@@ -10,44 +10,67 @@ load_dotenv()
 
 app = FastAPI(title="EV WhatsApp Bot")
 
-GREEN_API_INSTANCE = os.getenv("GREEN_API_INSTANCE", "")
-GREEN_API_TOKEN = os.getenv("GREEN_API_TOKEN", "")
-GREEN_API_URL = f"https://api.green-api.com/waInstance{GREEN_API_INSTANCE}"
+# Meta API config
+META_PHONE_NUMBER_ID = os.getenv("META_PHONE_NUMBER_ID", "")
+META_ACCESS_TOKEN = os.getenv("META_ACCESS_TOKEN", "")
+META_VERIFY_TOKEN = os.getenv("META_VERIFY_TOKEN", "evassist2024")
+META_API_URL = f"https://graph.facebook.com/v22.0/{META_PHONE_NUMBER_ID}/messages"
 
 
 async def send_whatsapp(phone: str, message: str):
-    url = f"{GREEN_API_URL}/sendMessage/{GREEN_API_TOKEN}"
-    payload = {"chatId": f"{phone}@c.us", "message": message}
+    headers = {
+        "Authorization": f"Bearer {META_ACCESS_TOKEN}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "messaging_product": "whatsapp",
+        "to": phone,
+        "type": "text",
+        "text": {"body": message}
+    }
     async with httpx.AsyncClient() as client:
-        await client.post(url, json=payload)
+        await client.post(META_API_URL, json=payload, headers=headers)
+
+
+# Webhook verification (Meta requires GET verification)
+@app.get("/webhook")
+async def verify_webhook(request: Request):
+    mode = request.query_params.get("hub.mode")
+    token = request.query_params.get("hub.verify_token")
+    challenge = request.query_params.get("hub.challenge")
+    if mode == "subscribe" and token == META_VERIFY_TOKEN:
+        return int(challenge)
+    return JSONResponse({"status": "forbidden"}, status_code=403)
 
 
 @app.post("/webhook")
 async def webhook(request: Request):
     try:
         data = await request.json()
-        msg_type = data.get("typeWebhook")
 
-        if msg_type not in ["incomingMessageReceived"]:
+        entry = data.get("entry", [{}])[0]
+        changes = entry.get("changes", [{}])[0]
+        value = changes.get("value", {})
+        messages = value.get("messages", [])
+
+        if not messages:
             return JSONResponse({"status": "ignored"})
 
-        sender_data = data.get("senderData", {})
-        phone = sender_data.get("sender", "").replace("@c.us", "")
-        msg_data = data.get("messageData", {})
-        type_message = msg_data.get("typeMessage")
-
+        msg = messages[0]
+        phone = msg.get("from", "")
+        msg_type = msg.get("type", "")
         text = ""
 
-        # Handle text message
-        if type_message == "textMessage":
-            text = msg_data.get("textMessageData", {}).get("textMessage", "").strip()
-
-        # Handle voice message
-        elif type_message == "audioMessage":
-            audio_url = msg_data.get("fileMessageData", {}).get("downloadUrl", "")
+        if msg_type == "text":
+            text = msg.get("text", {}).get("body", "").strip()
+        elif msg_type == "audio":
+            audio_url = msg.get("audio", {}).get("url", "")
             if audio_url:
                 async with httpx.AsyncClient() as client:
-                    audio_resp = await client.get(audio_url)
+                    audio_resp = await client.get(
+                        audio_url,
+                        headers={"Authorization": f"Bearer {META_ACCESS_TOKEN}"}
+                    )
                     audio_bytes = audio_resp.content
                 session = get_session(phone)
                 lang = session.get("lang", "en")
