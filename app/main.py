@@ -64,6 +64,18 @@ async def webhook(request: Request):
         return JSONResponse({"status": "error", "detail": str(e)}, status_code=500)
 
 
+@app.post("/process")
+async def process(request: Request):
+    data = await request.json()
+    phone = data.get("phone", "")
+    message = data.get("message", "")
+    if not phone or not message:
+        return JSONResponse({"reply": ""})
+    reply = process_message(phone, message)
+    return JSONResponse({"reply": reply})
+
+
 @app.get("/")
+@app.head("/")
 def health():
     return {"status": "EV WhatsApp Bot is running 🚴"}
