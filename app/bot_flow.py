@@ -6,6 +6,8 @@ sessions = {}
 MESSAGES = {
     "en": {
         "welcome": "👋 Welcome to *EV Assist*!\nI'll help you find the best EV rental.\n\nPlease select your language:\n1️⃣ Hindi\n2️⃣ English\n3️⃣ Bengali\n4️⃣ Kannada",
+        "ask_licence": "🪪 Do you have a valid *driving licence*?\n\n1️⃣ Yes\n2️⃣ No",
+        "no_licence_info": "✅ No problem! We'll show you *low speed EVs* that don't require a licence.",
         "ask_name": "Great! 😊 Please share your *name*.",
         "ask_city": "Thanks {name}! 🏙️ Please share your *city name*.",
         "ask_budget": "Got it! 💰 What is your *weekly budget*?\n\n1️⃣ Below ₹1000\n2️⃣ ₹1000 - ₹1500\n3️⃣ ₹1500 - ₹2000\n4️⃣ Above ₹2000",
@@ -19,6 +21,8 @@ MESSAGES = {
     },
     "hi": {
         "welcome": "👋 *EV Assist* में आपका स्वागत है!\nमैं आपको सबसे अच्छा EV किराया खोजने में मदद करूंगा।\n\nभाषा चुनें:\n1️⃣ हिंदी\n2️⃣ English\n3️⃣ Bengali\n4️⃣ Kannada",
+        "ask_licence": "🪪 क्या आपके पास वैध *ड्राइविंग लाइसेंस* है?\n\n1️⃣ हाँ\n2️⃣ नहीं",
+        "no_licence_info": "✅ कोई बात नहीं! हम आपको *लो स्पीड EV* दिखाएंगे जिनके लिए लाइसेंस की जरूरत नहीं।",
         "ask_name": "बढ़िया! 😊 कृपया अपना *नाम* बताएं।",
         "ask_city": "धन्यवाद {name}! 🏙️ कृपया अपना *शहर* बताएं।",
         "ask_budget": "ठीक है! 💰 आपका *साप्ताहिक बजट* क्या है?\n\n1️⃣ ₹1000 से कम\n2️⃣ ₹1000 - ₹1500\n3️⃣ ₹1500 - ₹2000\n4️⃣ ₹2000 से अधिक",
@@ -32,6 +36,8 @@ MESSAGES = {
     },
     "bn": {
         "welcome": "👋 *EV Assist*-এ আপনাকে স্বাগতম!\nআমি আপনাকে সেরা EV ভাড়া খুঁজে পেতে সাহায্য করব।\n\nভাষা নির্বাচন করুন:\n1️⃣ Hindi\n2️⃣ English\n3️⃣ Bengali\n4️⃣ Kannada",
+        "ask_licence": "🪪 আপনার কি বৈধ *ড্রাইভিং লাইসেন্স* আছে?\n\n1️⃣ হ্যাঁ\n2️⃣ না",
+        "no_licence_info": "✅ কোনো সমস্যা নেই! আমরা আপনাকে *লো স্পিড EV* দেখাব যেগুলোর জন্য লাইসেন্স দরকার নেই।",
         "ask_name": "দারুণ! 😊 আপনার *নাম* জানান।",
         "ask_city": "ধন্যবাদ {name}! 🏙️ আপনার *শহরের নাম* জানান।",
         "ask_budget": "ঠিক আছে! 💰 আপনার *সাপ্তাহিক বাজেট* কত?\n\n1️⃣ ₹1000-এর নিচে\n2️⃣ ₹1000 - ₹1500\n3️⃣ ₹1500 - ₹2000\n4️⃣ ₹2000-এর উপরে",
@@ -45,6 +51,8 @@ MESSAGES = {
     },
     "kn": {
         "welcome": "👋 *EV Assist*ಗೆ ಸ್ವಾಗತ!\nನಾನು ನಿಮಗೆ ಅತ್ಯುತ್ತಮ EV ಬಾಡಿಗೆ ಹುಡುಕಲು ಸಹಾಯ ಮಾಡುತ್ತೇನೆ.\n\nಭಾಷೆ ಆಯ್ಕೆ ಮಾಡಿ:\n1️⃣ Hindi\n2️⃣ English\n3️⃣ Bengali\n4️⃣ Kannada",
+        "ask_licence": "🪪 ನಿಮ್ಮ ಬಳಿ ಮಾನ್ಯ *ಡ್ರೈವಿಂಗ್ ಲೈಸೆನ್ಸ್* ಇದೆಯೇ?\n\n1️⃣ ಹೌದು\n2️⃣ ಇಲ್ಲ",
+        "no_licence_info": "✅ ಪರವಾಗಿಲ್ಲ! ನಾವು ನಿಮಗೆ *ಲೋ ಸ್ಪೀಡ್ EV* ತೋರಿಸುತ್ತೇವೆ ಅದಕ್ಕೆ ಲೈಸೆನ್ಸ್ ಬೇಕಿಲ್ಲ.",
         "ask_name": "ಅದ್ಭುತ! 😊 ನಿಮ್ಮ *ಹೆಸರು* ತಿಳಿಸಿ.",
         "ask_city": "ಧನ್ಯವಾದ {name}! 🏙️ ನಿಮ್ಮ *ನಗರದ ಹೆಸರು* ತಿಳಿಸಿ.",
         "ask_budget": "ಸರಿ! 💰 ನಿಮ್ಮ *ವಾರದ ಬಜೆಟ್* ಎಷ್ಟು?\n\n1️⃣ ₹1000 ಕೆಳಗೆ\n2️⃣ ₹1000 - ₹1500\n3️⃣ ₹1500 - ₹2000\n4️⃣ ₹2000 ಮೇಲೆ",
@@ -86,14 +94,24 @@ def process_message(phone: str, message: str) -> str:
     if step == "language":
         if msg in LANG_MAP:
             session["lang"] = LANG_MAP[msg]
-            session["step"] = "name"
-            return get_msg(LANG_MAP[msg], "ask_name")
+            session["step"] = "licence"
+            return get_msg(LANG_MAP[msg], "ask_licence")
         # First message - show welcome
         if msg.lower() in ["hi", "hello", "hey", "start", "helo"]:
             return get_msg("en", "welcome")
         return get_msg("en", "invalid_lang")
 
-    # Step 2: Name
+    # Step 2: Licence check
+    if step == "licence":
+        if msg not in ["1", "2"]:
+            return get_msg(lang, "invalid")
+        session["licence"] = msg == "1"
+        session["step"] = "name"
+        if msg == "2":
+            return get_msg(lang, "no_licence_info") + "\n\n" + get_msg(lang, "ask_name")
+        return get_msg(lang, "ask_name")
+
+    # Step 3: Name
     if step == "name":
         session["name"] = msg.title()
         session["step"] = "city"
@@ -121,7 +139,8 @@ def process_message(phone: str, message: str) -> str:
         session["step"] = "confirm"
 
         city = session["city"]
-        vendors, fallback = match_vendors(city, session["budget"], session["range"])
+        has_licence = session.get("licence", True)
+        vendors, fallback = match_vendors(city, session["budget"], session["range"], has_licence)
 
         if not vendors:
             clear_session(phone)

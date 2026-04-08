@@ -53,11 +53,10 @@ def parse_range(range_str):
         return None
 
 
-def match_vendors(city: str, budget_key: str, range_key: str):
+def match_vendors(city: str, budget_key: str, range_key: str, has_licence: bool = True):
     vendors = load_vendors()
     city_lower = city.strip().lower()
 
-    # Filter by city and live status
     city_vendors = [
         v for v in vendors
         if v.get("City", "").strip().lower() == city_lower
@@ -65,7 +64,17 @@ def match_vendors(city: str, budget_key: str, range_key: str):
     ]
 
     if not city_vendors:
-        return [], True  # no vendors in city at all
+        return [], True
+
+    # Filter by licence
+    if not has_licence:
+        city_vendors = [
+            v for v in city_vendors
+            if v.get("Type", "").strip().lower() in ["low speed", "e-cycle"]
+        ]
+
+    if not city_vendors:
+        return [], True
 
     budget_min, budget_max = BUDGET_RANGES.get(budget_key, (0, 99999))
     range_min, range_max = RANGE_RANGES.get(range_key, (0, 99999))
@@ -81,13 +90,36 @@ def match_vendors(city: str, budget_key: str, range_key: str):
         if budget_min <= rental <= budget_max and range_min <= km_range <= range_max:
             matched.append(v)
 
-    # Fallback: return all city vendors if no exact match
     fallback = False
     if not matched:
         matched = city_vendors
         fallback = True
 
-    return matched[:3], fallback
+    return matched, fallback
+
+
+PHOTO_MAP = {
+    "bgauss": "https://www.bgauss.com/wp-content/uploads/2023/01/C12i-MAX-Red.png",
+    "yulu dex": "https://www.yulu.bike/wp-content/uploads/2022/06/Dex-Yellow.png",
+    "ecargo": "https://www.nexzu.com/images/ecargo.png",
+    "hum cycles": "https://www.motovolt.com/wp-content/uploads/2021/06/hum-cycle.png",
+    "volt up": "https://voltup.in/wp-content/uploads/2022/08/voltup-bike.png",
+    "vida": "https://www.heromotocorp.com/content/dam/hero-motocorp/vida/v1-pro.png",
+    "bounce": "https://bounce.bike/wp-content/uploads/2022/06/infinity-e1.png",
+    "kinetic": "https://www.kineticgreen.com/images/e-luna.png",
+    "komaki": "https://komaki.in/wp-content/uploads/2022/06/xone.png",
+    "maki": "https://goewent.com/images/maki.png",
+}
+
+
+def get_photo_url(make: str) -> str:
+    if not make:
+        return ""
+    make_lower = make.lower()
+    for key, url in PHOTO_MAP.items():
+        if key in make_lower:
+            return url
+    return ""
 
 
 def format_option(index: int, vendor: dict, lang: str = "en") -> str:
@@ -98,6 +130,8 @@ def format_option(index: int, vendor: dict, lang: str = "en") -> str:
     deposit = vendor.get("Security Deposit", "N/A") or "N/A"
     refundable = vendor.get("Refundable Deposit", "Not available") or "Not available"
     charge_type = vendor.get("Charging/Swap", "N/A") or "N/A"
+    photo = get_photo_url(make)
+    photo_line = f"\n📸 {photo}" if photo else ""
 
     if lang == "hi":
         return (
@@ -106,7 +140,7 @@ def format_option(index: int, vendor: dict, lang: str = "en") -> str:
             f"🔋 रेंज: {km} km\n"
             f"🔒 सिक्योरिटी डिपॉजिट: ₹{deposit}\n"
             f"↩️ रिफंडेबल: ₹{refundable}\n"
-            f"⚡ चार्जिंग: {charge_type}"
+            f"⚡ चार्जिंग: {charge_type}{photo_line}"
         )
     elif lang == "bn":
         return (
@@ -115,7 +149,7 @@ def format_option(index: int, vendor: dict, lang: str = "en") -> str:
             f"🔋 রেঞ্জ: {km} km\n"
             f"🔒 সিকিউরিটি ডিপোজিট: ₹{deposit}\n"
             f"↩️ ফেরতযোগ্য: ₹{refundable}\n"
-            f"⚡ চার্জিং: {charge_type}"
+            f"⚡ চার্জিং: {charge_type}{photo_line}"
         )
     elif lang == "kn":
         return (
@@ -124,14 +158,14 @@ def format_option(index: int, vendor: dict, lang: str = "en") -> str:
             f"🔋 ರೇಂಜ್: {km} km\n"
             f"🔒 ಭದ್ರತಾ ಠೇವಣಿ: ₹{deposit}\n"
             f"↩️ ಮರುಪಾವತಿ: ₹{refundable}\n"
-            f"⚡ ಚಾರ್ಜಿಂಗ್: {charge_type}"
+            f"⚡ ಚಾರ್ಜಿಂಗ್: {charge_type}{photo_line}"
         )
-    else:  # English default
+    else:
         return (
             f"*{index}. {name} - {make}*\n"
             f"💰 Rental: ₹{rental}/week\n"
             f"🔋 Range: {km} km\n"
             f"🔒 Security Deposit: ₹{deposit}\n"
             f"↩️ Refundable: ₹{refundable}\n"
-            f"⚡ Charging: {charge_type}"
+            f"⚡ Charging: {charge_type}{photo_line}"
         )
