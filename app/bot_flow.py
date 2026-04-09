@@ -128,19 +128,11 @@ def process_message(phone: str, message: str) -> str:
         if msg not in ["1", "2", "3", "4"]:
             return get_msg(lang, "invalid")
         session["budget"] = msg
-        session["step"] = "range"
-        return get_msg(lang, "ask_range")
-
-    # Step 5: Range
-    if step == "range":
-        if msg not in ["1", "2", "3"]:
-            return get_msg(lang, "invalid")
-        session["range"] = msg
         session["step"] = "confirm"
 
         city = session["city"]
         has_licence = session.get("licence", True)
-        vendors, fallback = match_vendors(city, session["budget"], session["range"], has_licence)
+        vendors, fallback = match_vendors(city, session["budget"], "all", has_licence)
 
         if not vendors:
             clear_session(phone)

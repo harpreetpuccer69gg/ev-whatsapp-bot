@@ -77,7 +77,7 @@ def match_vendors(city: str, budget_key: str, range_key: str, has_licence: bool 
         return [], True
 
     budget_min, budget_max = BUDGET_RANGES.get(budget_key, (0, 99999))
-    range_min, range_max = RANGE_RANGES.get(range_key, (0, 99999))
+    range_min, range_max = (0, 99999) if range_key == "all" else RANGE_RANGES.get(range_key, (0, 99999))
 
     matched = []
     for v in city_vendors:
