@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220">
+  <rect width="360" height="220" rx="24" fill="#ef6c00"/>
+  <path d="M64 152h232v28H64z" fill="#fff3e0"/>
+  <circle cx="108" cy="172" r="22" fill="#ffe0b2"/>
+  <circle cx="252" cy="172" r="22" fill="#ffe0b2"/>
+  <path d="M90 132h180l18-42h-86l-14 26-14-26H90v42Z" fill="#5d4037"/>
+  <path d="M166 54l-16 36h36l16-36h-36Z" fill="#bf360c"/>
+  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="18" font-family="Arial, sans-serif">Low-Speed EV</text>
+</svg>

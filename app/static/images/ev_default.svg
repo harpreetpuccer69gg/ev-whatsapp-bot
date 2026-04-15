@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220">
+  <rect width="360" height="220" rx="24" fill="#546e7a"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="48" font-family="Arial, sans-serif">EV</text>
+  <text x="50%" y="178" dominant-baseline="middle" text-anchor="middle" fill="#cfd8dc" font-size="18" font-family="Arial, sans-serif">Vehicle</text>
+</svg>

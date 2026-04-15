@@ -10,7 +10,7 @@ SHEET_ID = os.getenv("GOOGLE_SHEET_ID", "")
 HEADERS = [
     "Timestamp", "Rider Name", "Rider Phone", "City", "Language",
     "Budget Range", "Range Preference", "Vendor", "Make", "Type",
-    "Rental/Week", "Security Deposit", "Refundable Deposit",
+    "Rental/Week", "Security Deposit", "Refundable Deposit", "Image URL",
     "SPOC Name", "SPOC Phone", "Status"
 ]
 
@@ -46,6 +46,7 @@ def get_sheet():
 
 def log_lead(session: dict, phone: str):
     chosen = session.get("chosen", {})
+    range_value = RANGE_LABELS.get(session.get("range", ""), session.get("range", ""))
     row = [
         datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         session.get("name", ""),
@@ -53,13 +54,14 @@ def log_lead(session: dict, phone: str):
         session.get("city", ""),
         LANG_LABELS.get(session.get("lang", "en"), "English"),
         BUDGET_LABELS.get(session.get("budget", ""), ""),
-        RANGE_LABELS.get(session.get("range", ""), ""),
+        range_value,
         chosen.get("Vendor", ""),
         chosen.get("Make", ""),
         chosen.get("Type", ""),
         chosen.get("Approx Rental/Week", ""),
         chosen.get("Security Deposit", ""),
         chosen.get("Refundable Deposit", ""),
+        chosen.get("Image", ""),
         chosen.get("SPOC", ""),
         chosen.get("Phone", ""),
         "New Lead"

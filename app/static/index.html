@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,130 +6,348 @@
     <title>EV Assist - Find Your EV</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #f0f4f8; }
-        .header { background: #25D366; color: white; text-align: center; padding: 20px; }
-        .header h1 { font-size: 24px; }
-        .header p { font-size: 14px; margin-top: 5px; opacity: 0.9; }
-        .container { max-width: 500px; margin: 0 auto; padding: 15px; }
-        .step { background: white; border-radius: 12px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .step h2 { font-size: 16px; color: #333; margin-bottom: 15px; }
-        .step-number { background: #25D366; color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; margin-right: 8px; font-weight: bold; font-size: 14px; }
-        select, input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; margin-top: 5px; }
-        select:focus, input:focus { border-color: #25D366; outline: none; }
-        .budget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .budget-btn { padding: 15px 10px; border: 2px solid #ddd; border-radius: 10px; background: white; cursor: pointer; text-align: center; font-size: 13px; transition: all 0.2s; }
-        .budget-btn.selected { border-color: #25D366; background: #25D366; color: white; }
-        .budget-btn .amount { font-size: 15px; font-weight: bold; display: block; }
-        .licence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .licence-btn { padding: 20px; border: 2px solid #ddd; border-radius: 10px; background: white; cursor: pointer; text-align: center; font-size: 15px; transition: all 0.2s; }
-        .licence-btn.selected { border-color: #25D366; background: #25D366; color: white; }
-        .licence-btn .icon { font-size: 30px; display: block; margin-bottom: 5px; }
-        .find-btn { width: 100%; padding: 18px; background: #25D366; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .find-btn:disabled { background: #ccc; cursor: not-allowed; }
-        .ev-card { background: white; border-radius: 12px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid #25D366; }
-        .ev-card h3 { color: #333; font-size: 17px; margin-bottom: 10px; }
-        .ev-detail { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
-        .ev-detail .value { font-weight: bold; color: #333; }
-        .confirm-btn { width: 100%; padding: 15px; background: #25D366; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        .form-section { background: white; border-radius: 12px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: none; }
-        .form-section input { margin-bottom: 10px; }
-        .submit-btn { width: 100%; padding: 18px; background: #25D366; color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; }
-        .success-msg { display: none; text-align: center; padding: 30px; background: white; border-radius: 12px; margin: 15px 0; }
-        .success-msg .icon { font-size: 60px; }
-        .success-msg h2 { color: #25D366; margin: 15px 0 10px; }
-        .type-badge { display: inline-block; padding: 3px 8px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-bottom: 8px; }
-        .hi-speed { background: #fff3cd; color: #856404; }
-        .low-speed { background: #d1ecf1; color: #0c5460; }
-        .e-cycle { background: #d4edda; color: #155724; }
-        .results-title { margin: 10px 0; color: #333; font-size: 16px; font-weight: bold; }
-        .no-results { text-align: center; padding: 30px; color: #666; background: white; border-radius: 12px; }
+        html, body { min-height: 100%; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(180deg,#e8f0ff 0%,#f8fbff 100%); color: #1c2331; }
+        .container { width: min(100%, 760px); margin: 0 auto; padding: 16px; }
+        .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0; }
+        .logo { font-size: 24px; font-weight: 800; color: #0d47a1; }
+        .logo span { color: #ffd600; }
+        .lang-select { border: none; border-radius: 999px; padding: 12px 14px; font-size: 14px; background: white; color: #0d47a1; box-shadow: 0 10px 24px rgba(14, 33, 82, 0.08); cursor: pointer; }
+        .hero { background: linear-gradient(135deg,#1565c0,#1e88e5); color: white; border-radius: 24px; padding: 28px 24px; box-shadow: 0 24px 56px rgba(14, 33, 82, 0.16); }
+        .hero h1 { font-size: clamp(26px, 4vw, 36px); line-height: 1.05; margin-bottom: 14px; }
+        .hero p { font-size: 16px; opacity: 0.92; margin-bottom: 20px; max-width: 680px; }
+        .hero-row { display: flex; flex-wrap: wrap; gap: 12px; }
+        .feature { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.16); padding: 12px 14px; border-radius: 999px; font-size: 14px; }
+        .card { background: white; border-radius: 22px; padding: 22px; margin-top: 18px; box-shadow: 0 18px 42px rgba(14, 33, 82, 0.08); }
+        .card + .card { margin-top: 18px; }
+        .card h2 { font-size: 18px; margin-bottom: 14px; color: #0d47a1; }
+        select, input[type="text"], input[type="tel"], .budget-btn, .licence-btn { width: 100%; font-size: 15px; }
+        select, input[type="text"], input[type="tel"] { border: 1px solid #d8e3f3; border-radius: 14px; padding: 14px 16px; color: #1c2331; background: #fbfdff; }
+        select:focus, input[type="text"]:focus, input[type="tel"]:focus { outline: none; border-color: #1976d2; box-shadow: 0 0 0 4px rgba(25,118,210,0.12); }
+        .budget-grid, .licence-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .budget-btn, .licence-btn { border: 1px solid #d8e3f3; border-radius: 16px; padding: 18px 14px; cursor: pointer; background: white; box-shadow: 0 10px 20px rgba(14,33,82,0.05); transition: transform 0.2s, border-color 0.2s, background 0.2s; text-align: left; }
+        .budget-btn:hover, .licence-btn:hover { transform: translateY(-1px); }
+        .budget-btn.selected, .licence-btn.selected { border-color: #1e88e5; background: #e3f2fd; }
+        .budget-btn .amount { display: block; font-weight: 800; margin-bottom: 6px; }
+        .find-btn, .submit-btn, .confirm-btn { width: 100%; border: none; border-radius: 16px; padding: 18px 16px; color: white; font-weight: 700; font-size: 16px; cursor: pointer; transition: transform 0.2s, opacity 0.2s; }
+        .find-btn { background: #ffd600; color: #0d47a1; margin-top: 14px; }
+        .find-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .submit-btn, .confirm-btn { background: #1e88e5; }
+        .submit-btn:hover, .confirm-btn:hover, .find-btn:hover { transform: translateY(-1px); }
+        .form-section { display: none; margin-top: 18px; }
+        .success-msg { display: none; text-align: center; padding: 26px 22px; background: white; border-radius: 20px; box-shadow: 0 18px 42px rgba(14,33,82,0.08); margin-top: 18px; }
+        .success-msg .icon { font-size: 56px; margin-bottom: 12px; }
+        .range-box { display: grid; gap: 12px; }
+        .range-box span { font-size: 14px; color: #424242; }
+        .range-input { accent-color: #1e88e5; width: 100%; }
+        .ev-card { background: white; border-radius: 24px; padding: 18px; margin-top: 18px; box-shadow: 0 18px 42px rgba(14,33,82,0.08); }
+        .ev-card .card-top { display: flex; gap: 18px; align-items: start; }
+        .ev-thumb { flex: 0 0 120px; width: 120px; height: 92px; border-radius: 20px; background-size: cover; background-position: center; border: 1px solid #d8e3f3; }
+        .ev-info { flex: 1; }
+        .ev-info h3 { font-size: 17px; margin-bottom: 10px; }
+        .ev-detail { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 8px 0; border-bottom: 1px solid #f0f4ff; }
+        .ev-detail:last-child { border-bottom: none; }
+        .ev-detail .value { font-weight: 700; }
+        .type-badge { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+        .hi-speed { background: #e3f2fd; color: #0d47a1; }
+        .low-speed { background: #fff3e0; color: #e65100; }
+        .e-cycle { background: #e8f5e9; color: #1b5e20; }
+        .results-title { margin-top: 14px; font-size: 16px; font-weight: 700; }
+        .summary-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: #1e88e5; color: white; font-size: 13px; margin: 8px 8px 0 0; }
+        .hint { margin-top: 10px; font-size: 13px; color: #5f6368; line-height: 1.5; }
+        .no-results { text-align: center; padding: 24px; color: #555; background: white; border-radius: 20px; box-shadow: 0 18px 42px rgba(14,33,82,0.08); margin-top: 18px; }
+        @media (max-width: 680px) {
+            .topbar { flex-direction: column; align-items: flex-start; }
+            .hero { padding: 22px 18px; }
+            .card { padding: 18px; }
+            .budget-grid, .licence-grid { grid-template-columns: 1fr; }
+            .ev-card .card-top { flex-direction: column; }
+            .ev-thumb { width: 100%; height: 170px; }
+        }
     </style>
 </head>
 <body>
-
-<div class="header">
-    <h1>🚴 EV Assist</h1>
-    <p>Delivery Riders के लिए सबसे अच्छा EV किराया</p>
-</div>
-
 <div class="container">
-
-    <div class="step">
-        <h2><span class="step-number">1</span>अपना शहर चुनें / Select Your City</h2>
-        <select id="citySelect" onchange="checkReady()">
-            <option value="">-- शहर चुनें / Select City --</option>
-            <option value="Bangalore">🏙️ Bangalore</option>
-            <option value="Mumbai">🏙️ Mumbai</option>
-            <option value="Delhi NCR">🏙️ Delhi NCR</option>
-            <option value="Chennai">🏙️ Chennai</option>
-            <option value="Kolkata">🏙️ Kolkata</option>
-            <option value="Hyderabad">🏙️ Hyderabad</option>
-            <option value="Pune">🏙️ Pune</option>
-            <option value="Ahmedabad">🏙️ Ahmedabad</option>
-            <option value="Jaipur">🏙️ Jaipur</option>
-            <option value="Lucknow">🏙️ Lucknow</option>
-            <option value="Guwahati">🏙️ Guwahati</option>
-            <option value="Patna">🏙️ Patna</option>
-            <option value="Coimbatore">🏙️ Coimbatore</option>
+    <div class="topbar">
+        <div class="logo">EV <span>Assist</span></div>
+        <select id="languageSelect" class="lang-select" onchange="applyLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="bn">বাংলা</option>
+            <option value="kn">ಕನ್ನಡ</option>
         </select>
     </div>
 
-    <div class="step">
-        <h2><span class="step-number">2</span>साप्ताहिक बजट / Weekly Budget</h2>
+    <div class="hero">
+        <h1 id="heroTitle">Delivery Rider EV Rentals</h1>
+        <p id="heroSubtitle">Fast, easy, and location-based EV options for your delivery shift.</p>
+        <div class="hero-row">
+            <div class="feature">🏙️ <span id="heroCityCount">Multiple cities</span></div>
+            <div class="feature">⚡ <span id="heroFastSearch">Fast matching</span></div>
+            <div class="feature">📱 <span id="heroMobileFriendly">Mobile friendly</span></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 id="stepCityHeading">1. Select City</h2>
+        <select id="citySelect" onchange="checkReady()">
+            <option value="">-- Select city --</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi NCR">Delhi NCR</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Pune">Pune</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Guwahati">Guwahati</option>
+            <option value="Patna">Patna</option>
+            <option value="Coimbatore">Coimbatore</option>
+        </select>
+        <p class="hint" id="cityHint">Choose your delivery city to see available EV rentals.</p>
+    </div>
+
+    <div class="card">
+        <h2 id="stepBudgetHeading">2. Weekly Budget</h2>
         <div class="budget-grid">
-            <div class="budget-btn" onclick="selectBudget(this,'1')"><span class="amount">₹1000</span>से कम / Below</div>
-            <div class="budget-btn" onclick="selectBudget(this,'2')"><span class="amount">₹1000-1500</span>per week</div>
-            <div class="budget-btn" onclick="selectBudget(this,'3')"><span class="amount">₹1500-2000</span>per week</div>
-            <div class="budget-btn" onclick="selectBudget(this,'4')"><span class="amount">₹2000+</span>से अधिक / Above</div>
+            <button class="budget-btn" onclick="selectBudget(this,'1')"><span class="amount">₹1000</span><br><span id="budgetBelow">Below</span></button>
+            <button class="budget-btn" onclick="selectBudget(this,'2')"><span class="amount">₹1000-1500</span><br><span id="budgetRange1">Per week</span></button>
+            <button class="budget-btn" onclick="selectBudget(this,'3')"><span class="amount">₹1500-2000</span><br><span id="budgetRange2">Per week</span></button>
+            <button class="budget-btn" onclick="selectBudget(this,'4')"><span class="amount">₹2000+</span><br><span id="budgetAbove">Above</span></button>
         </div>
     </div>
 
-    <div class="step">
-        <h2><span class="step-number">3</span>ड्राइविंग लाइसेंस है? / Have Driving Licence?</h2>
+    <div class="card">
+        <h2 id="stepRangeHeading">3. Preferred Range</h2>
+        <div class="range-box">
+            <span id="rangeLabel">Up to</span>
+            <input id="rangeInput" type="range" min="40" max="160" step="10" value="100" oninput="updateRangeLabel()" class="range-input" />
+            <span id="rangeValue">100 km</span>
+        </div>
+        <p class="hint" id="rangeHint">Filter EVs by how far you want to travel on a single charge.</p>
+    </div>
+
+    <div class="card">
+        <h2 id="stepLicenceHeading">4. Driving Licence</h2>
         <div class="licence-grid">
-            <div class="licence-btn" onclick="selectLicence(this,true)"><span class="icon">✅</span>हाँ / Yes</div>
-            <div class="licence-btn" onclick="selectLicence(this,false)"><span class="icon">❌</span>नहीं / No</div>
+            <button class="licence-btn" onclick="selectLicence(this,true)"><span class="icon">✅</span> <span id="licenceYes">Yes</span></button>
+            <button class="licence-btn" onclick="selectLicence(this,false)"><span class="icon">❌</span> <span id="licenceNo">No</span></button>
         </div>
+        <p class="hint" id="licenceHint">Low-speed EVs are available even without a licence.</p>
     </div>
 
-    <button class="find-btn" id="findBtn" onclick="findEVs()" disabled>🔍 EV खोजें / Find EVs</button>
+    <button class="find-btn" id="findBtn" onclick="findEVs()" disabled><span id="findBtnText">Find EVs</span></button>
 
     <div id="resultsContainer"></div>
 
     <div class="form-section" id="contactForm">
-        <h2>📝 अपनी जानकारी दें / Your Details</h2>
-        <input type="text" id="riderName" placeholder="आपका नाम / Your Name" />
-        <input type="tel" id="riderPhone" placeholder="मोबाइल नंबर / Mobile Number" />
-        <button class="submit-btn" onclick="submitLead()">✅ Confirm करें / Confirm</button>
+        <h2 id="formTitle">Confirm Your Details</h2>
+        <input type="text" id="riderName" placeholder="Your Name" />
+        <input type="tel" id="riderPhone" placeholder="Mobile Number" />
+        <button class="submit-btn" id="submitBtnText" onclick="submitLead()">Confirm & Request</button>
     </div>
 
     <div class="success-msg" id="successMsg">
         <div class="icon">🎉</div>
-        <h2>बधाई हो! Congratulations!</h2>
-        <p>Vendor आपसे <strong>24 घंटे</strong> में संपर्क करेगा।<br>Vendor will contact you within <strong>24 hours</strong>.</p>
+        <h2 id="successTitle">All set!</h2>
+        <p id="successSubtitle">Vendor will contact you within <strong>24 hours</strong>.</p>
     </div>
-
 </div>
 
 <script>
+    const translations = {
+        en: {
+            heroTitle: 'Delivery Rider EV Rentals',
+            heroSubtitle: 'Fast, easy, and location-based EV options for your delivery shift.',
+            heroCityCount: 'Multiple cities',
+            heroFastSearch: 'Fast matching',
+            heroMobileFriendly: 'Mobile friendly',
+            stepCityHeading: '1. Select City',
+            cityHint: 'Choose your delivery city to see available EV rentals.',
+            stepBudgetHeading: '2. Weekly Budget',
+            budgetBelow: 'Below',
+            budgetRange1: 'Per week',
+            budgetRange2: 'Per week',
+            budgetAbove: 'Above',
+            stepRangeHeading: '3. Preferred Range',
+            rangeLabel: 'Up to',
+            rangeHint: 'Filter EVs by how far you want to travel on a single charge.',
+            stepLicenceHeading: '4. Driving Licence',
+            licenceYes: 'Yes',
+            licenceNo: 'No',
+            licenceHint: 'Low-speed EVs are available even without a licence.',
+            findBtn: 'Find EVs',
+            formTitle: 'Confirm Your Details',
+            riderName: 'Your Name',
+            riderPhone: 'Mobile Number',
+            submitBtn: 'Confirm & Request',
+            successTitle: 'All set!',
+            successSubtitle: 'Vendor will contact you within 24 hours.',
+            noResults: 'No EVs available in {city} yet.',
+            foundText: '{count} vehicles found in {city}',
+            imageAlt: 'EV image',
+            citySelectDefault: '-- Select city --'
+        },
+        hi: {
+            heroTitle: 'डिलीवरी राइडर EV किराया',
+            heroSubtitle: 'तेज़, आसान और आपके शहर के हिसाब से EV विकल्प।',
+            heroCityCount: 'कई शहर',
+            heroFastSearch: 'तेज़ मिलान',
+            heroMobileFriendly: 'मोबाइल फ्रेंडली',
+            stepCityHeading: '1. अपना शहर चुनें',
+            cityHint: 'अपने शहर के लिए उपलब्ध EV किराये देखें।',
+            stepBudgetHeading: '2. साप्ताहिक बजट',
+            budgetBelow: 'के नीचे',
+            budgetRange1: 'प्रति सप्ताह',
+            budgetRange2: 'प्रति सप्ताह',
+            budgetAbove: 'से ऊपर',
+            stepRangeHeading: '3. पसंदीदा रेंज',
+            rangeLabel: 'तक',
+            rangeHint: 'एक चार्ज में कितनी दूरी चाहिए इसके अनुसार फिल्टर करें।',
+            stepLicenceHeading: '4. ड्राइविंग लाइसेंस',
+            licenceYes: 'हाँ',
+            licenceNo: 'नहीं',
+            licenceHint: 'लो स्पीड EV बिना लाइसेंस के भी उपलब्ध हैं।',
+            findBtn: 'EV खोजें',
+            formTitle: 'अपनी जानकारी दर्ज करें',
+            riderName: 'आपका नाम',
+            riderPhone: 'मोबाइल नंबर',
+            submitBtn: 'पुष्टि करें',
+            successTitle: 'सब तैयार!',
+            successSubtitle: 'Vendor आपसे 24 घंटे में संपर्क करेगा।',
+            noResults: '{city} में अभी कोई EV उपलब्ध नहीं।',
+            foundText: '{city} में {count} वाहन मिले',
+            imageAlt: 'EV छवि',
+            citySelectDefault: '-- शहर चुनें --'
+        },
+        bn: {
+            heroTitle: 'ডেলিভারি রাইডার EV ভাড়া',
+            heroSubtitle: 'দ্রুত, সহজ এবং আপনার শহরের EV অপশন।',
+            heroCityCount: 'বিভিন্ন শহর',
+            heroFastSearch: 'দ্রুত মেল',
+            heroMobileFriendly: 'মোবাইল ফ্রেন্ডলি',
+            stepCityHeading: '1. আপনার শহর নির্বাচন করুন',
+            cityHint: 'আপনার শহরের জন্য উপলভ্য EV ভাড়া দেখুন।',
+            stepBudgetHeading: '2. সাপ্তাহিক বাজেট',
+            budgetBelow: 'এর নিচে',
+            budgetRange1: 'প্রতি সপ্তাহে',
+            budgetRange2: 'প্রতি সপ্তাহে',
+            budgetAbove: 'এর উপরে',
+            stepRangeHeading: '3. পছন্দসই রেঞ্জ',
+            rangeLabel: 'পর্যন্ত',
+            rangeHint: 'একটি চার্জে কতদূর যেতে চান তা ফিল্টার করুন।',
+            stepLicenceHeading: '4. ড্রাইভিং লাইসেন্স',
+            licenceYes: 'হ্যাঁ',
+            licenceNo: 'না',
+            licenceHint: 'লো স্পিড EV লাইসেন্স ছাড়াই পাওয়া যায়।',
+            findBtn: 'EV খুঁজুন',
+            formTitle: 'আপনার বিবরণ নিশ্চিত করুন',
+            riderName: 'আপনার নাম',
+            riderPhone: 'মোবাইল নম্বর',
+            submitBtn: 'নিশ্চিত করুন',
+            successTitle: 'সব ঠিক আছে!',
+            successSubtitle: 'Vendor ২৪ ঘণ্টার মধ্যে আপনার সাথে যোগাযোগ করবে।',
+            noResults: '{city} এ এখনও কোনো EV নেই।',
+            foundText: '{city} এ {count} যানবাহন পাওয়া গেছে',
+            imageAlt: 'EV ছবি',
+            citySelectDefault: '-- শহর নির্বাচন করুন --'
+        },
+        kn: {
+            heroTitle: 'ಡೆಲಿವರಿ ರೈಡರ್ EV ಬಾಡಿಗೆ',
+            heroSubtitle: 'ವೇಗವಾಗಿ, ಸುಲಭವಾಗಿ ಮತ್ತು ನಿಮ್ಮ ನಗರದಲ್ಲಿ EV ಆಯ್ಕೆಗಳನ್ನು ಕಂಡುಹಿಡಿಯಿರಿ.',
+            heroCityCount: 'ಬಹುಶಃ ನಗರಗಳು',
+            heroFastSearch: 'ತ್ವರಿತ ಹೊಂದಿಕೆ',
+            heroMobileFriendly: 'ಮೊಬೈಲ್ ಸ್ನೇಹಿ',
+            stepCityHeading: '1. ನಿಮ್ಮ ನಗರವನ್ನು ಆಯ್ಕೆಮಾಡಿ',
+            cityHint: 'ನಿಮ್ಮ ನಗರದಲ್ಲಿ ಲಭ್ಯವಿರುವ EV ಬಾಡಿಗೆಗಳನ್ನು ನೋಡಿ.',
+            stepBudgetHeading: '2. ವಾರದ ಬಜೆಟ್',
+            budgetBelow: 'ಕೆಳಗೆ',
+            budgetRange1: 'ಪ್ರತಿ ವಾರ',
+            budgetRange2: 'ಪ್ರತಿ ವಾರ',
+            budgetAbove: 'ಮೇಲೆ',
+            stepRangeHeading: '3. ಇಚ್ಛಿತ ರೇಂಜ್',
+            rangeLabel: 'ವರೆಗೆ',
+            rangeHint: 'ಒಂದು ಚಾರ್ಜ್‌ನಲ್ಲಿ ನೀವು ಎಷ್ಟು ದೂರ ಹೋಗಲು ಬಯಸುತ್ತೀರಿ ಎಂಬುದನ್ನು ಫಿಲ್ಟರ್ ಮಾಡಿ.',
+            stepLicenceHeading: '4. ಡ್ರೈವಿಂಗ್ ಲೈಸೆನ್ಸ್',
+            licenceYes: 'ಹೌದು',
+            licenceNo: 'ಇಲ್ಲ',
+            licenceHint: 'ಕಡಿಮೆ ಸ್ಪೀಡ್ EVಗಳು ಲೈಸೆನ್ಸ್ ಇಲ್ಲದೆಲೂ ಲಭ್ಯವಿವೆ.',
+            findBtn: 'EVಗಳನ್ನು ಹುಡುಕು',
+            formTitle: 'ನಿಮ್ಮ ವಿವರಗಳನ್ನು ದೃಢೀಕರಿಸಿ',
+            riderName: 'ನಿಮ್ಮ ಹೆಸರು',
+            riderPhone: 'ಮೊಬೈಲ್ ನಂಬರ್',
+            submitBtn: 'ದೃಢೀಕರಿಸಿ',
+            successTitle: 'ಎಲ್ಲವೂ ಸಿದ್ಧವಾಗಿದೆ!',
+            successSubtitle: 'Vendor 24 ಗಂಟೆಗಳಲ್ಲಿ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ.',
+            noResults: '{city} ನಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ EV ಲಭ್ಯವಿಲ್ಲ.',
+            foundText: '{city} ನಲ್ಲಿ {count} ವಾಹನಗಳು ದೊರಕಿವೆ',
+            imageAlt: 'EV ಚಿತ್ರ',
+            citySelectDefault: '-- ನಗರ ಆಯ್ಕೆಮಾಡಿ --'
+        }
+    };
+
     let selectedBudget = null;
     let selectedLicence = null;
     let selectedVendor = null;
     let allVendors = [];
+    let currentLang = 'en';
 
     const BUDGET_RANGES = { '1':[0,1000], '2':[1000,1500], '3':[1500,2000], '4':[2000,99999] };
+    const typeImages = {
+        'hi-speed': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220"%3E%3Crect width="360" height="220" rx="24" fill="%2300278d"/%3E%3Cpath d="M70 160h220v26H70z" fill="%23bbdefb"/%3E%3Ccircle cx="110" cy="172" r="26" fill="%23e3f2fd"/%3E%3Ccircle cx="250" cy="172" r="26" fill="%23e3f2fd"/%3E%3Cpath d="M90 150h180l16-44h-84l-18 34-14-34H90v44Z" fill="%23fff"/%3E%3Cpath d="M180 54l-22 42h50l22-42h-50Z" fill="%23ffc107"/%3E%3C/svg%3E',
+        'low speed': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220"%3E%3Crect width="360" height="220" rx="24" fill="%23ff9800"/%3E%3Cpath d="M72 154h216v30H72z" fill="%23fff3e0"/%3E%3Ccircle cx="104" cy="168" r="24" fill="%23ffe0b2"/%3E%3Ccircle cx="256" cy="168" r="24" fill="%23ffe0b2"/%3E%3Cpath d="M96 141h180l18-46h-82l-16 28-14-28H96v46Z" fill="%236d4c41"/%3E%3Cpath d="M172 60l-18 36h44l18-36h-44Z" fill="%23bf360c"/%3E%3C/svg%3E',
+        'e-cycle': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220"%3E%3Crect width="360" height="220" rx="24" fill="%231b5e20"/%3E%3Ccircle cx="92" cy="158" r="30" fill="%23a5d6a7"/%3E%3Ccircle cx="268" cy="158" r="30" fill="%23a5d6a7"/%3E%3Cpath d="M92 158h140" stroke="%23fff" stroke-width="12" stroke-linecap="round"/%3E%3Cpath d="M226 158l-36-70H134l-24 48" stroke="%23fff" stroke-width="12" stroke-linecap="round" fill="none"/%3E%3Cpath d="M138 78h26" stroke="%23fff" stroke-width="10" stroke-linecap="round"/%3E%3C/svg%3E',
+        'default': 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220"%3E%3Crect width="360" height="220" rx="24" fill="%238eacbb"/%3E%3Ctext x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="44" font-family="Arial, sans-serif">EV</text%3E%3C/svg%3E'
+    };
 
-    fetch('/vendors').then(r => r.json()).then(v => allVendors = v);
+    fetch('/vendors')
+        .then(response => response.json())
+        .then(data => { allVendors = Array.isArray(data) ? data : []; })
+        .catch(() => { allVendors = []; });
+
+    function applyLanguage(lang) {
+        currentLang = lang;
+        const dict = translations[lang] || translations.en;
+        document.getElementById('heroTitle').innerText = dict.heroTitle;
+        document.getElementById('heroSubtitle').innerText = dict.heroSubtitle;
+        document.getElementById('heroCityCount').innerText = dict.heroCityCount;
+        document.getElementById('heroFastSearch').innerText = dict.heroFastSearch;
+        document.getElementById('heroMobileFriendly').innerText = dict.heroMobileFriendly;
+        document.getElementById('stepCityHeading').innerText = dict.stepCityHeading;
+        document.getElementById('cityHint').innerText = dict.cityHint;
+        document.getElementById('stepBudgetHeading').innerText = dict.stepBudgetHeading;
+        document.getElementById('budgetBelow').innerText = dict.budgetBelow;
+        document.getElementById('budgetRange1').innerText = dict.budgetRange1;
+        document.getElementById('budgetRange2').innerText = dict.budgetRange2;
+        document.getElementById('budgetAbove').innerText = dict.budgetAbove;
+        document.getElementById('stepRangeHeading').innerText = dict.stepRangeHeading;
+        document.getElementById('rangeLabel').innerText = dict.rangeLabel;
+        document.getElementById('rangeHint').innerText = dict.rangeHint;
+        document.getElementById('stepLicenceHeading').innerText = dict.stepLicenceHeading;
+        document.getElementById('licenceYes').innerText = dict.licenceYes;
+        document.getElementById('licenceNo').innerText = dict.licenceNo;
+        document.getElementById('licenceHint').innerText = dict.licenceHint;
+        document.getElementById('findBtnText').innerText = dict.findBtn;
+        document.getElementById('formTitle').innerText = dict.formTitle;
+        document.getElementById('riderName').placeholder = dict.riderName;
+        document.getElementById('riderPhone').placeholder = dict.riderPhone;
+        document.getElementById('submitBtnText').innerText = dict.submitBtn;
+        document.getElementById('successTitle').innerText = dict.successTitle;
+        document.getElementById('successSubtitle').innerText = dict.successSubtitle;
+        document.getElementById('citySelect').options[0].text = dict.citySelectDefault;
+    }
 
     function selectBudget(el, val) {
-        document.querySelectorAll('.budget-btn').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.budget-btn').forEach(btn => btn.classList.remove('selected'));
         el.classList.add('selected');
         selectedBudget = val;
         checkReady();
     }
 
     function selectLicence(el, val) {
-        document.querySelectorAll('.licence-btn').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.licence-btn').forEach(btn => btn.classList.remove('selected'));
         el.classList.add('selected');
         selectedLicence = val;
         checkReady();
@@ -140,32 +358,46 @@
         document.getElementById('findBtn').disabled = !(city && selectedBudget !== null && selectedLicence !== null);
     }
 
+    function updateRangeLabel() {
+        const value = document.getElementById('rangeInput').value;
+        document.getElementById('rangeValue').innerText = `${value} km`;
+    }
+
     function parseRental(str) {
         if (!str) return null;
-        const nums = str.replace(/₹/g,'').match(/\d+/g);
+        const nums = str.replace(/₹/g, '').match(/\d+/g);
+        return nums ? parseInt(nums[0], 10) : null;
+    }
+
+    function parseRangeRange(str) {
+        if (!str) return null;
+        const nums = str.match(/\d+/g);
         if (!nums) return null;
-        const first = parseInt(nums[0]);
-        if (str.toLowerCase().includes('day')) return first * 7;
-        return first;
+        const values = nums.map(Number).sort((a,b) => a - b);
+        return values.length === 1 ? values[0] : Math.round((values[0] + values[values.length - 1]) / 2);
     }
 
     function findEVs() {
         const city = document.getElementById('citySelect').value;
         const [bMin, bMax] = BUDGET_RANGES[selectedBudget];
+        const maxRange = Number(document.getElementById('rangeInput').value);
 
         let filtered = allVendors.filter(v => {
-            if (v.City?.toLowerCase() !== city.toLowerCase()) return false;
-            if (!['LIVE','LIVE FROM NEXT WEEK','MINUTES WIP'].includes(v.Status?.toUpperCase())) return false;
-            if (!selectedLicence && !['low speed','e-cycle'].includes(v.Type?.toLowerCase())) return false;
-            const r = parseRental(v['Approx Rental/Week']);
-            return r !== null && r >= bMin && r <= bMax;
+            if (!v.City || v.City.toLowerCase() !== city.toLowerCase()) return false;
+            const status = (v.Status || '').toLowerCase();
+            if (!['live','live from next week','minutes wip'].includes(status)) return false;
+            if (!selectedLicence && !(v.Type || '').toLowerCase().includes('low speed') && !(v.Type || '').toLowerCase().includes('e-cycle')) return false;
+            const rent = parseRental(v['Approx Rental/Week']);
+            const range = parseRangeRange(v['Range (Km)']);
+            return rent !== null && range !== null && rent >= bMin && rent <= bMax && range <= maxRange;
         });
 
-        if (filtered.length === 0) {
+        if (!filtered.length) {
             filtered = allVendors.filter(v => {
-                if (v.City?.toLowerCase() !== city.toLowerCase()) return false;
-                if (!['LIVE','LIVE FROM NEXT WEEK','MINUTES WIP'].includes(v.Status?.toUpperCase())) return false;
-                if (!selectedLicence && !['low speed','e-cycle'].includes(v.Type?.toLowerCase())) return false;
+                if (!v.City || v.City.toLowerCase() !== city.toLowerCase()) return false;
+                const status = (v.Status || '').toLowerCase();
+                if (!['live','live from next week','minutes wip'].includes(status)) return false;
+                if (!selectedLicence && !(v.Type || '').toLowerCase().includes('low speed') && !(v.Type || '').toLowerCase().includes('e-cycle')) return false;
                 return true;
             });
         }
@@ -173,65 +405,98 @@
         showResults(filtered, city);
     }
 
-    function showResults(vendors, city) {
-        const div = document.getElementById('resultsContainer');
+    function formatCountText(city, count) {
+        const template = translations[currentLang]?.foundText || translations.en.foundText;
+        return template.replace('{city}', city).replace('{count}', count);
+    }
 
-        if (vendors.length === 0) {
-            div.innerHTML = `<div class="no-results">😔 ${city} में अभी कोई EV उपलब्ध नहीं।<br>No EVs available in ${city} yet.</div>`;
+    function showResults(vendors, city) {
+        const container = document.getElementById('resultsContainer');
+        if (!vendors.length) {
+            const text = (translations[currentLang]?.noResults || translations.en.noResults).replace('{city}', city);
+            container.innerHTML = `<div class="no-results">😔 ${text}</div>`;
             return;
         }
 
-        let html = `<p class="results-title">🎯 ${vendors.length} EV मिले in ${city}</p>`;
-        vendors.forEach((v, i) => {
-            const type = v.Type?.toLowerCase();
-            const bc = type === 'hi-speed' ? 'hi-speed' : type === 'low speed' ? 'low-speed' : 'e-cycle';
-            const bt = type === 'hi-speed' ? '⚡ Hi-Speed' : type === 'low speed' ? '🐢 Low Speed' : '🚲 E-Cycle';
+        const grouped = vendors.reduce((acc, item) => {
+            const price = item['Approx Rental/Week'] || 'N/A';
+            acc[price] = (acc[price] || 0) + 1;
+            return acc;
+        }, {});
+
+        let html = `<p class="results-title">🎯 ${formatCountText(city, vendors.length)}</p>`;
+        html += Object.keys(grouped).sort((a,b) => (parseRental(a) || 0) - (parseRental(b) || 0)).map(price => `<span class="summary-pill">${grouped[price]} @ ${price}</span>`).join('');
+
+        vendors.forEach((vendor, index) => {
+            const rawType = (vendor.Type || 'default').toLowerCase();
+            const typeKey = rawType.includes('hi') ? 'hi-speed' : rawType.includes('low') ? 'low speed' : rawType.includes('e') ? 'e-cycle' : 'default';
+            const badgeText = typeKey === 'hi-speed' ? '⚡ Hi-Speed' : typeKey === 'low speed' ? '🐢 Low Speed' : '🚲 E-Cycle';
+            const imageUrl = vendor.Image || typeImages[typeKey] || typeImages.default;
             html += `<div class="ev-card">
-                <span class="type-badge ${bc}">${bt}</span>
-                <h3>${v.Vendor} - ${v.Make || 'EV'}</h3>
-                <div class="ev-detail"><span>💰 किराया/Rental</span><span class="value">₹${v['Approx Rental/Week']}/week</span></div>
-                <div class="ev-detail"><span>🔋 Range</span><span class="value">${v['Range (Km)']} km</span></div>
-                <div class="ev-detail"><span>🔒 Deposit</span><span class="value">₹${v['Security Deposit'] || 'N/A'}</span></div>
-                <div class="ev-detail"><span>⚡ Charging</span><span class="value">${v['Charging/Swap'] || 'N/A'}</span></div>
-                <button class="confirm-btn" onclick="selectEV(${i})">✅ यह चाहिए / I Want This</button>
+                <div class="card-top">
+                    <div class="ev-thumb" style="background-image:url('${imageUrl}')" aria-label="${translations[currentLang].imageAlt}"></div>
+                    <div class="ev-info">
+                        <span class="type-badge ${typeKey}">${badgeText}</span>
+                        <h3>${vendor.Make || 'EV'} • ${vendor.Vendor || 'Vendor'}</h3>
+                        <div class="ev-detail"><span>💰 Rental</span><span class="value">${vendor['Approx Rental/Week'] || 'N/A'}</span></div>
+                        <div class="ev-detail"><span>🔋 Range</span><span class="value">${vendor['Range (Km)'] || 'N/A'}</span></div>
+                        <div class="ev-detail"><span>🔌 Charge</span><span class="value">${vendor['Charging/Swap'] || 'N/A'}</span></div>
+                    </div>
+                </div>
+                <button class="confirm-btn" onclick="selectEV(${index})">✅ ${translations[currentLang].findBtn}</button>
             </div>`;
         });
 
-        div.innerHTML = html;
-        div._vendors = vendors;
-        div.scrollIntoView();
+        container.innerHTML = html;
+        container._vendors = vendors;
+        container.scrollIntoView({ behavior: 'smooth' });
     }
 
-    function selectEV(i) {
-        selectedVendor = document.getElementById('resultsContainer')._vendors[i];
+    function selectEV(index) {
+        selectedVendor = document.getElementById('resultsContainer')._vendors[index];
         document.getElementById('contactForm').style.display = 'block';
-        document.getElementById('contactForm').scrollIntoView();
+        document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
     }
 
     function submitLead() {
         const name = document.getElementById('riderName').value.trim();
         const phone = document.getElementById('riderPhone').value.trim();
-        if (!name || !phone) { alert('कृपया नाम और मोबाइल नंबर दें'); return; }
+        if (!name || !phone) {
+            alert(`${translations[currentLang].riderName} / ${translations[currentLang].riderPhone} required.`);
+            return;
+        }
 
         fetch('/submit-lead', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                name, phone,
+                name,
+                phone,
                 city: document.getElementById('citySelect').value,
+                lang: currentLang,
+                budget: selectedBudget,
+                range: document.getElementById('rangeInput').value,
+                licence: selectedLicence,
                 vendor: selectedVendor?.Vendor,
                 make: selectedVendor?.Make,
+                type: selectedVendor?.Type,
                 rental: selectedVendor?.['Approx Rental/Week'],
-                budget: selectedBudget,
-                licence: selectedLicence
+                security_deposit: selectedVendor?.['Security Deposit'],
+                refundable_deposit: selectedVendor?.['Refundable Deposit'],
+                spoc_name: selectedVendor?.['SPOC'],
+                spoc_phone: selectedVendor?.Phone,
+                image: selectedVendor?.Image || ''
             })
         }).finally(() => {
             document.getElementById('contactForm').style.display = 'none';
             document.getElementById('resultsContainer').innerHTML = '';
             document.getElementById('successMsg').style.display = 'block';
-            window.scrollTo(0,0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+
+    updateRangeLabel();
+    applyLanguage('en');
 </script>
 </body>
 </html>

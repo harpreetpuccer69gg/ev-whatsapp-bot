@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220">
+  <defs>
+    <linearGradient id="a" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1976d2"/>
+      <stop offset="100%" stop-color="#1e88e5"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="220" rx="24" fill="#0d47a1"/>
+  <path d="M60 150h240v30H60z" fill="#bbdefb"/>
+  <circle cx="110" cy="170" r="24" fill="#e3f2fd"/>
+  <circle cx="250" cy="170" r="24" fill="#e3f2fd"/>
+  <path d="M78 146h204l18-50H180l-12 24-18-24H78v50Z" fill="#fff"/>
+  <path d="M163 50l-20 52h60l20-52h-60Z" fill="#ffc107"/>
+  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="18" font-family="Arial, sans-serif">Hi-Speed EV</text>
+</svg>

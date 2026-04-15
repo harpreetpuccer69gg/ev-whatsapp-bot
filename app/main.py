@@ -122,19 +122,20 @@ async def submit_lead(request: Request):
         session = {
             "name": data.get("name", ""),
             "city": data.get("city", ""),
-            "lang": "en",
+            "lang": data.get("lang", "en"),
             "budget": data.get("budget", ""),
-            "range": "all",
+            "range": data.get("range", ""),
             "licence": data.get("licence", True),
             "chosen": {
                 "Vendor": data.get("vendor", ""),
                 "Make": data.get("make", ""),
-                "Type": "",
+                "Type": data.get("type", ""),
                 "Approx Rental/Week": data.get("rental", ""),
-                "Security Deposit": "",
-                "Refundable Deposit": "",
-                "SPOC": "",
-                "Phone": ""
+                "Security Deposit": data.get("security_deposit", ""),
+                "Refundable Deposit": data.get("refundable_deposit", ""),
+                "Image": data.get("image", ""),
+                "SPOC": data.get("spoc_name", ""),
+                "Phone": data.get("spoc_phone", "")
             }
         }
         log_lead(session, data.get("phone", ""))
