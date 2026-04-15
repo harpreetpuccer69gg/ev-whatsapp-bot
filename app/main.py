@@ -146,5 +146,9 @@ async def submit_lead(request: Request):
 
 @app.get("/")
 @app.head("/")
+def home():
+    return FileResponse("app/static/index.html")
+
+@app.get("/health")
 def health():
     return {"status": "EV WhatsApp Bot is running 🚴"}
