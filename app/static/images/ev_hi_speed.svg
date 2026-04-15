@@ -1,15 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220">
   <defs>
-    <linearGradient id="a" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#1976d2"/>
-      <stop offset="100%" stop-color="#1e88e5"/>
+    <linearGradient id="carGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0d47a1"/>
+      <stop offset="100%" stop-color="#1976d2"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="rgba(0,0,0,0.16)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
     </linearGradient>
   </defs>
-  <rect width="360" height="220" rx="24" fill="#0d47a1"/>
-  <path d="M60 150h240v30H60z" fill="#bbdefb"/>
-  <circle cx="110" cy="170" r="24" fill="#e3f2fd"/>
-  <circle cx="250" cy="170" r="24" fill="#e3f2fd"/>
-  <path d="M78 146h204l18-50H180l-12 24-18-24H78v50Z" fill="#fff"/>
-  <path d="M163 50l-20 52h60l20-52h-60Z" fill="#ffc107"/>
-  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="18" font-family="Arial, sans-serif">Hi-Speed EV</text>
+  <rect width="360" height="220" rx="24" fill="#e3f2fd"/>
+  <path d="M60 160h240v18H60z" fill="url(#shadow)"/>
+  <path d="M70 148c0-15 12-32 24-32h172c12 0 24 17 24 32v14H70v-14Z" fill="url(#carGrad)"/>
+  <path d="M90 148c14-8 30-14 50-14h80c20 0 36 6 50 14" fill="#0d47a1" opacity="0.85"/>
+  <path d="M76 148l18-36h178l18 36" fill="#bbdefb" opacity="0.55"/>
+  <circle cx="110" cy="168" r="18" fill="#0d47a1"/>
+  <circle cx="250" cy="168" r="18" fill="#0d47a1"/>
+  <circle cx="110" cy="168" r="10" fill="#bbdefb"/>
+  <circle cx="250" cy="168" r="10" fill="#bbdefb"/>
+  <path d="M125 108c10-8 22-12 35-12h40c13 0 25 4 35 12" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M128 118c9-6 19-9 30-9h38c11 0 21 3 30 9" stroke="#c5e1ff" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M95 128h170" stroke="#bbdefb" stroke-width="8" stroke-linecap="round"/>
+  <path d="M105 96l12-20h120l12 20" fill="#1565c0" opacity="0.8"/>
+  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#0d47a1" font-size="18" font-family="Arial, sans-serif" font-weight="700">Hi-Speed EV</text>
 </svg>

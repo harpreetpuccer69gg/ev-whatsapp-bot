@@ -1,9 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220">
-  <rect width="360" height="220" rx="24" fill="#2e7d32"/>
-  <circle cx="90" cy="160" r="30" fill="#a5d6a7"/>
-  <circle cx="270" cy="160" r="30" fill="#a5d6a7"/>
-  <path d="M90 160h146" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
-  <path d="M230 160l-34-66H134l-28 54" stroke="#fff" stroke-width="12" stroke-linecap="round" fill="none"/>
-  <path d="M144 80h30" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
-  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="18" font-family="Arial, sans-serif">E-Cycle</text>
+  <defs>
+    <linearGradient id="cycleBg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#c8e6c9"/>
+      <stop offset="100%" stop-color="#81c784"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="220" rx="24" fill="#e8f5e9"/>
+  <circle cx="100" cy="150" r="24" fill="#388e3c"/>
+  <circle cx="260" cy="150" r="24" fill="#388e3c"/>
+  <path d="M96 150h168" stroke="#1b5e20" stroke-width="10" stroke-linecap="round"/>
+  <path d="M108 150l18-58h80l18 58" stroke="#1b5e20" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M110 98h70" stroke="#1b5e20" stroke-width="10" stroke-linecap="round"/>
+  <path d="M130 90c8-12 24-20 40-20" stroke="#1b5e20" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M116 110l-14 24" stroke="#1b5e20" stroke-width="10" stroke-linecap="round"/>
+  <path d="M242 110l14 24" stroke="#1b5e20" stroke-width="10" stroke-linecap="round"/>
+  <path d="M96 150c5-8 10-20 30-20" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#1b5e20" font-size="18" font-family="Arial, sans-serif" font-weight="700">E-Cycle</text>
 </svg>
