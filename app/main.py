@@ -12,7 +12,7 @@ load_dotenv()
 
 BASE_DIR = os.path.dirname(__file__)
 STATIC_DIR = os.path.join(BASE_DIR, "static")
-VENDORS_PATH = os.path.join(BASE_DIR, "..", "data", "vendors.json")
+VENDORS_PATH = os.path.abspath(os.path.join(BASE_DIR, "..", "data", "vendors.json"))
 
 app = FastAPI(title="EV WhatsApp Bot")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
@@ -112,8 +112,13 @@ def landing_page():
 
 @app.get("/vendors")
 def get_vendors():
-    with open(VENDORS_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        if not os.path.exists(VENDORS_PATH):
+            return {"error": f"Vendors file not found at {VENDORS_PATH}"}
+        with open(VENDORS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        return {"error": f"Failed to load vendors: {str(e)}"}
 
 
 @app.post("/submit-lead")
