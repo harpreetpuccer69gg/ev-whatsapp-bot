@@ -1,7 +1,9 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 import httpx
 import os
+import json
 from dotenv import load_dotenv
 from app.bot_flow import process_message, get_session
 from app.sarvam import transcribe_audio
@@ -9,6 +11,9 @@ from app.sarvam import transcribe_audio
 load_dotenv()
 
 app = FastAPI(title="EV WhatsApp Bot")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+VENDORS_PATH = os.path.join(os.path.dirname(__file__), "../data/vendors.json")
 
 # Meta API config
 META_PHONE_NUMBER_ID = os.getenv("META_PHONE_NUMBER_ID", "")
@@ -96,6 +101,46 @@ async def process(request: Request):
         return JSONResponse({"reply": ""})
     reply = process_message(phone, message)
     return JSONResponse({"reply": reply})
+
+
+@app.get("/find-ev")
+def landing_page():
+    return FileResponse("app/static/index.html")
+
+
+@app.get("/vendors")
+def get_vendors():
+    with open(VENDORS_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@app.post("/submit-lead")
+async def submit_lead(request: Request):
+    data = await request.json()
+    try:
+        from app.sheets import log_lead
+        session = {
+            "name": data.get("name", ""),
+            "city": data.get("city", ""),
+            "lang": "en",
+            "budget": data.get("budget", ""),
+            "range": "all",
+            "licence": data.get("licence", True),
+            "chosen": {
+                "Vendor": data.get("vendor", ""),
+                "Make": data.get("make", ""),
+                "Type": "",
+                "Approx Rental/Week": data.get("rental", ""),
+                "Security Deposit": "",
+                "Refundable Deposit": "",
+                "SPOC": "",
+                "Phone": ""
+            }
+        }
+        log_lead(session, data.get("phone", ""))
+    except Exception:
+        pass
+    return JSONResponse({"status": "ok"})
 
 
 @app.get("/")
