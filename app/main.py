@@ -149,10 +149,12 @@ async def submit_lead(request: Request):
 @app.get("/")
 @app.head("/")
 def home():
-    html_path = os.path.join(STATIC_DIR, "index.html")
-    if os.path.exists(html_path):
-        return FileResponse(html_path, media_type="text/html")
-    return {"error": "Landing page not found"}
+    try:
+        with open(os.path.join(STATIC_DIR, "index.html"), "r", encoding="utf-8") as f:
+            content = f.read()
+        return HTMLResponse(content=content)
+    except Exception as e:
+        return {"error": f"Landing page not found: {str(e)}"}
 
 @app.get("/health")
 def health():
