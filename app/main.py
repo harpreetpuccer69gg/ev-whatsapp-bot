@@ -10,10 +10,12 @@ from app.sarvam import transcribe_audio
 
 load_dotenv()
 
-app = FastAPI(title="EV WhatsApp Bot")
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+BASE_DIR = os.path.dirname(__file__)
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+VENDORS_PATH = os.path.join(BASE_DIR, "..", "data", "vendors.json")
 
-VENDORS_PATH = os.path.join(os.path.dirname(__file__), "../data/vendors.json")
+app = FastAPI(title="EV WhatsApp Bot")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 # Meta API config
 META_PHONE_NUMBER_ID = os.getenv("META_PHONE_NUMBER_ID", "")
@@ -105,7 +107,7 @@ async def process(request: Request):
 
 @app.get("/find-ev")
 def landing_page():
-    return FileResponse("app/static/index.html")
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
 
 @app.get("/vendors")
@@ -147,7 +149,7 @@ async def submit_lead(request: Request):
 @app.get("/")
 @app.head("/")
 def home():
-    return FileResponse("app/static/index.html")
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
 @app.get("/health")
 def health():
