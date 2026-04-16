@@ -3,53 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EV Assist - Find Your EV</title>
+    <title>Flipkart EV Assist - Find Your EV</title>
     <link rel="icon" type="image/svg+xml" href="/static/images/flipkart_logo.svg">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { min-height: 100%; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(180deg, #fffdf2 0%, #f8faff 45%, #eff6ff 100%); color: #0f172a; }
-        .container { width: min(100%, 840px); margin: 0 auto; padding: 16px; }
-        .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0; background: linear-gradient(90deg, #ffe600 0%, #ffec80 100%); padding: 18px 24px; border-radius: 26px; box-shadow: 0 20px 48px rgba(0,0,0,0.12); border: 2px solid rgba(255, 221, 0, 0.5); }
-        .logo { display: inline-flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 900; color: #002d62; letter-spacing: -0.03em; }
-        .logo img { width: 130px; height: auto; display: block; }
-        .logo span { color: white; background: #002d62; border-radius: 14px; padding: 8px 16px; font-size: 20px; font-weight: 900; }
-        .lang-select { border: 2px solid #002d62; border-radius: 999px; padding: 12px 16px; font-size: 14px; background: white; color: #002d62; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10); cursor: pointer; font-weight: 600; }
-        .hero { background: linear-gradient(135deg, #ffffff, #dbeeff); color: #0f172a; border-radius: 28px; padding: 36px 28px; box-shadow: 0 26px 80px rgba(0, 45, 98, 0.12); border: 1px solid #dfe8ff; }
-        .hero h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.02; margin-bottom: 16px; letter-spacing: -0.02em; color: #002d62; }
-        .hero p { font-size: 16px; opacity: 0.95; margin-bottom: 24px; max-width: 720px; color: #1f2937; }
-        .hero-row { display: flex; flex-wrap: wrap; gap: 12px; }
-        .feature { display: inline-flex; align-items: center; gap: 10px; background: rgba(0,45,98,0.09); padding: 12px 16px; border-radius: 999px; font-size: 14px; color: #002d62; font-weight: 600; }
-        .card { background: white; border-radius: 26px; padding: 24px; margin-top: 18px; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08); border: 1px solid #e8efff; }
-        .card + .card { margin-top: 18px; }
-        .card h2 { font-size: 18px; margin-bottom: 14px; color: #002d62; font-weight: 700; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f1f3f6; color: #0f172a; }
+        .container { width: min(100%, 860px); margin: 0 auto; padding: 12px 16px; }
+
+        /* ── TOPBAR ── */
+        .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; background: #002d62; padding: 14px 22px; border-radius: 20px; box-shadow: 0 8px 28px rgba(0,45,98,0.28); }
+        .logo { display: inline-flex; align-items: center; gap: 10px; }
+        .logo img { width: 110px; height: auto; display: block; filter: brightness(0) invert(1); }
+        .logo-divider { width: 2px; height: 28px; background: rgba(255,214,0,0.5); border-radius: 2px; }
+        .logo-tag { color: #ffd600; font-size: 17px; font-weight: 900; letter-spacing: 0.5px; }
+        .lang-select { border: 2px solid #ffd600; border-radius: 999px; padding: 9px 14px; font-size: 13px; background: transparent; color: #ffd600; cursor: pointer; font-weight: 700; }
+        .lang-select option { background: #002d62; color: white; }
+
+        /* ── HERO ── */
+        .hero { background: linear-gradient(135deg, #002d62 0%, #1565c0 100%); color: white; border-radius: 24px; padding: 28px 24px 0 24px; box-shadow: 0 16px 48px rgba(0,45,98,0.22); overflow: hidden; margin-bottom: 14px; }
+        .hero-content { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
+        .hero-text { flex: 1; min-width: 220px; padding-bottom: 28px; }
+        .hero-badge { display: inline-block; background: #ffd600; color: #002d62; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .hero h1 { font-size: clamp(24px, 5vw, 38px); line-height: 1.1; margin-bottom: 10px; letter-spacing: -0.02em; color: white; }
+        .hero h1 span { color: #ffd600; }
+        .hero p { font-size: 14px; opacity: 0.85; margin-bottom: 18px; color: #dbeafe; }
+        .hero-row { display: flex; flex-wrap: wrap; gap: 8px; }
+        .feature { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 999px; font-size: 13px; color: white; font-weight: 600; border: 1px solid rgba(255,255,255,0.18); }
+
+        /* ── EV IMAGE STRIP ── */
+        .hero-evs { display: flex; gap: 12px; align-items: flex-end; padding-bottom: 0; flex-shrink: 0; }
+        .hero-ev-card { background: rgba(255,255,255,0.1); border-radius: 18px 18px 0 0; padding: 10px 10px 0 10px; text-align: center; border: 1px solid rgba(255,255,255,0.15); border-bottom: none; width: 120px; }
+        .hero-ev-card img { width: 100px; height: 70px; object-fit: contain; display: block; margin: 0 auto; }
+        .hero-ev-label { font-size: 10px; font-weight: 700; color: #ffd600; padding: 6px 0 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .card { background: white; border-radius: 20px; padding: 20px; margin-top: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); border: 1px solid #e0e7ef; }
+        .card h2 { font-size: 16px; margin-bottom: 14px; color: #002d62; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+        .card h2::before { content: ''; display: inline-block; width: 4px; height: 18px; background: #ffd600; border-radius: 2px; }
         select, input[type="text"], input[type="tel"], .budget-btn, .licence-btn { width: 100%; font-size: 15px; }
         select, input[type="text"], input[type="tel"] { border: 2px solid #d8e3f3; border-radius: 16px; padding: 14px 16px; color: #1c2331; background: #fbfdff; font-weight: 500; }
         select:focus, input[type="text"]:focus, input[type="tel"]:focus { outline: none; border-color: #002d62; box-shadow: 0 0 0 4px rgba(0,45,98,0.12); }
         .budget-grid, .licence-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0,1fr)); }
-        .budget-btn, .licence-btn { border: 2px solid #dbeafe; border-radius: 18px; padding: 18px 14px; cursor: pointer; background: white; box-shadow: 0 12px 26px rgba(0, 45, 98, 0.08); transition: all 0.2s ease; text-align: left; font-weight: 600; }
-        .budget-btn:hover, .licence-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(0, 45, 98, 0.12); }
-        .budget-btn.selected, .licence-btn.selected { border-color: #ffd600; background: #fffce1; box-shadow: 0 12px 32px rgba(255, 214, 0, 0.24); }
-        .budget-btn .amount { display: block; font-weight: 800; margin-bottom: 6px; color: #002d62; font-size: 16px; }
-        .find-btn, .submit-btn, .confirm-btn { width: 100%; border: none; border-radius: 12px; padding: 16px 16px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.25s ease; }
-        .find-btn { background: linear-gradient(90deg, #ffd600, #ffec80); color: #002d62; margin-top: 14px; box-shadow: 0 14px 32px rgba(255, 214, 0, 0.32); }
-        .find-btn:disabled { opacity: 0.65; cursor: not-allowed; box-shadow: none; }
-        .find-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(255, 214, 0, 0.40); }
-        .submit-btn, .confirm-btn { background: linear-gradient(135deg, #1e3a8a, #1565c0); color: white; box-shadow: 0 8px 20px rgba(30, 58, 138, 0.32); font-size: 14px; margin-top: 12px; }
-        .submit-btn:hover, .confirm-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(30, 58, 138, 0.40); background: linear-gradient(135deg, #1565c0, #0d47a1); }
+        .budget-btn, .licence-btn { border: 2px solid #e0e7ef; border-radius: 14px; padding: 16px 14px; cursor: pointer; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.18s ease; text-align: left; font-weight: 600; }
+        .budget-btn:hover, .licence-btn:hover { border-color: #ffd600; transform: translateY(-1px); }
+        .budget-btn.selected, .licence-btn.selected { border-color: #ffd600; background: #fffbe6; box-shadow: 0 4px 16px rgba(255,214,0,0.22); }
+        .budget-btn .amount { display: block; font-weight: 800; margin-bottom: 4px; color: #002d62; font-size: 15px; }
+        .find-btn, .submit-btn, .confirm-btn { width: 100%; border: none; border-radius: 10px; padding: 16px 16px; font-weight: 800; font-size: 15px; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.3px; }
+        .find-btn { background: #ffd600; color: #002d62; margin-top: 14px; box-shadow: 0 4px 18px rgba(255,214,0,0.38); }
+        .find-btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+        .find-btn:hover:not(:disabled) { background: #ffca00; transform: translateY(-1px); box-shadow: 0 6px 22px rgba(255,214,0,0.45); }
+        .submit-btn, .confirm-btn { background: #002d62; color: white; box-shadow: 0 4px 16px rgba(0,45,98,0.28); font-size: 14px; margin-top: 12px; }
+        .submit-btn:hover, .confirm-btn:hover { background: #1565c0; transform: translateY(-1px); }
         .form-section { display: none; margin-top: 18px; }
-        .success-msg { display: none; text-align: center; padding: 28px 22px; background: #fffbe6; border-radius: 24px; box-shadow: 0 18px 42px rgba(0,45,98,0.10); margin-top: 18px; border: 2px solid #ffd600; }
+        .success-msg { display: none; text-align: center; padding: 28px 22px; background: #fffbe6; border-radius: 20px; box-shadow: 0 8px 28px rgba(0,45,98,0.12); margin-top: 14px; border: 2px solid #ffd600; }
         .success-msg .icon { font-size: 56px; margin-bottom: 12px; }
         .success-msg h2 { color: #002d62; }
         .success-msg p { color: #424242; }
         .range-box { display: grid; gap: 12px; }
         .range-box span { font-size: 14px; color: #424242; font-weight: 600; }
         .range-input { accent-color: #ffd600; width: 100%; cursor: pointer; }
-        .ev-card { background: white; border-radius: 24px; padding: 18px; margin-top: 18px; box-shadow: 0 22px 42px rgba(15, 23, 42, 0.09); border: 1px solid #e5efff; transition: all 0.25s ease; }
-        .ev-card:hover { box-shadow: 0 26px 60px rgba(15, 23, 42, 0.15); transform: translateY(-3px); }
+        .ev-card { background: white; border-radius: 18px; padding: 16px; margin-top: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 1px solid #e0e7ef; transition: all 0.2s ease; }
+        .ev-card:hover { box-shadow: 0 8px 28px rgba(0,45,98,0.14); transform: translateY(-2px); border-color: #ffd600; }
         .ev-card .card-top { display: flex; gap: 18px; align-items: center; }
-        .ev-thumb { flex: 0 0 160px; width: 160px; height: 120px; border-radius: 22px; overflow: hidden; background: linear-gradient(135deg, #f7f7f7, #ffffff); border: 2px solid #dbeafe; display: flex; align-items: center; justify-content: center; }
-        .ev-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ev-thumb { flex: 0 0 150px; width: 150px; height: 110px; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #f1f5ff, #e8f0fe); border: 2px solid #dbeafe; display: flex; align-items: center; justify-content: center; }
+        .ev-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 6px; }
         .ev-info { flex: 1; padding-right: 8px; }
         .ev-info h3 { font-size: 18px; margin-bottom: 10px; color: #002d62; font-weight: 800; line-height: 1.2; }
         .ev-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; padding: 4px 0; color: #475569; }
@@ -58,31 +74,35 @@
         .ev-detail .value { font-weight: 700; color: #0f172a; }
         .card-bottom { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
         .price-tag { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; background: #e0f2fe; color: #0d47a1; font-weight: 700; font-size: 13px; }
-        .book-btn { flex: 1; min-width: 200px; border: none; border-radius: 14px; padding: 14px 18px; background: linear-gradient(90deg, #ffd600, #ffde59); color: #002d62; font-weight: 800; cursor: pointer; box-shadow: 0 14px 28px rgba(255, 214, 0, 0.28); transition: transform 0.2s, box-shadow 0.2s; }
-        .book-btn:hover { transform: translateY(-1px); box-shadow: 0 16px 34px rgba(255, 214, 0, 0.34); }
+        .book-btn { flex: 1; min-width: 160px; border: none; border-radius: 10px; padding: 13px 18px; background: #ffd600; color: #002d62; font-weight: 800; cursor: pointer; box-shadow: 0 4px 14px rgba(255,214,0,0.32); transition: all 0.18s ease; font-size: 14px; }
+        .book-btn:hover { background: #ffca00; transform: translateY(-1px); }
         .type-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
         .hi-speed { background: linear-gradient(135deg, #bbdefb, #90caf9); color: #0d47a1; }
         .low-speed { background: linear-gradient(135deg, #ffe0b2, #ffcc80); color: #e65100; }
         .e-cycle { background: linear-gradient(135deg, #c8e6c9, #a5d6a7); color: #1b5e20; }
-        .results-title { margin-top: 20px; font-size: 20px; font-weight: 800; color: #002d62; margin-bottom: 14px; }
-        .summary-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: linear-gradient(90deg, #002d62, #1e3a8a); color: white; font-size: 13px; margin: 8px 8px 0 0; font-weight: 700; box-shadow: 0 4px 18px rgba(0,45,98,0.24); }
+        .results-title { margin-top: 16px; font-size: 18px; font-weight: 800; color: #002d62; margin-bottom: 10px; }
+        .summary-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; background: #002d62; color: #ffd600; font-size: 12px; margin: 6px 6px 0 0; font-weight: 700; }
         .hint { margin-top: 10px; font-size: 13px; color: #5f6368; line-height: 1.5; }
         .no-results { text-align: center; padding: 24px; color: #555; background: white; border-radius: 20px; box-shadow: 0 18px 42px rgba(14,33,82,0.08); margin-top: 18px; }
         @media (max-width: 680px) {
-            .topbar { flex-direction: column; align-items: flex-start; }
-            .hero { padding: 22px 18px; }
-            .card { padding: 18px; }
+            .topbar { padding: 12px 16px; }
+            .hero-evs { display: none; }
+            .hero { padding: 22px 18px 0 18px; }
+            .hero-text { padding-bottom: 22px; }
+            .card { padding: 16px; }
             .budget-grid, .licence-grid { grid-template-columns: 1fr; }
-            .ev-card .card-top { flex-direction: row; }
-            .ev-thumb { flex: 0 0 120px; width: 120px; height: 95px; }
-            .ev-info { flex: 1; }
+            .ev-thumb { flex: 0 0 110px; width: 110px; height: 85px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="topbar">
-        <div class="logo"><img src="/static/images/flipkart_logo.svg" alt="EV Assist" /><span>Assist</span></div>
+        <div class="logo">
+            <img src="/static/images/flipkart_logo.svg" alt="Flipkart" />
+            <div class="logo-divider"></div>
+            <span class="logo-tag">⚡ EV Assist</span>
+        </div>
         <select id="languageSelect" class="lang-select" onchange="applyLanguage(this.value)">
             <option value="en">English</option>
             <option value="hi">हिन्दी</option>
@@ -92,12 +112,31 @@
     </div>
 
     <div class="hero">
-        <h1 id="heroTitle">Delivery Rider EV Rentals</h1>
-        <p id="heroSubtitle">Fast, easy, and location-based EV options for your delivery shift.</p>
-        <div class="hero-row">
-            <div class="feature">🏙️ <span id="heroCityCount">Multiple cities</span></div>
-            <div class="feature">⚡ <span id="heroFastSearch">Fast matching</span></div>
-            <div class="feature">📱 <span id="heroMobileFriendly">Mobile friendly</span></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">🛵 For Delivery Riders</div>
+                <h1 id="heroTitle">Delivery Rider <span>EV Rentals</span></h1>
+                <p id="heroSubtitle">Fast, easy, and location-based EV options for your delivery shift.</p>
+                <div class="hero-row">
+                    <div class="feature">🏙️ <span id="heroCityCount">Multiple cities</span></div>
+                    <div class="feature">⚡ <span id="heroFastSearch">Fast matching</span></div>
+                    <div class="feature">📱 <span id="heroMobileFriendly">Mobile friendly</span></div>
+                </div>
+            </div>
+            <div class="hero-evs">
+                <div class="hero-ev-card">
+                    <img src="/static/images/ev_e_cycle.svg" alt="E-Cycle" />
+                    <div class="hero-ev-label">E-Cycle</div>
+                </div>
+                <div class="hero-ev-card">
+                    <img src="/static/images/ev_low_speed.svg" alt="Low Speed" />
+                    <div class="hero-ev-label">Low Speed</div>
+                </div>
+                <div class="hero-ev-card">
+                    <img src="/static/images/ev_hi_speed.svg" alt="Hi Speed" />
+                    <div class="hero-ev-label">Hi Speed</div>
+                </div>
+            </div>
         </div>
     </div>
 
