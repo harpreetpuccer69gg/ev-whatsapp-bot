@@ -253,6 +253,8 @@ function checkReady(){
   document.getElementById('findBtn').disabled=!(city&&budget!==null&&licence!==null);
 }
 
+function parseRent(s){if(!s)return null;const n=String(s).replace(/₹/g,'').match(/\d+/g);return n?parseInt(n[0]):null;}
+
 function findEVs(){
   const city=document.getElementById('citySelect').value;
   const [bMin,bMax]=BR[budget];
