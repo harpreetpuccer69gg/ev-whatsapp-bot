@@ -15,8 +15,7 @@
         .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 0; background: #002d62; padding: 12px 20px; border-radius: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.18); position: sticky; top: 0; z-index: 100; }
         .logo { display: inline-flex; align-items: center; gap: 0; }
         .logo-fk { color: #ffd600; font-size: 22px; font-weight: 900; font-family: 'Segoe UI', sans-serif; letter-spacing: -0.5px; }
-        .logo-minutes { background: #ffd600; color: #002d62; font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px; margin-left: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
-        .logo-ev { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 600; margin-left: 6px; margin-top: 2px; }
+        .logo-minutes { background: #b02a37; color: #ffffff; font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px; margin-left: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
         .lang-select { border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; padding: 7px 12px; font-size: 13px; background: rgba(255,255,255,0.1); color: white; cursor: pointer; font-weight: 600; }
         .lang-select option { background: #002d62; color: white; }
 
@@ -28,12 +27,11 @@
         .hero h1 { font-size: clamp(22px, 4vw, 34px); line-height: 1.15; margin-bottom: 8px; color: white; font-weight: 900; }
         .hero h1 span { color: #ffd600; }
         .hero p { font-size: 13px; opacity: 0.8; margin-bottom: 16px; color: #dbeafe; }
-        .hero-row { display: flex; flex-wrap: wrap; gap: 8px; }
-        .feature { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 6px; font-size: 12px; color: white; font-weight: 600; }
+        .hero-row { display: none; }
         /* ── EV IMAGE STRIP ── */
         .hero-evs { display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0; }
         .hero-ev-card { background: rgba(255,255,255,0.12); border-radius: 14px 14px 0 0; padding: 12px 12px 0 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2); border-bottom: none; width: 130px; }
-        .hero-ev-card img { width: 110px; height: 80px; object-fit: contain; display: block; margin: 0 auto; }
+        .hero-ev-card img { width: 110px; height: 80px; object-fit: contain; display: block; margin: 0 auto; background: white; border-radius: 8px; padding: 4px; }
         .hero-ev-label { font-size: 10px; font-weight: 800; color: #ffd600; padding: 8px 0 10px; letter-spacing: 1px; text-transform: uppercase; }
         .card { background: white; border-radius: 20px; padding: 20px; margin-top: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); border: 1px solid #e0e7ef; }
         .card h2 { font-size: 16px; margin-bottom: 14px; color: #002d62; font-weight: 800; display: flex; align-items: center; gap: 8px; }
@@ -100,7 +98,6 @@
         <div class="logo">
             <span class="logo-fk">Flipkart</span>
             <span class="logo-minutes">Minutes</span>
-            <span class="logo-ev">⚡ EV Assist</span>
         </div>
         <select id="languageSelect" class="lang-select" onchange="applyLanguage(this.value)">
             <option value="en">English</option>
@@ -116,23 +113,19 @@
                 <div class="hero-badge">🛵 For Delivery Riders</div>
                 <h1 id="heroTitle">Delivery Rider <span>EV Rentals</span></h1>
                 <p id="heroSubtitle">Fast, easy, and location-based EV options for your delivery shift.</p>
-                <div class="hero-row">
-                    <div class="feature">🏙️ <span id="heroCityCount">Multiple cities</span></div>
-                    <div class="feature">⚡ <span id="heroFastSearch">Fast matching</span></div>
-                    <div class="feature">📱 <span id="heroMobileFriendly">Mobile friendly</span></div>
-                </div>
+                <div class="hero-row"></div>
             </div>
             <div class="hero-evs">
                 <div class="hero-ev-card">
-                    <img src="/static/images/ev_e_cycle.svg" alt="E-Cycle" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" alt="E-Cycle" />
                     <div class="hero-ev-label">E-Cycle</div>
                 </div>
                 <div class="hero-ev-card">
-                    <img src="/static/images/ev_low_speed.svg" alt="Low Speed" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/3774/3774278.png" alt="Low Speed" />
                     <div class="hero-ev-label">Low Speed</div>
                 </div>
                 <div class="hero-ev-card">
-                    <img src="/static/images/ev_hi_speed.svg" alt="Hi Speed" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/3774/3774270.png" alt="Hi Speed" />
                     <div class="hero-ev-label">Hi Speed</div>
                 </div>
             </div>
@@ -347,10 +340,10 @@
 
     const BUDGET_RANGES = { '1':[0,1000], '2':[1000,1500], '3':[1500,2000], '4':[2000,99999] };
     const typeImages = {
-        'hi-speed': '/static/images/ev_hi_speed.svg',
-        'low-speed': '/static/images/ev_low_speed.svg',
-        'e-cycle': '/static/images/ev_e_cycle.svg',
-        'default': '/static/images/ev_default.svg'
+        'hi-speed': 'https://cdn-icons-png.flaticon.com/512/3774/3774270.png',
+        'low-speed': 'https://cdn-icons-png.flaticon.com/512/3774/3774278.png',
+        'e-cycle': 'https://cdn-icons-png.flaticon.com/512/2972/2972185.png',
+        'default': 'https://cdn-icons-png.flaticon.com/512/3774/3774270.png'
     };
 
     fetch('/vendors')
