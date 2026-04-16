@@ -48,12 +48,6 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .bchip-amt{font-size:14px;font-weight:800;color:#002d62;display:block;margin-bottom:3px;}
 .bchip-lbl{font-size:12px;color:#757575;}
 
-/* RANGE SLIDER */
-.range-wrap{padding:4px 0;}
-.range-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.range-lbl{font-size:13px;color:#424242;font-weight:600;}
-.range-val{font-size:15px;font-weight:800;color:#002d62;}
-input[type=range]{width:100%;accent-color:#ffd600;height:4px;cursor:pointer;}
 
 /* LICENCE TOGGLE */
 .toggle-wrap{display:flex;gap:10px;}
@@ -174,19 +168,7 @@ input[type=range]{width:100%;accent-color:#ffd600;height:4px;cursor:pointer;}
   </div>
 
   <div class="card">
-    <div class="card-title" id="rangeLabel">3. Preferred Range</div>
-    <div class="range-wrap">
-      <div class="range-top">
-        <span class="range-lbl" id="rangeUpTo">Up to</span>
-        <span class="range-val" id="rangeVal">100 km</span>
-      </div>
-      <input type="range" id="rangeInput" min="40" max="160" step="10" value="100" oninput="updateRange()"/>
-    </div>
-    <p class="hint" id="rangeHint">Filter EVs by daily range on a single charge.</p>
-  </div>
-
-  <div class="card">
-    <div class="card-title" id="licLabel">4. Driving Licence</div>
+    <div class="card-title" id="licLabel">3. Driving Licence</div>
     <div class="toggle-wrap">
       <button class="tog-btn" id="togYes" onclick="setLic(true)">✅ <span id="licYes">Yes, I have one</span></button>
       <button class="tog-btn" id="togNo" onclick="setLic(false)">❌ <span id="licNo">No licence</span></button>
@@ -242,9 +224,6 @@ function setLang(l){
   document.getElementById('b2').innerText=t.b2;
   document.getElementById('b3').innerText=t.b3;
   document.getElementById('b4').innerText=t.b4;
-  document.getElementById('rangeLabel').innerHTML='<span style="width:3px;height:16px;background:#ffd600;border-radius:2px;display:inline-block;margin-right:8px;"></span>'+t.rangeLabel;
-  document.getElementById('rangeUpTo').innerText=t.rangeUpTo;
-  document.getElementById('rangeHint').innerText=t.rangeHint;
   document.getElementById('licLabel').innerHTML='<span style="width:3px;height:16px;background:#ffd600;border-radius:2px;display:inline-block;margin-right:8px;"></span>'+t.licLabel;
   document.getElementById('licYes').innerText=t.licYes;
   document.getElementById('licNo').innerText=t.licNo;
@@ -274,25 +253,17 @@ function checkReady(){
   document.getElementById('findBtn').disabled=!(city&&budget!==null&&licence!==null);
 }
 
-function updateRange(){
-  document.getElementById('rangeVal').innerText=document.getElementById('rangeInput').value+' km';
-}
-
-function parseRent(s){if(!s)return null;const n=s.replace(/₹/g,'').match(/\d+/g);return n?parseInt(n[0]):null;}
-function parseRange(s){if(!s)return null;const n=s.match(/\d+/g);if(!n)return null;const v=n.map(Number).sort((a,b)=>a-b);return v.length===1?v[0]:Math.round((v[0]+v[v.length-1])/2);}
-
 function findEVs(){
   const city=document.getElementById('citySelect').value;
   const [bMin,bMax]=BR[budget];
-  const maxKm=Number(document.getElementById('rangeInput').value);
   const live=['live','live from next week','minutes wip'];
 
   let res=vendors.filter(v=>{
     if((v.City||'').toLowerCase()!==city.toLowerCase())return false;
     if(!live.includes((v.Status||'').toLowerCase()))return false;
     if(!licence){const t=(v.Type||'').toLowerCase();if(!t.includes('low')&&!t.includes('e-cycle')&&!t.includes('ecycle'))return false;}
-    const r=parseRent(v['Approx Rental/Week']),km=parseRange(v['Range (Km)']);
-    return r!==null&&km!==null&&r>=bMin&&r<=bMax&&km<=maxKm;
+    const r=parseRent(v['Approx Rental/Week']);
+    return r!==null&&r>=bMin&&r<=bMax;
   });
 
   if(!res.length){
@@ -364,7 +335,7 @@ function submitLead(){
   if(!name||!phone){alert('Please enter name and phone.');return;}
   fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     name,phone,city:document.getElementById('citySelect').value,lang,budget,
-    range:document.getElementById('rangeInput').value,licence,
+    licence,
     vendor:selVendor?.Vendor,make:selVendor?.Make,type:selVendor?.Type,
     rental:selVendor?.['Approx Rental/Week'],security_deposit:selVendor?.['Security Deposit'],
     refundable_deposit:selVendor?.['Refundable Deposit'],
@@ -381,6 +352,5 @@ function submitLead(){
   });
 }
 
-updateRange();
 setLang('en');
 </script>
