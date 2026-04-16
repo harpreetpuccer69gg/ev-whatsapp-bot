@@ -14,7 +14,7 @@
     "SPOC": "Jayanthi V",
     "Phone": "9176710300",
     "Email": "jayanthiv@linkmiles.com",
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/bgauss.jpg"
   },
   {
     "City": "Bangalore",
@@ -31,7 +31,7 @@
     "SPOC": "Navya",
     "Phone": "8105073464",
     "Email": "navya@linkmiles.com",
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/bgauss.jpg"
   },
   {
     "City": "Bangalore",
@@ -48,7 +48,7 @@
     "SPOC": "Navya",
     "Phone": "8105073464",
     "Email": "navya@linkmiles.com",
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/bgauss.jpg"
   },
   {
     "City": "Kolkata",
@@ -235,7 +235,7 @@
     "SPOC": "Sandeep",
     "Phone": "8884468333",
     "Email": "sandeep.sm@yulu.bike",
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Delhi NCR",
@@ -252,7 +252,7 @@
     "SPOC": "Sheikh Ahnaf",
     "Phone": "9559169129",
     "Email": "sheikh.ahnaf@yulu.bike",
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Mumbai",
@@ -269,7 +269,7 @@
     "SPOC": "Janvi Aggarwal",
     "Phone": "9326466890",
     "Email": "janvi.aggarwal@yulu.bike",
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Hyderabad",
@@ -286,7 +286,7 @@
     "SPOC": "Nagaraju",
     "Phone": "9550816965",
     "Email": "ergadhindla.nagaraju@yulu.bike",
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Kolkata",
@@ -303,7 +303,7 @@
     "SPOC": null,
     "Phone": null,
     "Email": null,
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Delhi NCR",
@@ -320,7 +320,7 @@
     "SPOC": "Allen Khan",
     "Phone": "7678518479",
     "Email": "Allen@electorq.com",
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/baaz.png"
   },
   {
     "City": "Bangalore",
@@ -337,7 +337,7 @@
     "SPOC": "Nikhit",
     "Phone": "7338178823",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/esprinto.png"
   },
   {
     "City": "Bangalore",
@@ -354,7 +354,7 @@
     "SPOC": "Nikhit",
     "Phone": "7338178823",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/esprinto.png"
   },
   {
     "City": "Hyderabad",
@@ -371,7 +371,7 @@
     "SPOC": null,
     "Phone": "7338178823",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/esprinto.png"
   },
   {
     "City": "Ahmedabad",
@@ -439,7 +439,7 @@
     "SPOC": "Vineet Todi",
     "Phone": "8876566694",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/gogreen.jpeg"
   },
   {
     "City": "Pune",
@@ -473,7 +473,7 @@
     "SPOC": "Rahul Suhane",
     "Phone": "7985782290",
     "Email": null,
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Bangalore",
@@ -490,7 +490,7 @@
     "SPOC": "Surendra",
     "Phone": "87606 58451",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/blive.jpeg"
   },
   {
     "City": "Chennai",
@@ -507,7 +507,7 @@
     "SPOC": "Sriram",
     "Phone": "8939436157",
     "Email": "sriram@blive.co.in",
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/blive.jpeg"
   },
   {
     "City": "Guwahati",
@@ -524,7 +524,7 @@
     "SPOC": "Priyam",
     "Phone": "6000914610",
     "Email": null,
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Delhi NCR",
@@ -575,7 +575,7 @@
     "SPOC": "Pramod Jatar",
     "Phone": "9607673269",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/yugo.jpeg"
   },
   {
     "City": "Kolkata",
@@ -592,7 +592,7 @@
     "SPOC": "Shashank Sodhani",
     "Phone": "8459615967",
     "Email": "shashanks@goewent.com",
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Bangalore",
@@ -609,7 +609,7 @@
     "SPOC": "Abhishek Singh",
     "Phone": "9810389626",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/kinetic.png"
   },
   {
     "City": "Delhi NCR (Gurgaon)",
@@ -626,7 +626,7 @@
     "SPOC": "Abhishek Singh",
     "Phone": "9810389626",
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/kinetic.png"
   },
   {
     "City": "Kolkata",
@@ -660,7 +660,7 @@
     "SPOC": "Avneeshh Kajjam",
     "Phone": "6309848498",
     "Email": "avneeshh@bijliride.com",
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/bgauss.jpg"
   },
   {
     "City": "Mumbai",
@@ -677,7 +677,7 @@
     "SPOC": null,
     "Phone": null,
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/bgauss.jpg"
   },
   {
     "City": "Delhi NCR",
@@ -694,7 +694,7 @@
     "SPOC": null,
     "Phone": null,
     "Email": null,
-    "Image": "/static/images/ev_hi_speed.svg"
+    "Image": "/static/images/bgauss.jpg"
   },
   {
     "City": "Bangalore",
@@ -779,7 +779,7 @@
     "SPOC": null,
     "Phone": null,
     "Email": "Ranjithak@speedzev.com",
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Pune",
@@ -813,7 +813,7 @@
     "SPOC": "Viruksham",
     "Phone": "9087688008",
     "Email": null,
-    "Image": "/static/images/ev_low_speed.svg"
+    "Image": "/static/images/yulu.avif"
   },
   {
     "City": "Kolkata",
