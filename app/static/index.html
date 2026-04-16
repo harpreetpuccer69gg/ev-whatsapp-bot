@@ -9,33 +9,32 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { min-height: 100%; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f1f3f6; color: #0f172a; }
-        .container { width: min(100%, 860px); margin: 0 auto; padding: 12px 16px; }
+        .container { width: min(100%, 860px); margin: 0 auto; padding: 14px 16px; }
 
-        /* ── TOPBAR ── */
-        .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; background: #002d62; padding: 14px 22px; border-radius: 20px; box-shadow: 0 8px 28px rgba(0,45,98,0.28); }
-        .logo { display: inline-flex; align-items: center; gap: 10px; }
-        .logo img { width: 110px; height: auto; display: block; filter: brightness(0) invert(1); }
-        .logo-divider { width: 2px; height: 28px; background: rgba(255,214,0,0.5); border-radius: 2px; }
-        .logo-tag { color: #ffd600; font-size: 17px; font-weight: 900; letter-spacing: 0.5px; }
-        .lang-select { border: 2px solid #ffd600; border-radius: 999px; padding: 9px 14px; font-size: 13px; background: transparent; color: #ffd600; cursor: pointer; font-weight: 700; }
+        /* ── TOPBAR (Flipkart Minutes style) ── */
+        .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 0; background: #002d62; padding: 12px 20px; border-radius: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.18); position: sticky; top: 0; z-index: 100; }
+        .logo { display: inline-flex; align-items: center; gap: 0; }
+        .logo-fk { color: #ffd600; font-size: 22px; font-weight: 900; font-family: 'Segoe UI', sans-serif; letter-spacing: -0.5px; }
+        .logo-minutes { background: #ffd600; color: #002d62; font-size: 11px; font-weight: 900; padding: 3px 8px; border-radius: 4px; margin-left: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .logo-ev { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 600; margin-left: 6px; margin-top: 2px; }
+        .lang-select { border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; padding: 7px 12px; font-size: 13px; background: rgba(255,255,255,0.1); color: white; cursor: pointer; font-weight: 600; }
         .lang-select option { background: #002d62; color: white; }
 
         /* ── HERO ── */
-        .hero { background: linear-gradient(135deg, #002d62 0%, #1565c0 100%); color: white; border-radius: 24px; padding: 28px 24px 0 24px; box-shadow: 0 16px 48px rgba(0,45,98,0.22); overflow: hidden; margin-bottom: 14px; }
-        .hero-content { display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap; }
-        .hero-text { flex: 1; min-width: 220px; padding-bottom: 28px; }
-        .hero-badge { display: inline-block; background: #ffd600; color: #002d62; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase; }
-        .hero h1 { font-size: clamp(24px, 5vw, 38px); line-height: 1.1; margin-bottom: 10px; letter-spacing: -0.02em; color: white; }
+        .hero { background: linear-gradient(135deg, #002d62 0%, #1565c0 100%); color: white; padding: 24px 20px 0 20px; margin-bottom: 14px; overflow: hidden; }
+        .hero-content { display: flex; gap: 20px; align-items: flex-end; max-width: 860px; margin: 0 auto; }
+        .hero-text { flex: 1; min-width: 200px; padding-bottom: 24px; }
+        .hero-badge { display: inline-block; background: #ffd600; color: #002d62; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .hero h1 { font-size: clamp(22px, 4vw, 34px); line-height: 1.15; margin-bottom: 8px; color: white; font-weight: 900; }
         .hero h1 span { color: #ffd600; }
-        .hero p { font-size: 14px; opacity: 0.85; margin-bottom: 18px; color: #dbeafe; }
+        .hero p { font-size: 13px; opacity: 0.8; margin-bottom: 16px; color: #dbeafe; }
         .hero-row { display: flex; flex-wrap: wrap; gap: 8px; }
-        .feature { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 999px; font-size: 13px; color: white; font-weight: 600; border: 1px solid rgba(255,255,255,0.18); }
-
+        .feature { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.12); padding: 6px 12px; border-radius: 6px; font-size: 12px; color: white; font-weight: 600; }
         /* ── EV IMAGE STRIP ── */
-        .hero-evs { display: flex; gap: 12px; align-items: flex-end; padding-bottom: 0; flex-shrink: 0; }
-        .hero-ev-card { background: rgba(255,255,255,0.1); border-radius: 18px 18px 0 0; padding: 10px 10px 0 10px; text-align: center; border: 1px solid rgba(255,255,255,0.15); border-bottom: none; width: 120px; }
-        .hero-ev-card img { width: 100px; height: 70px; object-fit: contain; display: block; margin: 0 auto; }
-        .hero-ev-label { font-size: 10px; font-weight: 700; color: #ffd600; padding: 6px 0 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .hero-evs { display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0; }
+        .hero-ev-card { background: rgba(255,255,255,0.12); border-radius: 14px 14px 0 0; padding: 12px 12px 0 12px; text-align: center; border: 1px solid rgba(255,255,255,0.2); border-bottom: none; width: 130px; }
+        .hero-ev-card img { width: 110px; height: 80px; object-fit: contain; display: block; margin: 0 auto; }
+        .hero-ev-label { font-size: 10px; font-weight: 800; color: #ffd600; padding: 8px 0 10px; letter-spacing: 1px; text-transform: uppercase; }
         .card { background: white; border-radius: 20px; padding: 20px; margin-top: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); border: 1px solid #e0e7ef; }
         .card h2 { font-size: 16px; margin-bottom: 14px; color: #002d62; font-weight: 800; display: flex; align-items: center; gap: 8px; }
         .card h2::before { content: ''; display: inline-block; width: 4px; height: 18px; background: #ffd600; border-radius: 2px; }
@@ -99,9 +98,9 @@
 <div class="container">
     <div class="topbar">
         <div class="logo">
-            <img src="/static/images/flipkart_logo.svg" alt="Flipkart" />
-            <div class="logo-divider"></div>
-            <span class="logo-tag">⚡ EV Assist</span>
+            <span class="logo-fk">Flipkart</span>
+            <span class="logo-minutes">Minutes</span>
+            <span class="logo-ev">⚡ EV Assist</span>
         </div>
         <select id="languageSelect" class="lang-select" onchange="applyLanguage(this.value)">
             <option value="en">English</option>
