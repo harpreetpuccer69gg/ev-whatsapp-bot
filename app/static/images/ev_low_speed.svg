@@ -1,20 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220">
-  <defs>
-    <linearGradient id="lowBg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#ffeb3b"/>
-      <stop offset="100%" stop-color="#ffb300"/>
-    </linearGradient>
-  </defs>
-  <rect width="360" height="220" rx="24" fill="#fff8e1"/>
-  <path d="M60 156h240v20H60z" fill="#ffe082"/>
-  <path d="M72 148c0-14 12-26 26-26h164c14 0 26 12 26 26v10H72v-10Z" fill="url(#lowBg)"/>
-  <path d="M78 148l18-30h170l18 30" fill="#fff3e0" opacity="0.8"/>
-  <path d="M84 132l14-26h150l14 26" fill="#f57c00"/>
-  <circle cx="110" cy="170" r="18" fill="#bf360c"/>
-  <circle cx="250" cy="170" r="18" fill="#bf360c"/>
-  <circle cx="110" cy="170" r="9" fill="#fff3e0"/>
-  <circle cx="250" cy="170" r="9" fill="#fff3e0"/>
-  <path d="M92 130l8-16h20" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-  <path d="M262 130l8-16h20" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#bf360c" font-size="18" font-family="Arial, sans-serif" font-weight="700">Low-Speed EV</text>
+  <rect width="360" height="220" rx="16" fill="#fff8e1"/>
+  <!-- Shadow -->
+  <ellipse cx="180" cy="162" rx="70" ry="12" fill="#ffe082" opacity="0.5"/>
+  <!-- Rear wheel -->
+  <circle cx="110" cy="158" r="28" fill="#4e342e"/>
+  <circle cx="110" cy="158" r="18" fill="#6d4c41"/>
+  <circle cx="110" cy="158" r="7" fill="#bcaaa4"/>
+  <!-- Front wheel -->
+  <circle cx="262" cy="158" r="28" fill="#4e342e"/>
+  <circle cx="262" cy="158" r="18" fill="#6d4c41"/>
+  <circle cx="262" cy="158" r="7" fill="#bcaaa4"/>
+  <!-- Body -->
+  <path d="M122 155 L132 118 L195 112 L235 120 L248 155 Z" fill="#f57c00"/>
+  <!-- Seat -->
+  <rect x="132" y="106" width="62" height="13" rx="6" fill="#e65100"/>
+  <!-- Front panel -->
+  <path d="M235 120 L258 136 L262 155 L248 155 Z" fill="#fb8c00"/>
+  <!-- Handlebar -->
+  <rect x="250" y="110" width="4" height="26" rx="2" fill="#4e342e"/>
+  <rect x="242" y="110" width="16" height="5" rx="2" fill="#5d4037"/>
+  <!-- Footboard -->
+  <rect x="120" y="150" width="130" height="8" rx="4" fill="#bf360c"/>
+  <!-- Battery pack -->
+  <rect x="152" y="122" width="52" height="26" rx="5" fill="#e65100"/>
+  <rect x="157" y="126" width="42" height="8" rx="3" fill="#ffd600"/>
+  <text x="168" y="148" fill="#fff" font-size="13" font-weight="900">LOW</text>
+  <!-- Rear strut -->
+  <path d="M132 118 L118 155" stroke="#e65100" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- Label -->
+  <text x="50%" y="208" dominant-baseline="middle" text-anchor="middle" fill="#e65100" font-size="15" font-family="Arial, sans-serif" font-weight="800">Low-Speed EV</text>
 </svg>
