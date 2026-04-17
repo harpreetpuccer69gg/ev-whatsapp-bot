@@ -11,21 +11,32 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 /* HEADER */
 .header{background:#002d62;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
 .logo{display:flex;align-items:center;gap:6px;}
-.logo-fk{color:#fff;font-size:18px;font-weight:900;letter-spacing:-0.5px;}
-.logo-min{color:#ffd600;font-size:22px;font-weight:900;font-style:italic;letter-spacing:-1px;margin-left:2px;}
+.logo img{height:40px;width:auto;display:block;}
 .lang-sel{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 10px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;}
 .lang-sel option{background:#002d62;}
 
-/* HERO */
-.hero{background:linear-gradient(135deg,#002d62 0%,#1565c0 100%);padding:20px 16px 0;overflow:hidden;}
-.hero-inner{display:flex;align-items:flex-end;gap:12px;max-width:500px;margin:0 auto;}
-.hero-text{flex:1;padding-bottom:24px;}
+/* HERO CAROUSEL */
+.hero{background:linear-gradient(135deg,#002d62 0%,#1565c0 100%);overflow:hidden;position:relative;}
+.hero-slides{display:flex;transition:transform 0.5s ease;}
+.hero-slide{min-width:100%;padding:20px 16px 16px;}
+.hero-inner{display:flex;align-items:center;gap:12px;max-width:500px;margin:0 auto;}
+.hero-text{flex:1;padding-bottom:8px;}
 .hero-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:10px;font-weight:900;padding:3px 10px;border-radius:3px;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px;}
 .hero h1{color:#fff;font-size:22px;font-weight:900;line-height:1.2;margin-bottom:8px;}
 .hero h1 span{color:#ffd600;}
 .hero-sub{color:#90caf9;font-size:12px;line-height:1.6;}
-.hero-img{flex-shrink:0;width:130px;align-self:flex-end;}
-.hero-img img{width:130px;height:100px;object-fit:contain;display:block;}
+.hero-img{flex-shrink:0;width:130px;}
+.hero-img img{width:130px;height:110px;object-fit:contain;display:block;}
+/* Slide 2 - offer */
+.hero-slide-offer{background:linear-gradient(135deg,#7b1a24 0%,#b02a37 100%);}
+.offer-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:10px;font-weight:900;padding:3px 10px;border-radius:3px;margin-bottom:10px;text-transform:uppercase;}
+.offer-name{color:rgba(255,255,255,0.85);font-size:13px;font-weight:700;margin-bottom:4px;}
+.offer-price{color:#ffd600;font-size:32px;font-weight:900;letter-spacing:-1px;margin-bottom:4px;}
+.offer-sub{color:rgba(255,255,255,0.7);font-size:11px;}
+/* Dots */
+.hero-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 14px;}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.35);cursor:pointer;transition:all 0.2s;}
+.hero-dot.active{background:#ffd600;width:18px;border-radius:3px;}
 
 /* MAIN */
 .main{max-width:500px;margin:0 auto;padding:12px 12px 100px;}
@@ -55,9 +66,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .intro-box.hide{animation:popOut 0.3s ease forwards;}
 @keyframes popIn{from{transform:scale(0.85);opacity:0;}to{transform:scale(1);opacity:1;}}
 @keyframes popOut{from{transform:scale(1);opacity:1;}to{transform:scale(0.85);opacity:0;}}
-.intro-logo{display:flex;align-items:center;gap:6px;margin-bottom:20px;}
-.intro-fk{color:#002d62;font-size:22px;font-weight:900;}
-.intro-min{background:#b02a37;color:#fff;font-size:10px;font-weight:900;padding:2px 7px;border-radius:3px;}
+.intro-logo{margin-bottom:20px;}
 .intro-title{font-size:17px;font-weight:900;color:#002d62;margin-bottom:6px;}
 .intro-sub{font-size:12px;color:#9e9e9e;margin-bottom:20px;}
 .intro-sel{width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;color:#212121;background:#fafafa;font-weight:500;margin-bottom:12px;}
@@ -151,7 +160,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 <!-- INTRO POPUP -->
 <div class="intro-overlay" id="introOverlay">
   <div class="intro-box" id="introBox">
-    <div class="intro-logo"><span class="intro-fk">Flipkart</span><span class="intro-min">MINUTES</span></div>
+    <div class="intro-logo"><img src="/static/images/logo.png" alt="Flipkart Minutes" style="height:44px;width:auto;"/></div>
     <div class="intro-title" id="introTitle">Welcome! Let's get started</div>
     <div class="intro-sub" id="introSub">Select your language and city</div>
     <select class="intro-sel" id="introLang" onchange="setLang(this.value)">
@@ -183,10 +192,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 
 <div class="header">
   <div class="logo">
-    <div style="display:flex;flex-direction:column;line-height:1;">
-      <span class="logo-fk">Flipkart</span>
-      <span class="logo-min">MINUTES</span>
-    </div>
+    <img src="/static/images/logo.png" alt="Flipkart Minutes"/>
   </div>
   <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
     <option value="en">English</option>
@@ -197,15 +203,38 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 </div>
 
 <div class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge" id="heroBadge">🛵 For Delivery Riders</div>
-      <h1 id="heroTitle">Find the Best <span>EV Rentals</span> for Delivery Riders</h1>
-      <p class="hero-sub" id="heroSub">Affordable weekly plans | Instant booking | Vendor support</p>
+  <div class="hero-slides" id="heroSlides">
+    <!-- Slide 1: Normal -->
+    <div class="hero-slide">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge" id="heroBadge">🛵 For Delivery Riders</div>
+          <h1 id="heroTitle">Find the Best <span>EV Rentals</span> for Delivery Riders</h1>
+          <p class="hero-sub" id="heroSub">Affordable weekly plans | Instant booking | Vendor support</p>
+        </div>
+        <div class="hero-img">
+          <img src="/static/images/delivery_rider.png" alt="Delivery Rider"/>
+        </div>
+      </div>
     </div>
-    <div class="hero-img">
-      <img src="/static/images/ev_hi_speed.svg" alt="EV Scooter" id="heroImg"/>
+    <!-- Slide 2: Yuvwaa Offer -->
+    <div class="hero-slide hero-slide-offer">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="offer-badge">⚡ Special Offer</div>
+          <div class="offer-name">YuvwaaSpeed · Pune</div>
+          <div class="offer-price">₹59/day</div>
+          <div class="offer-sub">+ ₹1.50/km · Range 80km · Hi-Speed</div>
+        </div>
+        <div class="hero-img">
+          <img src="/static/images/yuvwaa.png" alt="Yuvwaa Speed"/>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="hero-dots">
+    <div class="hero-dot active" onclick="goSlide(0)"></div>
+    <div class="hero-dot" onclick="goSlide(1)"></div>
   </div>
 </div>
 
@@ -265,7 +294,14 @@ const IMGS={'hi-speed':'/static/images/ev_hi_speed.svg','low-speed':'/static/ima
 
 fetch('/vendors').then(r=>r.json()).then(d=>{vendors=Array.isArray(d)?d:[];}).catch(()=>{vendors=[];});
 
-// INTRO POPUP
+// HERO CAROUSEL
+let curSlide=0;
+function goSlide(n){
+  curSlide=n;
+  document.getElementById('heroSlides').style.transform=`translateX(-${n*100}%)`;
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+}
+setInterval(()=>goSlide(curSlide===0?1:0),3000);
 function closeIntro(){
   const city=document.getElementById('introCity').value;
   if(!city){alert('Please select your city');return;}
@@ -350,7 +386,7 @@ function renderResults(list,city){
   const box=document.getElementById('resultsArea');
   if(!list.length){box.innerHTML=`<div class="no-res">😔 ${t.noRes.replace('{city}',city)}</div>`;return;}
 
-  const featured=vendors.filter(v=>v.Featured&&(v.City||'').toLowerCase()===city.toLowerCase());
+
   const grouped=list.reduce((a,v)=>{const p=v['Approx Rental/Week']||'N/A';a[p]=(a[p]||0)+1;return a;},{});
   let html=`<div class="results-hdr">${t.foundText.replace('{count}',list.length).replace('{city}',city)}</div>`;
   html+=Object.keys(grouped).map(p=>`<span class="pill">${grouped[p]} @ ₹${p}</span>`).join('');
@@ -405,7 +441,7 @@ function renderResults(list,city){
   });
 
   box.innerHTML=html;
-  box._list=[...list,...featured];
+  box._list=list;
   box.scrollIntoView({behavior:'smooth'});
 }
 
