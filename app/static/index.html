@@ -391,28 +391,7 @@ function renderResults(list,city){
   let html=`<div class="results-hdr">${t.foundText.replace('{count}',list.length).replace('{city}',city)}</div>`;
   html+=Object.keys(grouped).map(p=>`<span class="pill">${grouped[p]} @ ₹${p}</span>`).join('');
 
-  // Featured cards first
-  if(featured.length){
-    html+=`<div class="featured-section-title">⭐ Special Offers</div>`;
-    featured.forEach((v,i)=>{
-      html+=`<div class="featured-card">
-        <div class="featured-top">
-          <div class="featured-img"><img src="${v.Image||IMGS['hi-speed']}" onerror="this.src='${IMGS['hi-speed']}'" alt="${v.Make||'EV'}"/></div>
-          <div class="featured-info">
-            <span class="featured-badge">⚡ Featured</span>
-            <div class="featured-name">${v.Make||'EV'} · ${v.Vendor||''}</div>
-            <div class="featured-offer">${v.OfferText||v['Approx Rental/Week']}</div>
-            <div class="featured-meta">Range ${v['Range (Km)']||'N/A'} km · Deposit ₹${v['Security Deposit']||'NIL'}</div>
-          </div>
-        </div>
-        <div class="featured-bot">
-          <span class="featured-price">${v.City} · ${v.Type||''}</span>
-          <button class="featured-book" onclick="openSheet(${list.length+i})">Book Now</button>
-        </div>
-      </div>`;
-    });
-  }
-
+  // Normal cards
   list.forEach((v,i)=>{
     const raw=(v.Type||'').toLowerCase();
     const tk=raw.includes('hi')?'hi-speed':raw.includes('low')?'low-speed':'e-cycle';
