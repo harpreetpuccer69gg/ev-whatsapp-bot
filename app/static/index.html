@@ -360,10 +360,11 @@ function parseRent(s){
 function findEVs(){
   const city=document.getElementById('citySelect').value;
   const live=['live','live from next week','minutes wip'];
+  const budgetSelected = budget && budget.length > 0;
   let res=vendors.filter(v=>{
     if((v.City||'').toLowerCase()!==city.toLowerCase())return false;
     if(!live.includes((v.Status||'').toLowerCase()))return false;
-    if(budget&&budget.length){
+    if(budgetSelected){
       const r=parseRent(v['Approx Rental/Week']);
       const match=budget.some(b=>{
         const [bMin,bMax]=BR[b];
@@ -373,26 +374,22 @@ function findEVs(){
     }
     return true;
   });
-  if(!res.length){
-    res=vendors.filter(v=>{
-      if((v.City||'').toLowerCase()!==city.toLowerCase())return false;
-      return live.includes((v.Status||'').toLowerCase());
-    });
-  }
-  renderResults(res,city,budget&&budget.length>0);
-}
-
-function renderResults(list,city,budgetFiltered){
-  const t=T[lang]||T.en;
   const box=document.getElementById('resultsArea');
-  if(!list.length){
-    if(budgetFiltered){
+  if(!res.length){
+    if(budgetSelected){
       box.innerHTML='<div class="no-res"><div style="font-size:36px;margin-bottom:10px;">😔</div><div style="font-weight:800;color:#002d62;font-size:15px;margin-bottom:6px;">No EVs available in '+city+' for this budget</div><div style="font-size:13px;color:#9e9e9e;">Try a higher budget or check other cities.</div></div>';
     } else {
       box.innerHTML='<div class="no-res">No EVs found in '+city+'.</div>';
     }
     return;
   }
+  renderResults(res,city);
+}
+
+function renderResults(list,city){
+  const t=T[lang]||T.en;
+  const box=document.getElementById('resultsArea');
+  if(!list.length){box.innerHTML='<div class="no-res">'+t.noRes.replace('{city}',city)+'</div>';return;}
   const grouped=list.reduce((a,v)=>{const p=v['Approx Rental/Week']||'N/A';a[p]=(a[p]||0)+1;return a;},{});
   let html='<div class="results-hdr">'+t.foundText.replace('{count}',list.length).replace('{city}',city)+'</div>';
   html+=Object.keys(grouped).map(p=>'<span class="pill">'+grouped[p]+' @ '+p+'</span>').join('');
