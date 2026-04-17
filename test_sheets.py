@@ -26,6 +26,6 @@ test_session = {
 
 try:
     log_lead(test_session, "919999999999")
-    print("✅ Google Sheets working! Check your sheet for test row.")
+    print("SUCCESS - Google Sheets working! Check your sheet for test row.")
 except Exception as e:
-    print(f"❌ Error: {e}")
+    print("FAILED - Error: " + str(e))

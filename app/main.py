@@ -48,9 +48,10 @@ async def submit_lead(request: Request):
             }
         }
         log_lead(session, data.get("phone", ""))
-    except Exception:
-        pass
-    return JSONResponse({"status": "ok"})
+        return JSONResponse({"status": "ok"})
+    except Exception as e:
+        print(f"Sheet error: {e}")
+        return JSONResponse({"status": "error", "detail": str(e)}, status_code=500)
 
 
 @app.get("/health")
