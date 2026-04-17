@@ -10,7 +10,7 @@ SHEET_ID = os.getenv("GOOGLE_SHEET_ID", "")
 
 HEADERS = [
     "Timestamp", "Rider Name", "Rider Phone", "City", "Language",
-    "Budget Range", "Vendor", "Make", "Type",
+    "Budget Range", "Range Preference", "Vendor", "Make", "Type",
     "Rental/Week", "Security Deposit", "Refundable Deposit",
     "SPOC Name", "SPOC Phone", "Status"
 ]
@@ -50,6 +50,7 @@ def log_lead(session: dict, phone: str):
         session.get("city", ""),
         LANG_LABELS.get(session.get("lang", "en"), "English"),
         BUDGET_LABELS.get(str(session.get("budget", "")), ""),
+        "",  # Range Preference - kept for column alignment
         chosen.get("Vendor", ""),
         chosen.get("Make", ""),
         chosen.get("Type", ""),
