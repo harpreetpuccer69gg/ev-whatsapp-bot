@@ -256,10 +256,10 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   <div class="card">
     <div class="card-title" id="budgetLabel">2. Weekly Budget</div>
     <div class="budget-grid">
-      <button class="bchip" onclick="setBudget(this,'1')"><span class="bchip-amt">₹1000</span><span class="bchip-lbl" id="b1">Below ₹1000</span></button>
-      <button class="bchip" onclick="setBudget(this,'2')"><span class="bchip-amt">₹1000–1500</span><span class="bchip-lbl" id="b2">Per week</span></button>
-      <button class="bchip" onclick="setBudget(this,'3')"><span class="bchip-amt">₹1500–2000</span><span class="bchip-lbl" id="b3">Per week</span></button>
-      <button class="bchip" onclick="setBudget(this,'4')"><span class="bchip-amt">₹2000+</span><span class="bchip-lbl" id="b4">Above ₹2000</span></button>
+      <button class="bchip" data-budget="1" onclick="setBudget(this,'1')"><span class="bchip-amt">₹1000</span><span class="bchip-lbl" id="b1">Below ₹1000</span></button>
+      <button class="bchip" data-budget="2" onclick="setBudget(this,'2')"><span class="bchip-amt">₹1000–1500</span><span class="bchip-lbl" id="b2">Per week</span></button>
+      <button class="bchip" data-budget="3" onclick="setBudget(this,'3')"><span class="bchip-amt">₹1500–2000</span><span class="bchip-lbl" id="b3">Per week</span></button>
+      <button class="bchip" data-budget="4" onclick="setBudget(this,'4')"><span class="bchip-amt">₹2000+</span><span class="bchip-lbl" id="b4">Above ₹2000</span></button>
     </div>
   </div>
 
@@ -344,9 +344,9 @@ function setLang(l){
 }
 
 function setBudget(el,v){
-  const wasActive=el.classList.contains('active');
-  document.querySelectorAll('.bchip').forEach(b=>b.classList.remove('active'));
-  if(!wasActive){el.classList.add('active');budget=v;}else{budget=null;}
+  el.classList.toggle('active');
+  const active=[...document.querySelectorAll('.bchip.active')].map(b=>b.dataset.budget);
+  budget=active.length===0||active.length===4?null:active;
   checkReady();
 }
 
@@ -364,10 +364,13 @@ function findEVs(){
   let res=vendors.filter(v=>{
     if((v.City||'').toLowerCase()!==city.toLowerCase())return false;
     if(!live.includes((v.Status||'').toLowerCase()))return false;
-    if(budget){
+    if(budget&&budget.length){
       const r=parseRent(v['Approx Rental/Week']);
-      const [bMin,bMax]=BR[budget];
-      if(r===null||r<bMin||r>bMax)return false;
+      const match=budget.some(b=>{
+        const [bMin,bMax]=BR[b];
+        return r!==null&&r>=bMin&&r<=bMax;
+      });
+      if(!match)return false;
     }
     return true;
   });
