@@ -796,7 +796,9 @@
         "SPOC":  null,
         "Phone":  null,
         "Email":  null,
-        "Image":  "/static/images/ev_hi_speed.svg"
+        "Image":  "/static/images/yuvwaa.png",
+        "Featured":  true,
+        "OfferText":  "Rs.59/day"
     },
     {
         "City":  "COIMBATORE",
