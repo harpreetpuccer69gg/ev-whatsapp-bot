@@ -222,6 +222,7 @@ function submitLead(){
   const name=document.getElementById('riderName').value.trim();
   const phone=document.getElementById('riderPhone').value.trim();
   if(!name||!phone){alert('Please enter name and phone.');return;}
+  if(phone.length!==10){alert('Please enter a valid 10-digit mobile number.');return;}
   const btn=document.getElementById('confirmBtn');
   btn.innerText='Submitting...';
   btn.disabled=true;
