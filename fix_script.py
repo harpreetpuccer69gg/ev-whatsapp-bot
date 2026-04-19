@@ -126,7 +126,7 @@ function renderResults(list,city){
   let html='<div class="results-hdr">'+t.foundText.replace('{count}',list.length).replace('{city}',city)+'</div>';
   html+='<input class="search-bar" id="searchBar" placeholder="Search vendor or bike..." oninput="renderCards()" />';
   html+='<div class="results-toolbar">';
-  html+='<button class="type-chip active" onclick="setType(this,\'all\')" >All</button>';
+  html+='<button class="type-chip active" onclick="setType(this,\'all\')">All</button>';
   html+='<button class="type-chip" onclick="setType(this,\'hi-speed\')">Hi-Speed</button>';
   html+='<button class="type-chip" onclick="setType(this,\'low-speed\')">Low Speed</button>';
   html+='<button class="type-chip" onclick="setType(this,\'e-cycle\')">E-Cycle</button>';
