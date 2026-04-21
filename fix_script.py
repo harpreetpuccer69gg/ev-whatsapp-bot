@@ -294,6 +294,10 @@ function yuvwaaClick(){
   const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed');
   if(yuvwaa)openDetail(yuvwaa);
 }
+function bounceClick(){
+  const bounce=vendors.find(v=>v.Vendor==='Bounce');
+  if(bounce)openDetail(bounce);
+}
 function closeSheet(){
   document.getElementById('overlay').classList.remove('show');
   document.getElementById('sheet').classList.remove('show');
