@@ -410,17 +410,25 @@ fetch('/vendors').then(r=>r.json()).then(d=>{vendors=Array.isArray(d)?d:[];}).ca
 
 const TOTAL_SLIDES=3;
 let curSlide=0;
+let autoScrollInterval=null;
 function goSlide(n){
   curSlide=(n+TOTAL_SLIDES)%TOTAL_SLIDES;
   const el=document.getElementById('heroSlides');
+  if(!el)return;
   el.scrollTo({left:curSlide*el.offsetWidth,behavior:'smooth'});
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
 }
-setInterval(()=>goSlide(curSlide+1),10000);
-// Update dot on manual scroll
+// Initialize carousel on full page load
 window.addEventListener('load',()=>{
   const el=document.getElementById('heroSlides');
   if(!el)return;
+  // Reset scroll to position 0
+  el.scrollLeft=0;
+  curSlide=0;
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===0));
+  // Start auto-scroll after page is fully loaded
+  autoScrollInterval=setInterval(()=>goSlide(curSlide+1),10000);
+  // Update dot on manual scroll
   el.addEventListener('scroll',()=>{
     const idx=Math.round(el.scrollLeft/el.offsetWidth);
     if(idx!==curSlide){curSlide=idx;document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));}
