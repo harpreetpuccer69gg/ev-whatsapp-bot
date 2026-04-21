@@ -37,19 +37,23 @@ function goSlide(n){
 setInterval(()=>goSlide(curSlide+1),10000);
 
 // Manual swipe - iOS compatible
-let touchStartX=0,touchStartY=0;
+let touchStartX=0,touchStartY=0,isDragging=false;
 window.addEventListener('load',()=>{
   const heroEl=document.getElementById('heroSlides');
   if(!heroEl)return;
-  heroEl.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});
-  heroEl.addEventListener('touchmove',e=>{
-    if(Math.abs(e.touches[0].clientX-touchStartX)>Math.abs(e.touches[0].clientY-touchStartY))e.preventDefault();
-  },{passive:false});
+  heroEl.addEventListener('touchstart',e=>{
+    touchStartX=e.touches[0].clientX;
+    touchStartY=e.touches[0].clientY;
+    isDragging=true;
+  },{passive:true});
   heroEl.addEventListener('touchend',e=>{
+    if(!isDragging)return;
+    isDragging=false;
     const dx=touchStartX-e.changedTouches[0].clientX;
     const dy=Math.abs(touchStartY-e.changedTouches[0].clientY);
-    if(Math.abs(dx)>30&&dy<80)goSlide(dx>0?curSlide+1:curSlide-1);
+    if(Math.abs(dx)>30&&dy<100)goSlide(dx>0?curSlide+1:curSlide-1);
   },{passive:true});
+  heroEl.addEventListener('touchcancel',()=>{isDragging=false;},{passive:true});
 });
 
 function closeIntro(){
