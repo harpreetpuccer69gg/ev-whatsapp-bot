@@ -17,9 +17,10 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 
 /* HERO CAROUSEL */
 .hero{background:linear-gradient(135deg,#002d62 0%,#1565c0 100%);position:relative;}
-.hero-slides{display:flex;overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;height:160px;}
+.hero-slides{display:flex;overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;align-items:flex-start;}
 .hero-slides::-webkit-scrollbar{display:none;}
-.hero-slide{min-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;padding:20px 16px 16px;scroll-snap-align:start;overflow:hidden;}
+.hero-slide{min-width:100%;width:100%;flex-shrink:0;box-sizing:border-box;scroll-snap-align:start;}
+.hero-slide-content{padding:20px 16px 16px;}
 .hero-inner{display:flex;align-items:center;gap:12px;max-width:500px;margin:0 auto;}
 .hero-text{flex:1;padding-bottom:8px;}
 .hero-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:10px;font-weight:900;padding:3px 10px;border-radius:3px;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px;}
@@ -251,8 +252,8 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 
 <div class="hero">
   <div class="hero-slides" id="heroSlides">
-    <!-- Slide 1: Normal -->
     <div class="hero-slide">
+      <div class="hero-slide-content">
       <div class="hero-inner">
         <div class="hero-text">
           <div class="hero-badge" id="heroBadge">🛵 For Delivery Riders</div>
@@ -263,9 +264,10 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
           <img src="/static/images/delivery_rider.png" alt="Delivery Rider"/>
         </div>
       </div>
+      </div>
     </div>
-    <!-- Slide 2: Yuvwaa Offer -->
     <div class="hero-slide hero-slide-offer" onclick="yuvwaaClick()" style="cursor:pointer;">
+      <div class="hero-slide-content">
       <div class="hero-inner">
         <div class="hero-text">
           <div class="offer-badge">⚡ Special Offer</div>
@@ -277,10 +279,10 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
           <img src="/static/images/yuvwaa.png" alt="Yuvwaa Speed"/>
         </div>
       </div>
+      </div>
     </div>
-    <!-- Slide 3: Poster -->
-    <div class="hero-slide" style="padding:0;" onclick="bounceClick()">
-      <img src="/static/images/fk_poster.png" alt="Flipkart Minutes" style="width:100%;height:160px;object-fit:cover;object-position:center;display:block;"/>
+    <div class="hero-slide" onclick="bounceClick()" style="cursor:pointer;">
+      <img src="/static/images/fk_poster.png" alt="Flipkart Minutes" style="width:100%;display:block;"/>
     </div>
   </div>
   <div class="hero-dots">
