@@ -1,0 +1,6 @@
+Linkmiles|Chennai|Bgauss|None
+Linkmiles|Bangalore|Bgauss C12i Max|3000
+Linkmiles|Bangalore|Bgauss Oowah|4500
+Bykemania|Bangalore|E-Sprinto/BGauss|1950
+Bykemania|Bangalore|E-Sprinto/BGauss|1700
+Bykemania|Hyderabad|E-Sprinto/BGauss|1700

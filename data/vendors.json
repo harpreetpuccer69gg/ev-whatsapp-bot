@@ -340,23 +340,6 @@
         "Image":  "/static/images/esprinto.png"
     },
     {
-        "City":  "Bangalore",
-        "Vendor":  "Bykemania",
-        "Status":  "Live",
-        "Battery Type":  "Sun Mobility/Indofast Swap",
-        "Make":  "E-Sprinto/BGauss",
-        "Type":  "Hi-Speed",
-        "Approx Rental/Week":  "1750",
-        "Range (Km)":  "65",
-        "Security Deposit":  "1700",
-        "Refundable Deposit":  null,
-        "Charging/Swap":  "Swap",
-        "SPOC":  "Nikhit",
-        "Phone":  "7338178823",
-        "Email":  null,
-        "Image":  "/static/images/esprinto.png"
-    },
-    {
         "City":  "Hyderabad",
         "Vendor":  "Bykemania",
         "Status":  "Live from next week",
