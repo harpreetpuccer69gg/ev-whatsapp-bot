@@ -36,14 +36,20 @@ function goSlide(n){
 }
 setInterval(()=>goSlide(curSlide+1),10000);
 
-// Manual swipe
+// Manual swipe - iOS compatible
 let touchStartX=0,touchStartY=0;
-const heroEl=document.getElementById('heroSlides');
-heroEl.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});
-heroEl.addEventListener('touchend',e=>{
-  const dx=touchStartX-e.changedTouches[0].clientX;
-  const dy=Math.abs(touchStartY-e.changedTouches[0].clientY);
-  if(Math.abs(dx)>40&&dy<60){goSlide(dx>0?curSlide+1:curSlide-1);}
+window.addEventListener('load',()=>{
+  const heroEl=document.getElementById('heroSlides');
+  if(!heroEl)return;
+  heroEl.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});
+  heroEl.addEventListener('touchmove',e=>{
+    if(Math.abs(e.touches[0].clientX-touchStartX)>Math.abs(e.touches[0].clientY-touchStartY))e.preventDefault();
+  },{passive:false});
+  heroEl.addEventListener('touchend',e=>{
+    const dx=touchStartX-e.changedTouches[0].clientX;
+    const dy=Math.abs(touchStartY-e.changedTouches[0].clientY);
+    if(Math.abs(dx)>30&&dy<80)goSlide(dx>0?curSlide+1:curSlide-1);
+  },{passive:true});
 });
 
 function closeIntro(){
@@ -233,8 +239,6 @@ function openDetail(v){
   document.getElementById('detailCharge').innerText=v['Charging/Swap']||'N/A';
   document.getElementById('detailDeposit').innerText=v['Security Deposit']||'NIL';
   document.getElementById('detailRefund').innerText=v['Refundable Deposit']||'NIL';
-  document.getElementById('detailSpocName').innerText=v.SPOC||'Contact Vendor';
-  document.getElementById('detailSpocPhone').innerText=v.Phone||'';
   const page=document.getElementById('detailPage');
   page.style.display='block';
   page.style.transform='translateX(100%)';
@@ -295,8 +299,8 @@ function yuvwaaClick(){
   if(yuvwaa)openDetail(yuvwaa);
 }
 function bounceClick(){
-  const bounce=vendors.find(v=>v.Vendor==='Bounce');
-  if(bounce)openDetail(bounce);
+  const bigo=vendors.find(v=>v.Vendor==='BiGO');
+  if(bigo)openDetail(bigo);
 }
 function closeSheet(){
   document.getElementById('overlay').classList.remove('show');
