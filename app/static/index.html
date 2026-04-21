@@ -402,7 +402,7 @@ function goSlide(n){
   document.getElementById('heroSlides').style.transform='translateX(-'+n*100+'%)';
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
 }
-setInterval(()=>goSlide(curSlide===0?1:0),3000);
+setInterval(()=>goSlide(curSlide===0?1:0),10000);
 
 function closeIntro(){
   const city=document.getElementById('introCity').value;
