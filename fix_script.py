@@ -31,23 +31,18 @@ const TOTAL_SLIDES=3;
 let curSlide=0;
 function goSlide(n){
   curSlide=(n+TOTAL_SLIDES)%TOTAL_SLIDES;
-  document.getElementById('heroSlides').style.transform='translateX(-'+curSlide*100+'%)';
+  const el=document.getElementById('heroSlides');
+  el.scrollTo({left:curSlide*el.offsetWidth,behavior:'smooth'});
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
 }
 setInterval(()=>goSlide(curSlide+1),10000);
-
-// Swipe - works on iOS and Android
-let swipeStartX=0,swipeStartY=0;
+// Update dot on manual scroll
 window.addEventListener('load',()=>{
   const el=document.getElementById('heroSlides');
   if(!el)return;
-  el.addEventListener('touchstart',e=>{swipeStartX=e.touches[0].pageX;swipeStartY=e.touches[0].pageY;},{passive:true});
-  el.addEventListener('touchend',e=>{
-    const dx=swipeStartX-e.changedTouches[0].pageX;
-    const dy=swipeStartY-e.changedTouches[0].pageY;
-    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>20){
-      goSlide(dx>0?curSlide+1:curSlide-1);
-    }
+  el.addEventListener('scroll',()=>{
+    const idx=Math.round(el.scrollLeft/el.offsetWidth);
+    if(idx!==curSlide){curSlide=idx;document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));}
   },{passive:true});
 });
 
@@ -73,9 +68,9 @@ function setLang(l){
   document.getElementById('heroBadge').innerText=t.heroBadge;
   document.getElementById('heroTitle').innerHTML=t.heroTitle;
   document.getElementById('heroSub').innerText=t.heroSub;
-  document.getElementById('cityLabel').innerHTML='<span style="width:3px;height:16px;background:#ffd600;border-radius:2px;display:inline-block;margin-right:8px;"></span>'+t.cityLabel;
+  document.getElementById('cityLabel').innerText=t.cityLabel;
   document.getElementById('cityHint').innerText=t.cityHint;
-  document.getElementById('budgetLabel').innerHTML='<span style="width:3px;height:16px;background:#ffd600;border-radius:2px;display:inline-block;margin-right:8px;"></span>'+t.budgetLabel;
+  document.getElementById('budgetLabel').innerText=t.budgetLabel;
   document.getElementById('b1').innerText=t.b1;
   document.getElementById('b2').innerText=t.b2;
   document.getElementById('b3').innerText=t.b3;
