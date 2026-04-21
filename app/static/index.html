@@ -165,6 +165,37 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .featured-section-title{font-size:12px;font-weight:800;color:#b02a37;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;margin-top:4px;}
 .no-res{text-align:center;padding:30px;background:#fff;border-radius:12px;color:#757575;font-size:14px;}
 
+/* DETAIL PAGE */
+.detail-page{display:none;position:fixed;inset:0;background:#f1f3f6;z-index:400;overflow-y:auto;}
+.detail-page.show{display:block;}
+.detail-header{background:#002d62;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
+.back-btn{background:none;border:none;color:#ffd600;font-size:22px;cursor:pointer;padding:4px 8px;font-weight:900;line-height:1;}
+.detail-header-title{color:#fff;font-size:15px;font-weight:800;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.detail-img-wrap{width:100%;height:260px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid #e0e0e0;}
+.detail-img-wrap img{width:100%;height:100%;object-fit:contain;padding:16px;}
+.detail-body{max-width:500px;margin:0 auto;padding:16px;}
+.detail-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;margin-bottom:10px;text-transform:uppercase;}
+.detail-name{font-size:22px;font-weight:900;color:#002d62;margin-bottom:6px;line-height:1.2;}
+.detail-price-box{background:#002d62;border-radius:14px;padding:16px;margin:14px 0;display:flex;align-items:center;justify-content:space-between;}
+.detail-price-label{color:rgba(255,255,255,0.7);font-size:12px;}
+.detail-price-val{color:#ffd600;font-size:26px;font-weight:900;}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.detail-item{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
+.detail-item-label{font-size:11px;color:#9e9e9e;font-weight:600;margin-bottom:4px;text-transform:uppercase;}
+.detail-item-val{font-size:14px;font-weight:800;color:#212121;}
+.detail-spoc{background:#fff;border-radius:12px;padding:14px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;gap:12px;}
+.detail-spoc-icon{width:42px;height:42px;background:#ffd600;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.detail-spoc-name{font-size:14px;font-weight:800;color:#002d62;}
+.detail-spoc-phone{font-size:12px;color:#757575;margin-top:2px;}
+.detail-book-btn{width:100%;background:#ffd600;color:#002d62;border:none;border-radius:14px;padding:18px;font-size:17px;font-weight:900;cursor:pointer;box-shadow:0 4px 16px rgba(255,214,0,0.4);transition:all 0.2s;margin-bottom:30px;}
+.detail-book-btn:hover{background:#ffca00;transform:translateY(-1px);}
+.dpop-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:600;align-items:flex-end;justify-content:center;}
+.dpop-overlay.show{display:flex;}
+.dpop{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:500px;animation:slideUp 0.25s ease;}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.dpop-handle{width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 20px;}
+.dpop-title{font-size:17px;font-weight:900;color:#002d62;margin-bottom:16px;}
+
 @media(min-width:500px){
   .hero-inner,.main{max-width:500px;}
   .header{max-width:100%;}
@@ -234,7 +265,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
       </div>
     </div>
     <!-- Slide 2: Yuvwaa Offer -->
-    <div class="hero-slide hero-slide-offer">
+    <div class="hero-slide hero-slide-offer" onclick="yuvwaaClick()" style="cursor:pointer;">
       <div class="hero-inner">
         <div class="hero-text">
           <div class="offer-badge">⚡ Special Offer</div>
@@ -282,6 +313,53 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   <button class="find-btn" id="findBtn" onclick="findEVs()">🔍 Find EVs</button>
 
   <div id="resultsArea"></div>
+</div>
+
+<!-- DETAIL PAGE -->
+<div class="detail-page" id="detailPage">
+  <div class="detail-header">
+    <button class="back-btn" onclick="closeDetail()">&#8592;</button>
+    <div class="detail-header-title" id="detailHeaderTitle">EV Details</div>
+  </div>
+  <div class="detail-img-wrap">
+    <img id="detailImg" src="" alt="EV"/>
+  </div>
+  <div class="detail-body">
+    <span class="detail-badge ev-badge" id="detailBadge"></span>
+    <div class="detail-name" id="detailName"></div>
+    <div class="detail-price-box">
+      <div><div class="detail-price-label">Weekly Rental</div><div class="detail-price-val" id="detailPrice"></div></div>
+      <div style="text-align:right"><div class="detail-price-label">City</div><div style="color:#fff;font-weight:800;font-size:14px;" id="detailCity"></div></div>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-item"><div class="detail-item-label">Range</div><div class="detail-item-val" id="detailRange"></div></div>
+      <div class="detail-item"><div class="detail-item-label">Charging</div><div class="detail-item-val" id="detailCharge"></div></div>
+      <div class="detail-item"><div class="detail-item-label">Security Deposit</div><div class="detail-item-val" id="detailDeposit"></div></div>
+      <div class="detail-item"><div class="detail-item-label">Refundable</div><div class="detail-item-val" id="detailRefund"></div></div>
+    </div>
+    <div class="detail-spoc" id="detailSpocBox">
+      <div class="detail-spoc-icon">&#128100;</div>
+      <div><div class="detail-spoc-name" id="detailSpocName"></div><div class="detail-spoc-phone" id="detailSpocPhone"></div></div>
+    </div>
+    <button class="detail-book-btn" onclick="openDetailPopup()">Confirm &amp; Request</button>
+  </div>
+</div>
+<!-- DETAIL CONFIRM POPUP -->
+<div class="dpop-overlay" id="dpopOverlay" onclick="closeDetailPopup()">
+  <div class="dpop" onclick="event.stopPropagation()">
+    <div class="dpop-handle"></div>
+    <div class="dpop-title" id="dpopTitle">Confirm Your Details</div>
+    <div class="ev-summary" id="dpopSummary">
+      <div class="ev-summary-img"><img id="dpopImg" src="" alt="EV"/></div>
+      <div class="ev-summary-info">
+        <div class="ev-summary-name" id="dpopName"></div>
+        <div class="ev-summary-price" id="dpopPrice"></div>
+      </div>
+    </div>
+    <input class="inp" id="dpopName2" type="text" placeholder="Your Name"/>
+    <input class="inp" id="dpopPhone" type="tel" placeholder="Mobile Number" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+    <button class="confirm-btn" id="dpopBtn" onclick="submitDetailLead()">Confirm &amp; Request</button>
+  </div>
 </div>
 
 <div class="overlay" id="overlay" onclick="closeSheet()"></div>
@@ -417,10 +495,10 @@ function renderResults(list,city){
   let html='<div class="results-hdr">'+t.foundText.replace('{count}',list.length).replace('{city}',city)+'</div>';
   html+='<input class="search-bar" id="searchBar" placeholder="Search vendor or bike..." oninput="renderCards()" />';
   html+='<div class="results-toolbar">';
-  html+='<button class="type-chip active" onclick="setType(this,\'all\')">All</button>';
-  html+='<button class="type-chip" onclick="setType(this,\'hi-speed\')">Hi-Speed</button>';
-  html+='<button class="type-chip" onclick="setType(this,\'low-speed\')">Low Speed</button>';
-  html+='<button class="type-chip" onclick="setType(this,\'e-cycle\')">E-Cycle</button>';
+  html+='<button class="type-chip active" onclick="setType(this,'all')">All</button>';
+  html+='<button class="type-chip" onclick="setType(this,'hi-speed')">Hi-Speed</button>';
+  html+='<button class="type-chip" onclick="setType(this,'low-speed')">Low Speed</button>';
+  html+='<button class="type-chip" onclick="setType(this,'e-cycle')">E-Cycle</button>';
   html+='<button class="sort-btn" id="sortBtn" onclick="toggleSort()">Price: Low to High</button>';
   html+='</div><div id="evList"></div>';
   box.innerHTML=html;
@@ -492,18 +570,88 @@ function toggleSort(){
 
 function openSheet(i){
   selVendor=document.getElementById('resultsArea')._list[i];
-  const tk=(selVendor.Type||'').toLowerCase().includes('hi')?'hi-speed':(selVendor.Type||'').toLowerCase().includes('low')?'low-speed':'e-cycle';
-  const img=selVendor.Image&&!selVendor.Image.includes('ev_hi')&&!selVendor.Image.includes('ev_lo')&&!selVendor.Image.includes('ev_e')?selVendor.Image:IMGS[tk];
-  document.getElementById('summaryImg').src=img;
-  document.getElementById('summaryName').innerText=(selVendor.Make||'EV')+' - '+(selVendor.Vendor||'');
-  document.getElementById('summaryType').innerText=selVendor.Type||'';
-  document.getElementById('summaryRange').innerText=(selVendor['Range (Km)']||'N/A')+' km';
-  document.getElementById('summaryDeposit').innerText=selVendor['Security Deposit']||'NIL';
-  document.getElementById('summaryPrice').innerText='Weekly: '+(selVendor['Approx Rental/Week']||'N/A');
-  document.getElementById('overlay').classList.add('show');
-  document.getElementById('sheet').classList.add('show');
+  openDetail(selVendor);
 }
 
+function openDetail(v){
+  selVendor=v;
+  const tk=(v.Type||'').toLowerCase().includes('hi')?'hi-speed':(v.Type||'').toLowerCase().includes('low')?'low-speed':'e-cycle';
+  const bc=tk==='hi-speed'?'badge-hi':tk==='low-speed'?'badge-lo':'badge-ec';
+  const bl=tk==='hi-speed'?'Hi-Speed':tk==='low-speed'?'Low Speed':'E-Cycle';
+  const img=v.Image&&!v.Image.includes('ev_hi')&&!v.Image.includes('ev_lo')&&!v.Image.includes('ev_e')?v.Image:IMGS[tk];
+  document.getElementById('detailImg').src=img;
+  document.getElementById('detailHeaderTitle').innerText=(v.Make||'EV')+' - '+(v.Vendor||'');
+  document.getElementById('detailName').innerText=(v.Make||'EV')+' - '+(v.Vendor||'');
+  const badge=document.getElementById('detailBadge');
+  badge.className='detail-badge ev-badge '+bc;
+  badge.innerText=bl;
+  document.getElementById('detailPrice').innerText=v['Approx Rental/Week']||'N/A';
+  document.getElementById('detailCity').innerText=v.City||'';
+  document.getElementById('detailRange').innerText=(v['Range (Km)']||'N/A')+' km';
+  document.getElementById('detailCharge').innerText=v['Charging/Swap']||'N/A';
+  document.getElementById('detailDeposit').innerText=v['Security Deposit']||'NIL';
+  document.getElementById('detailRefund').innerText=v['Refundable Deposit']||'NIL';
+  document.getElementById('detailSpocName').innerText=v.SPOC||'Contact Vendor';
+  document.getElementById('detailSpocPhone').innerText=v.Phone||'';
+  const page=document.getElementById('detailPage');
+  page.style.display='block';
+  page.style.transform='translateX(100%)';
+  page.style.transition='transform 0.3s ease';
+  setTimeout(()=>page.style.transform='translateX(0)',10);
+  window.scrollTo(0,0);
+}
+
+function closeDetail(){
+  const page=document.getElementById('detailPage');
+  page.style.transform='translateX(100%)';
+  setTimeout(()=>page.style.display='none',300);
+}
+
+function openDetailPopup(){
+  const v=selVendor;
+  const tk=(v.Type||'').toLowerCase().includes('hi')?'hi-speed':(v.Type||'').toLowerCase().includes('low')?'low-speed':'e-cycle';
+  const img=v.Image&&!v.Image.includes('ev_hi')&&!v.Image.includes('ev_lo')&&!v.Image.includes('ev_e')?v.Image:IMGS[tk];
+  document.getElementById('dpopImg').src=img;
+  document.getElementById('dpopName').innerText=(v.Make||'EV')+' - '+(v.Vendor||'');
+  document.getElementById('dpopPrice').innerText='Weekly: '+(v['Approx Rental/Week']||'N/A');
+  document.getElementById('dpopOverlay').classList.add('show');
+}
+
+function closeDetailPopup(){
+  document.getElementById('dpopOverlay').classList.remove('show');
+}
+
+function submitDetailLead(){
+  const name=document.getElementById('dpopName2').value.trim();
+  const phone=document.getElementById('dpopPhone').value.trim();
+  if(!name||!phone){alert('Please enter name and phone.');return;}
+  if(phone.length!==10){alert('Please enter a valid 10-digit mobile number.');return;}
+  const btn=document.getElementById('dpopBtn');
+  btn.innerText='Submitting...';
+  btn.disabled=true;
+  const v=selVendor;
+  fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    name,phone,city:v.City||'',lang,budget,
+    vendor:v.Vendor,make:v.Make,type:v.Type,
+    rental:v['Approx Rental/Week'],security_deposit:v['Security Deposit'],
+    refundable_deposit:v['Refundable Deposit'],
+    spoc_name:v.SPOC,spoc_phone:v.Phone,image:v.Image||''
+  })}).finally(()=>{
+    btn.innerText='Confirm & Request';
+    btn.disabled=false;
+    closeDetailPopup();
+    closeDetail();
+    const t=T[lang]||T.en;
+    document.getElementById('successTitle').innerText=t.successTitle;
+    document.getElementById('successMsg').innerHTML=t.successMsg;
+    document.getElementById('successOverlay').classList.add('show');
+  });
+}
+
+function yuvwaaClick(){
+  const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed');
+  if(yuvwaa)openDetail(yuvwaa);
+}
 function closeSheet(){
   document.getElementById('overlay').classList.remove('show');
   document.getElementById('sheet').classList.remove('show');

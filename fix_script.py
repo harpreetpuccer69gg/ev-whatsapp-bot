@@ -201,18 +201,88 @@ function toggleSort(){
 
 function openSheet(i){
   selVendor=document.getElementById('resultsArea')._list[i];
-  const tk=(selVendor.Type||'').toLowerCase().includes('hi')?'hi-speed':(selVendor.Type||'').toLowerCase().includes('low')?'low-speed':'e-cycle';
-  const img=selVendor.Image&&!selVendor.Image.includes('ev_hi')&&!selVendor.Image.includes('ev_lo')&&!selVendor.Image.includes('ev_e')?selVendor.Image:IMGS[tk];
-  document.getElementById('summaryImg').src=img;
-  document.getElementById('summaryName').innerText=(selVendor.Make||'EV')+' - '+(selVendor.Vendor||'');
-  document.getElementById('summaryType').innerText=selVendor.Type||'';
-  document.getElementById('summaryRange').innerText=(selVendor['Range (Km)']||'N/A')+' km';
-  document.getElementById('summaryDeposit').innerText=selVendor['Security Deposit']||'NIL';
-  document.getElementById('summaryPrice').innerText='Weekly: '+(selVendor['Approx Rental/Week']||'N/A');
-  document.getElementById('overlay').classList.add('show');
-  document.getElementById('sheet').classList.add('show');
+  openDetail(selVendor);
 }
 
+function openDetail(v){
+  selVendor=v;
+  const tk=(v.Type||'').toLowerCase().includes('hi')?'hi-speed':(v.Type||'').toLowerCase().includes('low')?'low-speed':'e-cycle';
+  const bc=tk==='hi-speed'?'badge-hi':tk==='low-speed'?'badge-lo':'badge-ec';
+  const bl=tk==='hi-speed'?'Hi-Speed':tk==='low-speed'?'Low Speed':'E-Cycle';
+  const img=v.Image&&!v.Image.includes('ev_hi')&&!v.Image.includes('ev_lo')&&!v.Image.includes('ev_e')?v.Image:IMGS[tk];
+  document.getElementById('detailImg').src=img;
+  document.getElementById('detailHeaderTitle').innerText=(v.Make||'EV')+' - '+(v.Vendor||'');
+  document.getElementById('detailName').innerText=(v.Make||'EV')+' - '+(v.Vendor||'');
+  const badge=document.getElementById('detailBadge');
+  badge.className='detail-badge ev-badge '+bc;
+  badge.innerText=bl;
+  document.getElementById('detailPrice').innerText=v['Approx Rental/Week']||'N/A';
+  document.getElementById('detailCity').innerText=v.City||'';
+  document.getElementById('detailRange').innerText=(v['Range (Km)']||'N/A')+' km';
+  document.getElementById('detailCharge').innerText=v['Charging/Swap']||'N/A';
+  document.getElementById('detailDeposit').innerText=v['Security Deposit']||'NIL';
+  document.getElementById('detailRefund').innerText=v['Refundable Deposit']||'NIL';
+  document.getElementById('detailSpocName').innerText=v.SPOC||'Contact Vendor';
+  document.getElementById('detailSpocPhone').innerText=v.Phone||'';
+  const page=document.getElementById('detailPage');
+  page.style.display='block';
+  page.style.transform='translateX(100%)';
+  page.style.transition='transform 0.3s ease';
+  setTimeout(()=>page.style.transform='translateX(0)',10);
+  window.scrollTo(0,0);
+}
+
+function closeDetail(){
+  const page=document.getElementById('detailPage');
+  page.style.transform='translateX(100%)';
+  setTimeout(()=>page.style.display='none',300);
+}
+
+function openDetailPopup(){
+  const v=selVendor;
+  const tk=(v.Type||'').toLowerCase().includes('hi')?'hi-speed':(v.Type||'').toLowerCase().includes('low')?'low-speed':'e-cycle';
+  const img=v.Image&&!v.Image.includes('ev_hi')&&!v.Image.includes('ev_lo')&&!v.Image.includes('ev_e')?v.Image:IMGS[tk];
+  document.getElementById('dpopImg').src=img;
+  document.getElementById('dpopName').innerText=(v.Make||'EV')+' - '+(v.Vendor||'');
+  document.getElementById('dpopPrice').innerText='Weekly: '+(v['Approx Rental/Week']||'N/A');
+  document.getElementById('dpopOverlay').classList.add('show');
+}
+
+function closeDetailPopup(){
+  document.getElementById('dpopOverlay').classList.remove('show');
+}
+
+function submitDetailLead(){
+  const name=document.getElementById('dpopName2').value.trim();
+  const phone=document.getElementById('dpopPhone').value.trim();
+  if(!name||!phone){alert('Please enter name and phone.');return;}
+  if(phone.length!==10){alert('Please enter a valid 10-digit mobile number.');return;}
+  const btn=document.getElementById('dpopBtn');
+  btn.innerText='Submitting...';
+  btn.disabled=true;
+  const v=selVendor;
+  fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    name,phone,city:v.City||'',lang,budget,
+    vendor:v.Vendor,make:v.Make,type:v.Type,
+    rental:v['Approx Rental/Week'],security_deposit:v['Security Deposit'],
+    refundable_deposit:v['Refundable Deposit'],
+    spoc_name:v.SPOC,spoc_phone:v.Phone,image:v.Image||''
+  })}).finally(()=>{
+    btn.innerText='Confirm & Request';
+    btn.disabled=false;
+    closeDetailPopup();
+    closeDetail();
+    const t=T[lang]||T.en;
+    document.getElementById('successTitle').innerText=t.successTitle;
+    document.getElementById('successMsg').innerHTML=t.successMsg;
+    document.getElementById('successOverlay').classList.add('show');
+  });
+}
+
+function yuvwaaClick(){
+  const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed');
+  if(yuvwaa)openDetail(yuvwaa);
+}
 function closeSheet(){
   document.getElementById('overlay').classList.remove('show');
   document.getElementById('sheet').classList.remove('show');
