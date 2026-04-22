@@ -1,3 +1,4 @@
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import os
@@ -69,6 +70,7 @@ def bounce():
 
 
 @app.get("/")
+@app.head("/")
 def home():
     try:
         with open(os.path.join(STATIC_DIR, "index.html"), "r", encoding="utf-8") as f:
