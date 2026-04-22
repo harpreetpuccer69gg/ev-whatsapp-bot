@@ -4,5 +4,5 @@ services:
     env: python
     branch: main
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && python -c "content=open('app/static/index.html',encoding='utf-8').read().replace('<title>Flipkart EV Assist</title>','<title>Bounce EV - Flipkart Minutes</title>').replace('<div class=\"intro-overlay\" id=\"introOverlay\">','<div class=\"intro-overlay\" id=\"introOverlay\" style=\"display:none;\">');open('app/static/bounce.html','w',encoding='utf-8').write(content)"
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
