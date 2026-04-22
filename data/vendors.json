@@ -815,8 +815,7 @@
         "SPOC":  null,
         "Phone":  null,
         "Email":  null,
-        "Image":  "/static/images/bounce.png",
-        "Redirect":  "/bounce"
+        "Image":  "/static/images/bounce.png"
     },
     {
         "City":  "Hyderabad",
@@ -833,8 +832,7 @@
         "SPOC":  null,
         "Phone":  null,
         "Email":  null,
-        "Image":  "/static/images/bounce.png",
-        "Redirect":  "/bounce"
+        "Image":  "/static/images/bounce.png"
     },
     {
         "City":  "Delhi NCR",
@@ -851,8 +849,7 @@
         "SPOC":  null,
         "Phone":  null,
         "Email":  null,
-        "Image":  "/static/images/bounce.png",
-        "Redirect":  "/bounce"
+        "Image":  "/static/images/bounce.png"
     },
     {
         "City":  "Kolkata",

@@ -327,7 +327,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
         </div>
       </div>
     </div>
-    <div class="hero-slide" onclick="window.location.href='/bounce'" style="cursor:pointer;padding:0;overflow:hidden;background:#0b3a75;">
+    <div class="hero-slide" onclick="bounceClick()" style="cursor:pointer;padding:0;overflow:hidden;background:#0b3a75;">
       <img src="/static/images/fk_poster.png" alt="Flipkart Minutes" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;"/>
     </div>
   </div>
@@ -635,7 +635,6 @@ function renderCards(){
     const bl=tk==='hi-speed'?'Hi-Speed':tk==='low-speed'?'Low Speed':'E-Cycle';
     const img=v.Image&&!v.Image.includes('ev_hi')&&!v.Image.includes('ev_lo')&&!v.Image.includes('ev_e')?v.Image:IMGS[tk];
     const idx=box._list.indexOf(v);
-    const isRedirect=v.Redirect;
     html+='<div class="ev-card">'
       +'<div class="ev-img-wrap"><img src="'+img+'" onerror="this.src=\''+IMGS[tk]+'\'"/></div>'
       +'<div class="ev-card-body"><span class="ev-badge '+bc+'">'+bl+'</span>'
@@ -646,9 +645,7 @@ function renderCards(){
       +'<div class="ev-meta-item">Deposit <span>'+(v['Security Deposit']||'NIL')+'</span></div>'
       +'</div></div>'
       +'<div class="ev-card-bot"><div class="ev-price"><small>Weekly rental</small>'+(v['Approx Rental/Week']||'N/A')+'</div>'
-      +(isRedirect
-        ?'<button class="book-btn" onclick="window.location.href=\''+isRedirect+'\'">Book Now</button>'
-        :'<button class="book-btn" onclick="openSheet('+idx+')">Book Now</button>')
+      +'<button class="book-btn" onclick="openSheet('+idx+')">Book Now</button>'
       +'</div></div>';
   });
   evList.innerHTML=html;
@@ -752,8 +749,8 @@ function yuvwaaClick(){
   if(yuvwaa)openDetail(yuvwaa);
 }
 function bounceClick(){
-  const bigo=vendors.find(v=>v.Vendor==='BiGO');
-  if(bigo)openDetail(bigo);
+  const bounce=vendors.find(v=>v.Vendor==='Bounce');
+  if(bounce)openDetail(bounce);
 }
 function closeSheet(){
   document.getElementById('overlay').classList.remove('show');
