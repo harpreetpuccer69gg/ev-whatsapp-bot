@@ -16,41 +16,35 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .lang-sel option{background:#002d62;}
 
 /* HERO CAROUSEL */
-.hero{background:#0b3a75;position:relative;overflow:hidden;height:260px;display:flex;flex-direction:column;}
-.hero-slides{display:flex;overflow-x:scroll;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:0;width:100%;scroll-behavior:smooth;flex:1;height:100%;}
-.hero-slides::-webkit-scrollbar{display:none;}
-.hero-slide{min-width:100%;width:100%;flex-shrink:0;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:0;height:100%;background-color:#0b3a75;}
-.hero-slide-content{padding:16px;background:#0b3a75;width:100%;height:100%;display:flex;align-items:center;justify-content:space-between;}
-.hero-inner{display:flex;align-items:center;gap:16px;width:100%;justify-content:space-between;max-width:100%;}
-.hero-slide-offer .hero-inner{max-width:unset;margin:0;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-.hero-text{flex:1;padding-bottom:0;display:flex;flex-direction:column;justify-content:center;max-width:60%;}
-/* Banner slide - CONTAIN (no crop) */
-.hero-slide:nth-child(3){display:flex;padding:0;align-items:center;justify-content:center;border-radius:0;height:100%;background-color:#0b3a75;}
-.hero-slide:nth-child(3) img{width:100%;height:100%;display:block;object-fit:contain;object-position:center;background-color:#0b3a75;}
-.hero-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:11px;font-weight:900;padding:4px 12px;border-radius:4px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;width:fit-content;}
-.hero h1{color:#fff;font-size:22px;font-weight:700;line-height:1.3;margin-bottom:6px;max-width:100%;}
+.hero{background:linear-gradient(135deg,#002d62 0%,#1565c0 100%);overflow:hidden;position:relative;}
+.hero-slides{display:flex;transition:transform 0.4s ease;will-change:transform;align-items:stretch;height:200px;-webkit-overflow-scrolling:touch;}
+.hero-slide{min-width:100%;width:100%;padding:20px 16px 16px;flex-shrink:0;box-sizing:border-box;}
+.hero-inner{display:flex;align-items:center;gap:12px;max-width:500px;margin:0 auto;}
+.hero-text{flex:1;padding-bottom:8px;}
+.hero-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:10px;font-weight:900;padding:3px 10px;border-radius:3px;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px;}
+.hero h1{color:#fff;font-size:22px;font-weight:900;line-height:1.2;margin-bottom:8px;}
 .hero h1 span{color:#ffd600;}
-.hero-sub{color:#90caf9;font-size:13px;line-height:1.5;margin-bottom:0;}
-.hero-img{flex-shrink:0;height:120px;width:auto;display:flex;align-items:center;justify-content:center;overflow:visible;border-radius:8px;max-width:40%;}
-.hero-img img{height:100%;width:100%;object-fit:contain;display:block;margin:0;padding:0;box-sizing:border-box;}
-/* Slide 2 - offer CONTAIN */
-.hero-slide-offer{background:#0b3a75;display:flex;align-items:center;justify-content:space-between;padding:16px;width:100%;box-sizing:border-box;border-radius:0;height:100%;}
-.offer-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:11px;font-weight:900;padding:4px 12px;border-radius:4px;margin-bottom:6px;text-transform:uppercase;width:fit-content;}
-.offer-name{color:rgba(255,255,255,0.9);font-size:14px;font-weight:700;margin-bottom:4px;}
+.hero-sub{color:#90caf9;font-size:12px;line-height:1.6;}
+.hero-img{flex-shrink:0;width:130px;}
+.hero-img img{width:130px;height:110px;object-fit:contain;display:block;}
+/* Slide 2 - offer */
+.hero-slide-offer{background:linear-gradient(135deg,#7b1a24 0%,#b02a37 100%);}
+.offer-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:10px;font-weight:900;padding:3px 10px;border-radius:3px;margin-bottom:10px;text-transform:uppercase;}
+.offer-name{color:rgba(255,255,255,0.85);font-size:13px;font-weight:700;margin-bottom:4px;}
 .offer-price{color:#ffd600;font-size:32px;font-weight:900;letter-spacing:-1px;margin-bottom:4px;}
-.offer-sub{color:rgba(255,255,255,0.75);font-size:12px;margin:0;}
+.offer-sub{color:rgba(255,255,255,0.7);font-size:11px;}
 /* Dots */
-.hero-dots{display:flex;justify-content:center;align-items:center;gap:8px;padding:8px 0;background:transparent;position:absolute;bottom:8px;left:0;right:0;z-index:10;}
-.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.3s ease;border:none;}
-.hero-dot:hover{background:rgba(255,255,255,0.6);}
-.hero-dot.active{background:#ffd600;width:24px;border-radius:4px;box-shadow:0 2px 8px rgba(255,214,0,0.4);}
+.hero-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 14px;}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.35);cursor:pointer;transition:all 0.2s;}
+.hero-dot.active{background:#ffd600;width:18px;border-radius:3px;}
 
 /* MAIN */
 .main{max-width:500px;margin:0 auto;padding:12px 12px 100px;}
 
 /* CARD */
 .card{background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
-.card-title{font-size:14px;font-weight:800;color:#002d62;margin-bottom:14px;}
+.card-title{font-size:14px;font-weight:800;color:#002d62;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.card-title::before{content:'';width:3px;height:16px;background:#ffd600;border-radius:2px;display:inline-block;}
 
 /* CITY SELECT */
 .city-sel{width:100%;border:1.5px solid #e0e0e0;border-radius:8px;padding:12px 14px;font-size:14px;color:#212121;background:#fafafa;font-weight:500;}
@@ -103,7 +97,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .ev-card{background:#fff;border-radius:12px;margin-bottom:12px;box-shadow:0 2px 10px rgba(0,0,0,0.09);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
 .ev-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.13);}
 .ev-img-wrap{width:100%;height:140px;background:#f5f7ff;border-bottom:1.5px solid #e3eaff;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-.ev-img-wrap img{width:100%;height:100%;object-fit:contain;padding:8px;box-sizing:border-box;margin:0;}
+.ev-img-wrap img{width:100%;height:100%;object-fit:contain;padding:8px;}
 .ev-card-body{padding:12px 14px 0;}
 .ev-info{flex:1;}
 .ev-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;}
@@ -131,7 +125,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 /* EV SUMMARY IN SHEET */
 .ev-summary{background:#f8faff;border-radius:12px;padding:12px;margin-bottom:16px;display:flex;gap:12px;align-items:center;border:1.5px solid #e3eaff;}
 .ev-summary-img{width:70px;height:55px;border-radius:8px;overflow:hidden;background:#fff;border:1px solid #e0e0e0;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-.ev-summary-img img{width:100%;height:100%;object-fit:contain;padding:4px;box-sizing:border-box;margin:0;}
+.ev-summary-img img{width:100%;height:100%;object-fit:contain;padding:4px;}
 .ev-summary-info{flex:1;}
 .ev-summary-name{font-size:13px;font-weight:800;color:#002d62;margin-bottom:4px;}
 .ev-summary-meta{font-size:11px;color:#757575;display:flex;gap:10px;flex-wrap:wrap;}
@@ -158,7 +152,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .featured-card{background:linear-gradient(135deg,#b02a37 0%,#7b1a24 100%);border-radius:14px;margin-bottom:14px;overflow:hidden;box-shadow:0 6px 24px rgba(176,42,55,0.4);}
 .featured-top{display:flex;gap:12px;padding:14px;align-items:center;}
 .featured-img{width:110px;height:85px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
-.featured-img img{width:100%;height:100%;object-fit:contain;padding:4px;box-sizing:border-box;margin:0;}
+.featured-img img{width:100%;height:100%;object-fit:contain;padding:4px;}
 .featured-info{flex:1;}
 .featured-badge{display:inline-flex;align-items:center;gap:4px;background:#ffd600;color:#002d62;font-size:10px;font-weight:900;padding:3px 10px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;}
 .featured-name{color:#fff;font-size:15px;font-weight:900;margin-bottom:6px;}
@@ -178,7 +172,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .back-btn{background:none;border:none;color:#ffd600;font-size:22px;cursor:pointer;padding:4px 8px;font-weight:900;line-height:1;}
 .detail-header-title{color:#fff;font-size:15px;font-weight:800;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .detail-img-wrap{width:100%;height:260px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid #e0e0e0;}
-.detail-img-wrap img{width:100%;height:100%;object-fit:contain;padding:16px;box-sizing:border-box;margin:0;}
+.detail-img-wrap img{width:100%;height:100%;object-fit:contain;padding:16px;}
 .detail-body{max-width:500px;margin:0 auto;padding:16px;}
 .detail-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;margin-bottom:10px;text-transform:uppercase;}
 .detail-name{font-size:22px;font-weight:900;color:#002d62;margin-bottom:6px;line-height:1.2;}
@@ -202,52 +196,9 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .dpop-handle{width:40px;height:4px;background:#e0e0e0;border-radius:2px;margin:0 auto 20px;}
 .dpop-title{font-size:17px;font-weight:900;color:#002d62;margin-bottom:16px;}
 
-@media(max-width:480px){
-  .hero{height:180px;background-color:#0b3a75;}
-  .hero-slide-content{padding:12px;height:100%;background-color:#0b3a75;}
-  .hero h1{font-size:18px;line-height:1.2;}
-  .hero-sub{font-size:12px;}
-  .hero-img{height:80px;width:auto;max-width:35%;}
-  .hero-img img{height:100%;width:100%;padding:0;object-fit:contain;}
-  .hero-inner{gap:10px;}
-  .hero-text{max-width:60%;}
-  .hero-slide-offer{padding:12px;height:100%;flex-wrap:wrap;background-color:#0b3a75;}
-  .hero-slide-offer .hero-inner{gap:8px;}
-  .offer-price{font-size:26px;margin-bottom:2px;}
-  .offer-name{font-size:13px;}
-  .offer-sub{font-size:11px;}
-  .hero-dots{gap:6px;padding:6px 0;bottom:6px;}
-  .hero-dot{width:6px;height:6px;}
-  .hero-dot.active{width:18px;}
-  .hero-slide:nth-child(3){background-color:#0b3a75;}
-  .hero-slide:nth-child(3) img{object-fit:contain;}
-}
-@media(min-width:481px) and (max-width:768px){
-  .hero{height:220px;background-color:#0b3a75;}
-  .hero-slide-content{padding:14px;height:100%;background-color:#0b3a75;}
-  .hero h1{font-size:20px;line-height:1.3;}
-  .hero-sub{font-size:13px;}
-  .hero-img{height:100px;width:auto;max-width:38%;}
-  .hero-img img{height:100%;width:100%;padding:0;object-fit:contain;}
-  .hero-inner{gap:12px;}
-  .hero-text{max-width:60%;}
-  .hero-slide-offer{padding:14px;height:100%;background-color:#0b3a75;}
-  .offer-price{font-size:30px;}
-  .hero-slide:nth-child(3){background-color:#0b3a75;}
-  .hero-slide:nth-child(3) img{object-fit:contain;}
-}
-@media(min-width:769px){
-  .hero{height:260px;background-color:#0b3a75;}
-  .hero-slide-content{padding:16px;height:100%;background-color:#0b3a75;}
-  .hero h1{font-size:22px;line-height:1.3;}
-  .hero-sub{font-size:14px;}
-  .hero-img{height:120px;width:auto;max-width:40%;}
-  .hero-img img{height:100%;width:100%;padding:0;object-fit:contain;}
-  .hero-text{max-width:60%;}
-  .hero-slide-offer{padding:16px;height:100%;background-color:#0b3a75;}
-  .offer-price{font-size:32px;}
-  .hero-slide:nth-child(3){background-color:#0b3a75;}
-  .hero-slide:nth-child(3) img{object-fit:contain;}
+@media(min-width:500px){
+  .hero-inner,.main{max-width:500px;}
+  .header{max-width:100%;}
 }
 </style>
 </head>
@@ -300,8 +251,8 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 
 <div class="hero">
   <div class="hero-slides" id="heroSlides">
+    <!-- Slide 1: Normal -->
     <div class="hero-slide">
-      <div class="hero-slide-content">
       <div class="hero-inner">
         <div class="hero-text">
           <div class="hero-badge" id="heroBadge">🛵 For Delivery Riders</div>
@@ -312,8 +263,8 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
           <img src="/static/images/delivery_rider.png" alt="Delivery Rider"/>
         </div>
       </div>
-      </div>
     </div>
+    <!-- Slide 2: Yuvwaa Offer -->
     <div class="hero-slide hero-slide-offer" onclick="yuvwaaClick()" style="cursor:pointer;">
       <div class="hero-inner">
         <div class="hero-text">
@@ -322,13 +273,17 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
           <div class="offer-price">₹59/day</div>
           <div class="offer-sub">+ ₹1.50/km · Range 80km · Hi-Speed</div>
         </div>
-        <div style="flex-shrink:0;width:42%;height:100%;display:flex;align-items:center;justify-content:center;overflow:visible;">
-          <img src="/static/images/yuvwaa.png" alt="Yuvwaa Speed" style="max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain;display:block;margin:0;padding:0;"/>
-        </div>
       </div>
     </div>
-    <div class="hero-slide" onclick="window.location.href='/bounce'" style="cursor:pointer;padding:0;overflow:hidden;background:#0b3a75;">
-      <img src="/static/images/fk_poster.png" alt="Flipkart Minutes" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;"/>
+    <!-- Slide 3: Poster -->
+    <div class="hero-slide">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge" id="heroBadge3">🚀 Flipkart Minutes</div>
+          <h1 id="heroTitle3" style="color:#002d62;">Quick EV Bookings on <span style="color:#ffd600;">Flipkart</span></h1>
+          <p class="hero-sub" id="heroSub3" style="color:#757575;">Same-day delivery | Reliable vendors | Best rates guaranteed</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hero-dots">
@@ -447,58 +402,26 @@ fetch('/vendors').then(r=>r.json()).then(d=>{vendors=Array.isArray(d)?d:[];}).ca
 
 const TOTAL_SLIDES=3;
 let curSlide=0;
-let autoScrollInterval=null;
-let touchStartX=0;
-let touchEndX=0;
-
 function goSlide(n){
   curSlide=(n+TOTAL_SLIDES)%TOTAL_SLIDES;
-  const el=document.getElementById('heroSlides');
-  if(!el)return;
-  el.scrollTo({left:curSlide*el.offsetWidth,behavior:'smooth'});
+  document.getElementById('heroSlides').style.transform='translateX(-'+curSlide*100+'%)';
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
-  // Reset auto-scroll on manual navigation
-  clearInterval(autoScrollInterval);
-  autoScrollInterval=setInterval(()=>goSlide(curSlide+1),3500);
 }
+setInterval(()=>goSlide(curSlide+1),10000);
 
-function handleSwipe(el){
-  const diff=touchStartX-touchEndX;
-  if(Math.abs(diff)>50){
-    if(diff>0)goSlide(curSlide+1);
-    else goSlide(curSlide-1);
-  }
-}
-
-// Initialize carousel on full page load
+// Manual swipe - iOS compatible
+let touchStartX=0,touchStartY=0;
 window.addEventListener('load',()=>{
-  const el=document.getElementById('heroSlides');
-  if(!el)return;
-  // Reset scroll to position 0
-  el.scrollLeft=0;
-  curSlide=0;
-  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===0));
-  
-  // Start auto-scroll after page is fully loaded (3.5 sec interval)
-  autoScrollInterval=setInterval(()=>goSlide(curSlide+1),3500);
-  
-  // Update dot on manual scroll
-  el.addEventListener('scroll',()=>{
-    const idx=Math.round(el.scrollLeft/el.offsetWidth);
-    if(idx!==curSlide){
-      curSlide=idx;
-      document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
-      // Reset timer on manual scroll
-      clearInterval(autoScrollInterval);
-      autoScrollInterval=setInterval(()=>goSlide(curSlide+1),3500);
-    }
-  },{passive:true});
-  
-  // Touch/Swipe support
-  el.addEventListener('touchstart',(e)=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
-  el.addEventListener('touchend',(e)=>{
-    touchEndX=e.changedTouches[0].screenX;
-    handleSwipe(el);
+  const heroEl=document.getElementById('heroSlides');
+  if(!heroEl)return;
+  heroEl.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;touchStartY=e.touches[0].clientY;},{passive:true});
+  heroEl.addEventListener('touchmove',e=>{
+    if(Math.abs(e.touches[0].clientX-touchStartX)>Math.abs(e.touches[0].clientY-touchStartY))e.preventDefault();
+  },{passive:false});
+  heroEl.addEventListener('touchend',e=>{
+    const dx=touchStartX-e.changedTouches[0].clientX;
+    const dy=Math.abs(touchStartY-e.changedTouches[0].clientY);
+    if(Math.abs(dx)>30&&dy<80)goSlide(dx>0?curSlide+1:curSlide-1);
   },{passive:true});
 });
 
@@ -524,8 +447,9 @@ function setLang(l){
   document.getElementById('heroBadge').innerText=t.heroBadge;
   document.getElementById('heroTitle').innerHTML=t.heroTitle;
   document.getElementById('heroSub').innerText=t.heroSub;
-  document.getElementById('cityLabel').innerText=t.cityLabel;
-  document.getElementById('budgetLabel').innerText=t.budgetLabel;
+  document.getElementById('cityLabel').innerHTML='<span style="width:3px;height:16px;background:#ffd600;border-radius:2px;display:inline-block;margin-right:8px;"></span>'+t.cityLabel;
+  document.getElementById('cityHint').innerText=t.cityHint;
+  document.getElementById('budgetLabel').innerHTML='<span style="width:3px;height:16px;background:#ffd600;border-radius:2px;display:inline-block;margin-right:8px;"></span>'+t.budgetLabel;
   document.getElementById('b1').innerText=t.b1;
   document.getElementById('b2').innerText=t.b2;
   document.getElementById('b3').innerText=t.b3;
@@ -592,10 +516,10 @@ function renderResults(list,city){
   let html='<div class="results-hdr">'+t.foundText.replace('{count}',list.length).replace('{city}',city)+'</div>';
   html+='<input class="search-bar" id="searchBar" placeholder="Search vendor or bike..." oninput="renderCards()" />';
   html+='<div class="results-toolbar">';
-  html+='<button class="type-chip active" onclick="setType(this,\'all\')">All</button>';
-  html+='<button class="type-chip" onclick="setType(this,\'hi-speed\')">Hi-Speed</button>';
-  html+='<button class="type-chip" onclick="setType(this,\'low-speed\')">Low Speed</button>';
-  html+='<button class="type-chip" onclick="setType(this,\'e-cycle\')">E-Cycle</button>';
+  html+='<button class="type-chip active" onclick="setType(this,'all')">All</button>';
+  html+='<button class="type-chip" onclick="setType(this,'hi-speed')">Hi-Speed</button>';
+  html+='<button class="type-chip" onclick="setType(this,'low-speed')">Low Speed</button>';
+  html+='<button class="type-chip" onclick="setType(this,'e-cycle')">E-Cycle</button>';
   html+='<button class="sort-btn" id="sortBtn" onclick="toggleSort()">Price: Low to High</button>';
   html+='</div><div id="evList"></div>';
   box.innerHTML=html;
@@ -635,7 +559,6 @@ function renderCards(){
     const bl=tk==='hi-speed'?'Hi-Speed':tk==='low-speed'?'Low Speed':'E-Cycle';
     const img=v.Image&&!v.Image.includes('ev_hi')&&!v.Image.includes('ev_lo')&&!v.Image.includes('ev_e')?v.Image:IMGS[tk];
     const idx=box._list.indexOf(v);
-    const isRedirect=v.Redirect;
     html+='<div class="ev-card">'
       +'<div class="ev-img-wrap"><img src="'+img+'" onerror="this.src=\''+IMGS[tk]+'\'"/></div>'
       +'<div class="ev-card-body"><span class="ev-badge '+bc+'">'+bl+'</span>'
@@ -646,10 +569,7 @@ function renderCards(){
       +'<div class="ev-meta-item">Deposit <span>'+(v['Security Deposit']||'NIL')+'</span></div>'
       +'</div></div>'
       +'<div class="ev-card-bot"><div class="ev-price"><small>Weekly rental</small>'+(v['Approx Rental/Week']||'N/A')+'</div>'
-      +(isRedirect
-        ?'<button class="book-btn" onclick="window.location.href=\''+isRedirect+'\'">Book Now</button>'
-        :'<button class="book-btn" onclick="openSheet('+idx+')">Book Now</button>')
-      +'</div></div>';
+      +'<button class="book-btn" onclick="openSheet('+idx+')">Book Now</button></div></div>';
   });
   evList.innerHTML=html;
 }

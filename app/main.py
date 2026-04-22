@@ -1,4 +1,3 @@
-from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import os
@@ -59,8 +58,17 @@ def health():
     return {"status": "EV Assist is running 🚴"}
 
 
+@app.get("/bounce")
+@app.head("/bounce")
+def bounce():
+    try:
+        with open(os.path.join(STATIC_DIR, "bounce.html"), "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
+
+
 @app.get("/")
-@app.head("/")
 def home():
     try:
         with open(os.path.join(STATIC_DIR, "index.html"), "r", encoding="utf-8") as f:
