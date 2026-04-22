@@ -1,0 +1,3 @@
+delivery_rider.png:644x322
+yuvwaa.png:532x573
+fk_poster.png:3500x1099
