@@ -459,7 +459,7 @@ function goSlide(n){
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
   // Reset auto-scroll on manual navigation
   clearInterval(autoScrollInterval);
-  autoScrollInterval=setInterval(()=>goSlide(curSlide+1),3500);
+  autoScrollInterval=setInterval(()=>goSlide(curSlide+1),5000);
 }
 
 function handleSwipe(el){
@@ -479,21 +479,24 @@ window.addEventListener('load',()=>{
   curSlide=0;
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===0));
   
-  // Start auto-scroll after page is fully loaded (3.5 sec interval)
-  autoScrollInterval=setInterval(()=>goSlide(curSlide+1),3500);
-  
-  // Update dot on manual scroll
+  // Start auto-scroll after page is fully loaded (5 sec interval)
+  autoScrollInterval=setInterval(()=>goSlide(curSlide+1),5000);
+
+  // Update dot on manual scroll - debounced to avoid double-fire
+  let scrollTimer=null;
   el.addEventListener('scroll',()=>{
-    const idx=Math.round(el.scrollLeft/el.offsetWidth);
-    if(idx!==curSlide){
-      curSlide=idx;
-      document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
-      // Reset timer on manual scroll
-      clearInterval(autoScrollInterval);
-      autoScrollInterval=setInterval(()=>goSlide(curSlide+1),3500);
-    }
+    clearTimeout(scrollTimer);
+    scrollTimer=setTimeout(()=>{
+      const idx=Math.round(el.scrollLeft/el.offsetWidth);
+      if(idx!==curSlide){
+        curSlide=idx;
+        document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
+        clearInterval(autoScrollInterval);
+        autoScrollInterval=setInterval(()=>goSlide(curSlide+1),5000);
+      }
+    },150);
   },{passive:true});
-  
+
   // Touch/Swipe support
   el.addEventListener('touchstart',(e)=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
   el.addEventListener('touchend',(e)=>{
@@ -745,12 +748,20 @@ function submitDetailLead(){
 }
 
 function yuvwaaClick(){
-  const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed');
-  if(yuvwaa)openDetail(yuvwaa);
+  const city=document.getElementById('citySelect').value;
+  const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed'&&(v.City||'').toLowerCase()===city.toLowerCase());
+  if(yuvwaa){openDetail(yuvwaa);return;}
+  const box=document.getElementById('resultsArea');
+  box.innerHTML='<div class="no-res"><div style="font-size:36px;margin-bottom:10px;">😔</div><div style="font-weight:800;color:#002d62;font-size:15px;margin-bottom:6px;">YuvwaaSpeed not available in '+city+'</div><div style="font-size:13px;color:#9e9e9e;">Currently available in Pune only.</div></div>';
+  box.scrollIntoView({behavior:'smooth'});
 }
 function bounceClick(){
-  const bounce=vendors.find(v=>v.Vendor==='Bounce');
-  if(bounce)openDetail(bounce);
+  const city=document.getElementById('citySelect').value;
+  const bounce=vendors.find(v=>v.Vendor==='Bounce'&&(v.City||'').toLowerCase()===city.toLowerCase());
+  if(bounce){openDetail(bounce);return;}
+  const box=document.getElementById('resultsArea');
+  box.innerHTML='<div class="no-res"><div style="font-size:36px;margin-bottom:10px;">😔</div><div style="font-weight:800;color:#002d62;font-size:15px;margin-bottom:6px;">Bounce not available in '+city+'</div><div style="font-size:13px;color:#9e9e9e;">Currently available in Bangalore, Hyderabad & Delhi NCR.</div></div>';
+  box.scrollIntoView({behavior:'smooth'});
 }
 function closeSheet(){
   document.getElementById('overlay').classList.remove('show');
