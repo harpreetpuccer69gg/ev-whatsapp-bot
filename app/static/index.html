@@ -480,11 +480,13 @@ window.addEventListener('load',()=>{
 
   autoScrollInterval=setInterval(()=>{ if(!isTouching)goSlide(curSlide+1); },5000);
 
-  el.addEventListener('touchstart',(e)=>{
+  // Attach touch to outer .hero div — fixes iOS Safari swipe interception
+  const hero=document.querySelector('.hero');
+  hero.addEventListener('touchstart',(e)=>{
     isTouching=true;
     touchStartX=e.changedTouches[0].screenX;
   },{passive:true});
-  el.addEventListener('touchend',(e)=>{
+  hero.addEventListener('touchend',(e)=>{
     touchEndX=e.changedTouches[0].screenX;
     handleSwipe();
     setTimeout(()=>{isTouching=false;},600);
@@ -677,6 +679,7 @@ function openDetail(v){
   document.getElementById('detailRange').innerText=(v['Range (Km)']||'N/A')+' km';
   document.getElementById('detailCharge').innerText=v['Charging/Swap']||'N/A';
   document.getElementById('detailDeposit').innerText=v['Security Deposit']||'NIL';
+  document.getElementById('detailRefund').innerText=v['Refundable Deposit']||'NIL';
   document.getElementById('detailDisclaimer').classList.toggle('show',v.Vendor==='YuvwaaSpeed'||v.Vendor==='Bounce');
   const page=document.getElementById('detailPage');
   page.style.display='block';
