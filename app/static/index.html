@@ -482,9 +482,26 @@ window.addEventListener('load',()=>{
   // Start auto-scroll after page is fully loaded (5 sec interval)
   autoScrollInterval=setInterval(()=>goSlide(curSlide+1),5000);
 
-  // Update dot on manual scroll - debounced to avoid double-fire
+  // Touch/Swipe support - block auto-scroll during manual touch
+  let isTouching=false;
+  el.addEventListener('touchstart',(e)=>{
+    isTouching=true;
+    clearInterval(autoScrollInterval);
+    touchStartX=e.changedTouches[0].screenX;
+  },{passive:true});
+  el.addEventListener('touchend',(e)=>{
+    touchEndX=e.changedTouches[0].screenX;
+    handleSwipe(el);
+    setTimeout(()=>{
+      isTouching=false;
+      autoScrollInterval=setInterval(()=>goSlide(curSlide+1),5000);
+    },600);
+  },{passive:true});
+
+  // Update dot on manual scroll - only when not touching
   let scrollTimer=null;
   el.addEventListener('scroll',()=>{
+    if(isTouching)return;
     clearTimeout(scrollTimer);
     scrollTimer=setTimeout(()=>{
       const idx=Math.round(el.scrollLeft/el.offsetWidth);
@@ -495,13 +512,6 @@ window.addEventListener('load',()=>{
         autoScrollInterval=setInterval(()=>goSlide(curSlide+1),5000);
       }
     },150);
-  },{passive:true});
-
-  // Touch/Swipe support
-  el.addEventListener('touchstart',(e)=>{touchStartX=e.changedTouches[0].screenX;},{passive:true});
-  el.addEventListener('touchend',(e)=>{
-    touchEndX=e.changedTouches[0].screenX;
-    handleSwipe(el);
   },{passive:true});
 });
 
@@ -748,20 +758,12 @@ function submitDetailLead(){
 }
 
 function yuvwaaClick(){
-  const city=document.getElementById('citySelect').value;
-  const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed'&&(v.City||'').toLowerCase()===city.toLowerCase());
-  if(yuvwaa){openDetail(yuvwaa);return;}
-  const box=document.getElementById('resultsArea');
-  box.innerHTML='<div class="no-res"><div style="font-size:36px;margin-bottom:10px;">😔</div><div style="font-weight:800;color:#002d62;font-size:15px;margin-bottom:6px;">YuvwaaSpeed not available in '+city+'</div><div style="font-size:13px;color:#9e9e9e;">Currently available in Pune only.</div></div>';
-  box.scrollIntoView({behavior:'smooth'});
+  const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed');
+  if(yuvwaa)openDetail(yuvwaa);
 }
 function bounceClick(){
-  const city=document.getElementById('citySelect').value;
-  const bounce=vendors.find(v=>v.Vendor==='Bounce'&&(v.City||'').toLowerCase()===city.toLowerCase());
-  if(bounce){openDetail(bounce);return;}
-  const box=document.getElementById('resultsArea');
-  box.innerHTML='<div class="no-res"><div style="font-size:36px;margin-bottom:10px;">😔</div><div style="font-weight:800;color:#002d62;font-size:15px;margin-bottom:6px;">Bounce not available in '+city+'</div><div style="font-size:13px;color:#9e9e9e;">Currently available in Bangalore, Hyderabad & Delhi NCR.</div></div>';
-  box.scrollIntoView({behavior:'smooth'});
+  const bounce=vendors.find(v=>v.Vendor==='Bounce');
+  if(bounce)openDetail(bounce);
 }
 function closeSheet(){
   document.getElementById('overlay').classList.remove('show');
