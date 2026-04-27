@@ -718,13 +718,14 @@ function submitDetailLead(){
   btn.innerText='Submitting...';
   btn.disabled=true;
   const v=selVendor;
-  fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+  const timeout=new Promise((_,reject)=>setTimeout(()=>reject('timeout'),8000));
+  Promise.race([fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     name,phone,city:v.City||'',lang,budget,
     vendor:v.Vendor,make:v.Make,type:v.Type,
     rental:v['Approx Rental/Week'],security_deposit:v['Security Deposit'],
     refundable_deposit:v['Refundable Deposit'],
     spoc_name:v.SPOC,spoc_phone:v.Phone,image:v.Image||''
-  })}).finally(()=>{
+  })]),timeout]).finally(()=>{
     btn.innerText='Confirm & Request';
     btn.disabled=false;
     closeDetailPopup();
@@ -757,13 +758,14 @@ function submitLead(){
   const btn=document.getElementById('confirmBtn');
   btn.innerText='Submitting...';
   btn.disabled=true;
-  fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+  const timeout2=new Promise((_,reject)=>setTimeout(()=>reject('timeout'),8000));
+  Promise.race([fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     name,phone,city:document.getElementById('citySelect').value,lang,budget,
     vendor:selVendor&&selVendor.Vendor,make:selVendor&&selVendor.Make,type:selVendor&&selVendor.Type,
     rental:selVendor&&selVendor['Approx Rental/Week'],security_deposit:selVendor&&selVendor['Security Deposit'],
     refundable_deposit:selVendor&&selVendor['Refundable Deposit'],
     spoc_name:selVendor&&selVendor.SPOC,spoc_phone:selVendor&&selVendor.Phone,image:(selVendor&&selVendor.Image)||''
-  })}).finally(()=>{
+  })]),timeout2]).finally(()=>{
     btn.innerText='Confirm & Request';
     btn.disabled=false;
     closeSheet();
