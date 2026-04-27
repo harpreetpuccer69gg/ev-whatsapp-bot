@@ -62,7 +62,7 @@ def health():
 @app.get("/bounce")
 @app.head("/bounce")
 def bounce():
-    return FileResponse(os.path.join(STATIC_DIR, "bounce.html"))
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
 
 @app.get("/")

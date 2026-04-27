@@ -300,6 +300,8 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   </select>
 </div>
 
+<div id="bouncePageDisclaimer" style="display:none;background:#fff8e1;border-left:5px solid #ffd600;padding:14px 16px;font-size:13px;color:#5d4037;line-height:1.6;font-weight:500;">&#9888;&#65039; <strong>Disclaimer:</strong> This vendor may not be available in all cities. Please confirm availability and pricing with the vendor before booking.</div>
+
 <div class="hero">
   <div class="hero-slides" id="heroSlides">
     <div class="hero-slide">
@@ -779,6 +781,12 @@ function submitLead(){
 
 setLang('en');
 document.querySelectorAll('.bchip').forEach(b=>b.classList.add('active'));
+// If loaded as bounce page, hide intro immediately
+if(window.location.pathname==='/bounce'){
+  document.getElementById('introOverlay').style.display='none';
+  var disc=document.getElementById('bouncePageDisclaimer');
+  if(disc)disc.style.display='block';
+}
 </script>
 
 </body>
