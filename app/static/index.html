@@ -711,11 +711,18 @@ function closeDetailPopup(){
   document.getElementById('dpopOverlay').classList.remove('show');
 }
 
+function isValidPhone(p){
+  if(!/^[6-9][0-9]{9}$/.test(p))return false;
+  if(/^(.)(\1){9}$/.test(p))return false;
+  if(p==='1234567890'||p==='9876543210')return false;
+  return true;
+}
+
 function submitDetailLead(){
   const name=document.getElementById('dpopName2').value.trim();
   const phone=document.getElementById('dpopPhone').value.trim();
   if(!name||!phone){alert('Please enter name and phone.');return;}
-  if(phone.length!==10){alert('Please enter a valid 10-digit mobile number.');return;}
+  if(phone.length!==10||!isValidPhone(phone)){alert('Please enter a valid 10-digit mobile number. Dummy numbers are not accepted.');return;}
   const btn=document.getElementById('dpopBtn');
   btn.innerText='Submitting...';
   btn.disabled=true;
@@ -756,7 +763,7 @@ function submitLead(){
   const name=document.getElementById('riderName').value.trim();
   const phone=document.getElementById('riderPhone').value.trim();
   if(!name||!phone){alert('Please enter name and phone.');return;}
-  if(phone.length!==10){alert('Please enter a valid 10-digit mobile number.');return;}
+  if(phone.length!==10||!isValidPhone(phone)){alert('Please enter a valid 10-digit mobile number. Dummy numbers are not accepted.');return;}
   const btn=document.getElementById('confirmBtn');
   btn.innerText='Submitting...';
   btn.disabled=true;
