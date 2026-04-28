@@ -29,7 +29,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .hero-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:11px;font-weight:900;padding:4px 12px;border-radius:4px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;width:fit-content;}
 .hero h1{color:#fff;font-size:22px;font-weight:700;line-height:1.3;margin-bottom:6px;max-width:100%;}
 .hero h1 span{color:#ffd600;}
-.hero-sub{color:#90caf9;font-size:13px;line-height:1.5;margin-bottom:0;}
+.hero-sub{color:#ffffff;font-size:13px;line-height:1.5;margin-bottom:0;}
 .hero-img{flex-shrink:0;height:120px;width:auto;display:flex;align-items:center;justify-content:center;overflow:visible;border-radius:8px;max-width:40%;}
 .hero-img img{height:100%;width:100%;object-fit:contain;display:block;margin:0;padding:0;box-sizing:border-box;}
 /* Slide 2 - offer CONTAIN */
@@ -37,7 +37,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .offer-badge{display:inline-block;background:#ffd600;color:#002d62;font-size:11px;font-weight:900;padding:4px 12px;border-radius:4px;margin-bottom:6px;text-transform:uppercase;width:fit-content;}
 .offer-name{color:rgba(255,255,255,0.9);font-size:14px;font-weight:700;margin-bottom:4px;}
 .offer-price{color:#ffd600;font-size:32px;font-weight:900;letter-spacing:-1px;margin-bottom:4px;}
-.offer-sub{color:rgba(255,255,255,0.75);font-size:12px;margin:0;}
+.offer-sub{color:#ffffff;font-size:12px;margin:0;}
 /* disclaimer */
 .detail-disclaimer{background:#fff8e1;border-left:4px solid #ffd600;padding:12px 14px;margin:0 0 14px 0;border-radius:0 8px 8px 0;font-size:12px;color:#5d4037;line-height:1.6;display:none;}
 .detail-disclaimer.show{display:block;}
@@ -172,12 +172,27 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 .featured-book:hover{background:#ffca00;}
 .featured-section-title{font-size:12px;font-weight:800;color:#b02a37;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;margin-top:4px;}
 .no-res{text-align:center;padding:30px;background:#fff;border-radius:12px;color:#757575;font-size:14px;}
+/* BEST MATCH */
+.best-match-card{background:linear-gradient(135deg,#002d62 0%,#1565c0 100%);border-radius:14px;margin-bottom:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,45,98,0.35);cursor:pointer;}
+.best-match-top{display:flex;gap:12px;padding:14px;align-items:center;}
+.best-match-img{width:90px;height:70px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.15);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.best-match-img img{width:100%;height:100%;object-fit:contain;padding:4px;box-sizing:border-box;}
+.best-match-info{flex:1;}
+.best-match-badge{display:inline-flex;align-items:center;gap:4px;background:#ffd600;color:#002d62;font-size:10px;font-weight:900;padding:3px 10px;border-radius:999px;margin-bottom:6px;text-transform:uppercase;}
+.best-match-name{color:#fff;font-size:14px;font-weight:900;margin-bottom:4px;}
+.best-match-meta{color:rgba(255,255,255,0.85);font-size:11px;}
+.best-match-bot{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 14px;border-top:1px solid rgba(255,255,255,0.15);}
+.best-match-price{color:#ffd600;font-size:18px;font-weight:900;}
+.best-match-price small{color:rgba(255,255,255,0.7);font-size:11px;font-weight:400;display:block;}
+.best-match-btn{background:#ffd600;color:#002d62;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:900;cursor:pointer;}
+.best-match-btn:hover{background:#ffca00;}
 
 /* DETAIL PAGE */
 .detail-page{display:none;position:fixed;inset:0;background:#f1f3f6;z-index:400;overflow-y:auto;}
 .detail-page.show{display:block;}
 .detail-header{background:#002d62;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
 .back-btn{background:none;border:none;color:#ffd600;font-size:22px;cursor:pointer;padding:4px 8px;font-weight:900;line-height:1;}
+.share-btn{background:none;border:none;color:#ffd600;font-size:22px;cursor:pointer;padding:4px 8px;line-height:1;margin-left:auto;}
 .detail-header-title{color:#fff;font-size:15px;font-weight:800;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .detail-img-wrap{width:100%;height:260px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid #e0e0e0;}
 .detail-img-wrap img{width:100%;height:100%;object-fit:contain;padding:16px;box-sizing:border-box;margin:0;}
@@ -387,6 +402,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   <div class="detail-header">
     <button class="back-btn" onclick="closeDetail()">&#8592;</button>
     <div class="detail-header-title" id="detailHeaderTitle">EV Details</div>
+    <button class="share-btn" onclick="shareEV()" title="Share">&#11014;</button>
   </div>
   <div class="detail-img-wrap">
     <img id="detailImg" src="" alt="EV"/>
@@ -592,7 +608,22 @@ function renderResults(list,city){
   const t=T[lang]||T.en;
   const box=document.getElementById('resultsArea');
   if(!list.length){box.innerHTML='<div class="no-res">'+t.noRes.replace('{city}',city)+'</div>';return;}
-  let html='<div class="results-hdr">'+t.foundText.replace('{count}',list.length).replace('{city}',city)+'</div>';
+  const live=list.filter(v=>parseRent(v['Approx Rental/Week'])!==null);
+  const best=live.length?live.reduce((a,b)=>parseRent(a['Approx Rental/Week'])<=parseRent(b['Approx Rental/Week'])?a:b):null;
+  let html='';
+  if(best){
+    const btk=(best.Type||'').toLowerCase().includes('hi')?'hi-speed':(best.Type||'').toLowerCase().includes('low')?'low-speed':'e-cycle';
+    const bimg=best.Image&&!best.Image.includes('ev_hi')&&!best.Image.includes('ev_lo')&&!best.Image.includes('ev_e')?best.Image:IMGS[btk];
+    const bidx=list.indexOf(best);
+    html+='<div class="best-match-card" onclick="openSheet('+bidx+')">';
+    html+='<div class="best-match-top"><div class="best-match-img"><img src="'+bimg+'" onerror="this.src=\''+IMGS[btk]+'\'"/></div>';
+    html+='<div class="best-match-info"><div class="best-match-badge">⭐ Best Match</div>';
+    html+='<div class="best-match-name">'+(best.Make||'EV')+' – '+(best.Vendor||'')+'</div>';
+    html+='<div class="best-match-meta">Range: '+(best['Range (Km)']||'N/A')+' km &nbsp;|&nbsp; Deposit: '+(best['Security Deposit']||'NIL')+'</div></div></div>';
+    html+='<div class="best-match-bot"><div class="best-match-price"><small>Weekly rental</small>'+(best['Approx Rental/Week']||'N/A')+'</div>';
+    html+='<button class="best-match-btn">Book Now</button></div></div>';
+  }
+  html+='<div class="results-hdr">'+t.foundText.replace('{count}',list.length).replace('{city}',city)+'</div>';
   html+='<input class="search-bar" id="searchBar" placeholder="Search vendor or bike..." oninput="renderCards()" />';
   html+='<div class="results-toolbar">';
   html+='<button class="type-chip active" onclick="setType(this,\'all\')">All</button>';
@@ -756,6 +787,13 @@ function submitDetailLead(){
   });
 }
 
+function shareEV(){
+  const v=selVendor;
+  if(!v)return;
+  const text=(v.Make||'EV')+' - '+(v.Vendor||'')+' | Weekly: '+(v['Approx Rental/Week']||'N/A')+' | City: '+(v.City||'')+' | Book at: https://ev-whatsapp-bot-c7sg.onrender.com';
+  if(navigator.share){navigator.share({title:'EV Rental - '+(v.Vendor||''),text:text,url:'https://ev-whatsapp-bot-c7sg.onrender.com'}).catch(()=>{});}
+  else{navigator.clipboard&&navigator.clipboard.writeText(text).then(()=>alert('Copied to clipboard!'));}
+}
 function yuluClick(){
   const yulu=vendors.find(v=>v.Vendor==='Yulu'&&(v.City||'').toLowerCase()==='delhi ncr');
   if(yulu)openDetail(yulu);
