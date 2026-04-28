@@ -16,6 +16,7 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.get("/vendors")
+@app.head("/vendors")
 def get_vendors():
     try:
         with open(VENDORS_PATH, "r", encoding="utf-8") as f:
@@ -55,6 +56,7 @@ async def submit_lead(request: Request):
 
 
 @app.get("/health")
+@app.head("/health")
 def health():
     return {"status": "EV Assist is running 🚴"}
 
