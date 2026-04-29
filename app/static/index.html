@@ -402,6 +402,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   <div class="detail-header">
     <button class="back-btn" onclick="closeDetail()">&#8592;</button>
     <div class="detail-header-title" id="detailHeaderTitle">EV Details</div>
+    <button onclick="shareEV()" style="background:none;border:none;color:#ffd600;font-size:20px;cursor:pointer;padding:4px 8px;" title="Share">&#128279;</button>
     <button class="share-btn" onclick="shareEV()" title="Share">&#11014;</button>
   </div>
   <div class="detail-img-wrap">
@@ -798,6 +799,22 @@ function yuluClick(){
   const yulu=vendors.find(v=>v.Vendor==='Yulu'&&(v.City||'').toLowerCase()==='delhi ncr');
   if(yulu)openDetail(yulu);
 }
+function shareEV(){
+  const v=selVendor;
+  if(!v)return;
+  const text='Check out this EV rental!\n'+
+    (v.Make||'EV')+' - '+(v.Vendor||'')+' | '+(v.City||'')+
+    '\nWeekly: '+(v['Approx Rental/Week']||'N/A')+
+    '\nRange: '+(v['Range (Km)']||'N/A')+' km'+
+    '\nDeposit: '+(v['Security Deposit']||'NIL')+
+    '\nBook here: https://ev-whatsapp-bot-c7sg.onrender.com';
+  if(navigator.share){
+    navigator.share({title:'EV Rental - Flipkart Minutes',text:text});
+  } else {
+    navigator.clipboard.writeText(text).then(()=>alert('Details copied! Share with your friends.'));
+  }
+}
+
 function yuvwaaClick(){
   const yuvwaa=vendors.find(v=>v.Vendor==='YuvwaaSpeed');
   if(yuvwaa)openDetail(yuvwaa);
