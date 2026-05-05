@@ -307,6 +307,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
     <h2 id="successTitle">Request Submitted!</h2>
     <p id="successMsg">Vendor will contact you within <strong>24 hours</strong>. Get ready to ride!</p>
     <button class="ok-btn" onclick="closeSuccess()">OK</button>
+    <button class="ok-btn" onclick="bookAnother()" style="background:#fff;color:#002d62;border:1.5px solid #002d62;margin-top:10px;">Book Another EV</button>
   </div>
 </div>
 
@@ -403,7 +404,6 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   <div class="detail-header">
     <button class="back-btn" onclick="closeDetail()">&#8592;</button>
     <div class="detail-header-title" id="detailHeaderTitle">EV Details</div>
-    <button onclick="shareEV()" style="background:none;border:none;color:#ffd600;font-size:20px;cursor:pointer;padding:4px 8px;" title="Share">&#128279;</button>
     <button class="share-btn" onclick="shareEV()" title="Share">&#11014;</button>
   </div>
   <div class="detail-img-wrap">
@@ -439,8 +439,10 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
         <div class="ev-summary-price" id="dpopPrice"></div>
       </div>
     </div>
-    <input class="inp" id="dpopName2" type="text" placeholder="Your Name"/>
-    <input class="inp" id="dpopPhone" type="tel" placeholder="Mobile Number" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+    <label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Your Name</label>
+    <input class="inp" id="dpopName2" type="text" placeholder="e.g. Ravi Kumar"/>
+    <label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Mobile Number</label>
+    <input class="inp" id="dpopPhone" type="tel" placeholder="e.g. 98765 43210" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
     <button class="confirm-btn" id="dpopBtn" onclick="submitDetailLead()">Confirm &amp; Request</button>
   </div>
 </div>
@@ -461,8 +463,10 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
       <div class="ev-summary-price" id="summaryPrice"></div>
     </div>
   </div>
-  <input class="inp" id="riderName" type="text" placeholder="Your Name"/>
-  <input class="inp" id="riderPhone" type="tel" placeholder="Mobile Number" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+    <label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Your Name</label>
+    <input class="inp" id="riderName" type="text" placeholder="e.g. Ravi Kumar"/>
+    <label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Mobile Number</label>
+    <input class="inp" id="riderPhone" type="tel" placeholder="e.g. 98765 43210" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
   <button class="confirm-btn" onclick="submitLead()" id="confirmBtn">Confirm & Request</button>
 </div>
 <script>
@@ -539,6 +543,12 @@ function closeIntro(){
 function closeSuccess(){
   document.getElementById('successOverlay').classList.remove('show');
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function bookAnother(){
+  document.getElementById('successOverlay').classList.remove('show');
+  const res=document.getElementById('resultsArea');
+  if(res&&res._list)res.scrollIntoView({behavior:'smooth'});
 }
 
 function setLang(l){
