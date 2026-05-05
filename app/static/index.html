@@ -355,7 +355,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
       </div>
     </div>
     <div class="hero-slide" onclick="bounceClick()" style="cursor:pointer;padding:0;overflow:hidden;background:#0b3a75;">
-      <img src="/static/images/fk_poster.png" alt="Flipkart Minutes" style="width:100%;height:100%;object-fit:fill;display:block;"/>
+      <img src="/static/images/fk_poster.png" alt="Flipkart Minutes" style="width:100%;height:100%;object-fit:contain;display:block;"/>
     </div>
     <div class="hero-slide" onclick="yuluClick()" style="cursor:pointer;padding:0;overflow:hidden;background:#0b3a75;align-items:flex-start;">
       <img src="/static/images/yulu_poster.jpeg" alt="Yulu DeX" style="width:100%;height:100%;object-fit:cover;object-position:left center;display:block;"/>
@@ -404,6 +404,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   <div class="detail-header">
     <button class="back-btn" onclick="closeDetail()">&#8592;</button>
     <div class="detail-header-title" id="detailHeaderTitle">EV Details</div>
+    <button onclick="shareEV()" style="background:none;border:none;color:#ffd600;font-size:20px;cursor:pointer;padding:4px 8px;" title="Share">&#128279;</button>
     <button class="share-btn" onclick="shareEV()" title="Share">&#11014;</button>
   </div>
   <div class="detail-img-wrap">
