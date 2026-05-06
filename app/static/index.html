@@ -497,36 +497,33 @@ let isTouching=false;
 
 function updateCarousel(){
   const city=(document.getElementById('citySelect').value||'').toLowerCase();
-  const slides=document.querySelectorAll('.hero-slide');
-  // Slide 1 always visible
-  // Slide 2 = YuvwaaSpeed (Pune only)
-  // Slide 3 = Bounce (Bangalore, Hyderabad, Delhi NCR)
-  // Slide 4 = Yulu (multiple cities)
   const yuvwaaCities=['pune'];
   const bounceCities=['bangalore','hyderabad','delhi ncr'];
   const yuluCities=vendors.filter(v=>v.Vendor==='Yulu').map(v=>(v.City||'').toLowerCase());
-  slides[1].style.display=(!city||yuvwaaCities.includes(city))?'':'none';
-  slides[2].style.display=(!city||bounceCities.includes(city))?'':'none';
-  slides[3].style.display=(!city||yuluCities.includes(city))?'':'none';
-  // Recalculate total visible slides and reset
-  const visible=[...slides].filter(s=>s.style.display!=='none');
-  window._visibleSlides=visible;
-  goSlide(0);
+  const slides=document.querySelectorAll('.hero-slide');
+  // Slide 2 - YuvwaaSpeed
+  const showYuvwaa=!city||yuvwaaCities.includes(city);
+  slides[1].style.opacity=showYuvwaa?'1':'0.3';
+  slides[1].style.pointerEvents=showYuvwaa?'auto':'none';
+  // Slide 3 - Bounce
+  const showBounce=!city||bounceCities.includes(city);
+  slides[2].style.opacity=showBounce?'1':'0.3';
+  slides[2].style.pointerEvents=showBounce?'auto':'none';
+  // Slide 4 - Yulu
+  const showYulu=!city||yuluCities.includes(city);
+  slides[3].style.opacity=showYulu?'1':'0.3';
+  slides[3].style.pointerEvents=showYulu?'auto':'none';
 }
 
 function goSlide(n){
-  const slides=window._visibleSlides||[...document.querySelectorAll('.hero-slide')];
-  const total=slides.length;
-  if(total===0)return;
+  const allSlides=[...document.querySelectorAll('.hero-slide')];
+  const slides=allSlides.filter(s=>s.style.display!=='none');
+  const total=slides.length||TOTAL_SLIDES;
   curSlide=(n%total+total)%total;
   const el=document.getElementById('heroSlides');
   if(!el)return;
-  // Scroll to the nth visible slide
-  const targetSlide=slides[curSlide];
-  el.scrollTo({left:targetSlide.offsetLeft,behavior:'smooth'});
-  // Update dots
-  const dots=document.querySelectorAll('.hero-dot');
-  dots.forEach((d,i)=>d.classList.toggle('active',i===curSlide));
+  el.style.transform='translateX(-'+curSlide*100+'%)';
+  document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
 }
 
 function handleSwipe(){
