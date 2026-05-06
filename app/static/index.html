@@ -501,32 +501,37 @@ function updateCarousel(){
   const bounceCities=['bangalore','hyderabad','delhi ncr'];
   const yuluCities=vendors.filter(v=>v.Vendor==='Yulu').map(v=>(v.City||'').toLowerCase());
   const slides=document.querySelectorAll('.hero-slide');
-  // If no city selected yet — show all posters at full brightness
   if(!city){
     [1,2,3].forEach(i=>{slides[i].style.opacity='1';slides[i].style.pointerEvents='auto';});
     return;
   }
-  // After city selected — hide irrelevant posters
-  const showYuvwaa=yuvwaaCities.includes(city);
-  slides[1].style.opacity=showYuvwaa?'1':'0';
-  slides[1].style.pointerEvents=showYuvwaa?'auto':'none';
-  const showBounce=bounceCities.includes(city);
-  slides[2].style.opacity=showBounce?'1':'0';
-  slides[2].style.pointerEvents=showBounce?'auto':'none';
-  const showYulu=yuluCities.includes(city);
-  slides[3].style.opacity=showYulu?'1':'0';
-  slides[3].style.pointerEvents=showYulu?'auto':'none';
+  slides[1].style.opacity=yuvwaaCities.includes(city)?'1':'0';
+  slides[1].style.pointerEvents=yuvwaaCities.includes(city)?'auto':'none';
+  slides[2].style.opacity=bounceCities.includes(city)?'1':'0';
+  slides[2].style.pointerEvents=bounceCities.includes(city)?'auto':'none';
+  slides[3].style.opacity=yuluCities.includes(city)?'1':'0';
+  slides[3].style.pointerEvents=yuluCities.includes(city)?'auto':'none';
+  // Reset to slide 0 and rebuild visible list
+  curSlide=0;
+  window._activeSlides=[0];
+  if(yuvwaaCities.includes(city))window._activeSlides.push(1);
+  if(bounceCities.includes(city))window._activeSlides.push(2);
+  if(yuluCities.includes(city))window._activeSlides.push(3);
+  goSlideActive(0);
 }
 
-function goSlide(n){
-  const allSlides=[...document.querySelectorAll('.hero-slide')];
-  const slides=allSlides.filter(s=>s.style.display!=='none');
-  const total=slides.length||TOTAL_SLIDES;
+function goSlideActive(n){
+  const active=window._activeSlides||[0,1,2,3];
+  const total=active.length;
   curSlide=(n%total+total)%total;
   const el=document.getElementById('heroSlides');
   if(!el)return;
-  el.style.transform='translateX(-'+curSlide*100+'%)';
+  el.style.transform='translateX(-'+active[curSlide]*100+'%)';
   document.querySelectorAll('.hero-dot').forEach((d,i)=>d.classList.toggle('active',i===curSlide));
+}
+
+function goSlide(n){
+  goSlideActive(n);
 }
 
 function handleSwipe(){
