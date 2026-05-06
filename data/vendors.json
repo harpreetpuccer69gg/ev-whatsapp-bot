@@ -269,7 +269,7 @@
         "SPOC": "Sandeep",
         "Phone": "8884468333",
         "Email": "sandeep.sm@yulu.bike",
-        "Image": "/static/images/yulu_bangalore.jpeg"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Delhi NCR",
@@ -286,7 +286,7 @@
         "SPOC": "Sheikh Ahnaf",
         "Phone": "9559169129",
         "Email": "sheikh.ahnaf@yulu.bike",
-        "Image": "/static/images/yulu_delhi.jpeg"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Mumbai",
@@ -303,7 +303,7 @@
         "SPOC": "Janvi Aggarwal",
         "Phone": "9326466890",
         "Email": "janvi.aggarwal@yulu.bike",
-        "Image": "/static/images/yulu_mumbai.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Hyderabad",
@@ -320,7 +320,7 @@
         "SPOC": "Nagaraju",
         "Phone": "9550816965",
         "Email": "ergadhindla.nagaraju@yulu.bike",
-        "Image": "/static/images/yulu_hyderabad.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Kolkata",
@@ -337,7 +337,7 @@
         "SPOC": null,
         "Phone": null,
         "Email": null,
-        "Image": "/static/images/yulu_kolkata.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Delhi NCR",
@@ -815,7 +815,7 @@
         "SPOC": "Viruksham",
         "Phone": "9087688008",
         "Email": null,
-        "Image": "/static/images/yulu_coimbatore.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Bangalore",
@@ -900,7 +900,7 @@
         "SPOC": null,
         "Phone": null,
         "Email": null,
-        "Image": "/static/images/yulu_bhopal.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Indore",
@@ -917,7 +917,7 @@
         "SPOC": null,
         "Phone": null,
         "Email": null,
-        "Image": "/static/images/yulu_indore.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Kochi",
@@ -934,7 +934,7 @@
         "SPOC": null,
         "Phone": null,
         "Email": null,
-        "Image": "/static/images/yulu_kochi.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Madurai",
@@ -951,7 +951,7 @@
         "SPOC": null,
         "Phone": null,
         "Email": null,
-        "Image": "/static/images/yulu_madurai.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Vadodara",
@@ -968,7 +968,7 @@
         "SPOC": null,
         "Phone": null,
         "Email": null,
-        "Image": "/static/images/yulu_vadodara.png"
+        "Image": "/static/images/yulu.png"
     },
     {
         "City": "Zirakpur",
@@ -985,6 +985,6 @@
         "SPOC": null,
         "Phone": null,
         "Email": null,
-        "Image": "/static/images/yulu_zirakpur.png"
+        "Image": "/static/images/yulu.png"
     }
 ]

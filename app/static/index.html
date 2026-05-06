@@ -501,17 +501,20 @@ function updateCarousel(){
   const bounceCities=['bangalore','hyderabad','delhi ncr'];
   const yuluCities=vendors.filter(v=>v.Vendor==='Yulu').map(v=>(v.City||'').toLowerCase());
   const slides=document.querySelectorAll('.hero-slide');
-  // Slide 2 - YuvwaaSpeed
-  const showYuvwaa=!city||yuvwaaCities.includes(city);
-  slides[1].style.opacity=showYuvwaa?'1':'0.3';
+  // If no city selected yet — show all posters at full brightness
+  if(!city){
+    [1,2,3].forEach(i=>{slides[i].style.opacity='1';slides[i].style.pointerEvents='auto';});
+    return;
+  }
+  // After city selected — hide irrelevant posters
+  const showYuvwaa=yuvwaaCities.includes(city);
+  slides[1].style.opacity=showYuvwaa?'1':'0';
   slides[1].style.pointerEvents=showYuvwaa?'auto':'none';
-  // Slide 3 - Bounce
-  const showBounce=!city||bounceCities.includes(city);
-  slides[2].style.opacity=showBounce?'1':'0.3';
+  const showBounce=bounceCities.includes(city);
+  slides[2].style.opacity=showBounce?'1':'0';
   slides[2].style.pointerEvents=showBounce?'auto':'none';
-  // Slide 4 - Yulu
-  const showYulu=!city||yuluCities.includes(city);
-  slides[3].style.opacity=showYulu?'1':'0.3';
+  const showYulu=yuluCities.includes(city);
+  slides[3].style.opacity=showYulu?'1':'0';
   slides[3].style.pointerEvents=showYulu?'auto':'none';
 }
 
