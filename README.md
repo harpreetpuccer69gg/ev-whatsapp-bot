@@ -3,14 +3,15 @@
 A responsive web app that helps Flipkart delivery riders find and book EV rentals in their city.
 Supports Hindi, English, Bengali and Kannada.
 
-🌐 **Live:** https://ev-whatsapp-bot-c7sg.onrender.com
+🌐 **Live:** https://ev-rental-in-minutes.onrender.com
 📊 **Leads Sheet:** https://docs.google.com/spreadsheets/d/1RwPcbZp8Wtv5HRdp7uXIMupEmp6V5HXtrAiElx7DEPI/edit
+📄 **Docs:** https://docs.google.com/document/d/1b2901P0-3EQTdFiNRjN9KKJIrWRpQnbrmuTDmkvVS9M/edit?tab=t.0
 
 ---
 
 ## Features
 
-- **Hero Carousel** — 3 posters with auto-slide (5s) and manual swipe (Android + iOS)
+- **Hero Carousel** — 4 posters with auto-slide (5s) and manual swipe (Android + iOS)
 - **City Selector** — 13 cities across India
 - **Budget Filter** — 4 weekly budget ranges
 - **EV Results** — Search, filter by type (Hi-Speed / Low Speed / E-Cycle), sort by price
