@@ -844,7 +844,7 @@ function shareEV(){
   const v=selVendor;
   if(!v)return;
   const text=(v.Make||'EV')+' - '+(v.Vendor||'')+' | Weekly: '+(v['Approx Rental/Week']||'N/A')+' | City: '+(v.City||'')+' | Book at: https://ev-whatsapp-bot-c7sg.onrender.com';
-  if(navigator.share){navigator.share({title:'EV Rental - '+(v.Vendor||''),text:text,url:'https://ev-whatsapp-bot-c7sg.onrender.com'}).catch(()=>{});}
+  if(navigator.share){navigator.share({title:'EV Rental - '+(v.Vendor||''),text:text,url:'https://ev-rental-in-minutes.onrender.com'}).catch(()=>{});}
   else{navigator.clipboard&&navigator.clipboard.writeText(text).then(()=>alert('Copied to clipboard!'));}
 }
 function yuluClick(){
@@ -859,7 +859,7 @@ function shareEV(){
     '\nWeekly: '+(v['Approx Rental/Week']||'N/A')+
     '\nRange: '+(v['Range (Km)']||'N/A')+' km'+
     '\nDeposit: '+(v['Security Deposit']||'NIL')+
-    '\nBook here: https://ev-whatsapp-bot-c7sg.onrender.com';
+    '\nBook here: https://ev-rental-in-minutes.onrender.com';
   if(navigator.share){
     navigator.share({title:'EV Rental - Flipkart Minutes',text:text});
   } else {
