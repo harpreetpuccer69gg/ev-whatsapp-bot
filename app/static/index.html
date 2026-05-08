@@ -767,22 +767,18 @@ function openDetail(v){
   page.style.transition='transform 0.3s ease';
   setTimeout(()=>page.style.transform='translateX(0)',10);
   window.scrollTo(0,0);
-  // Push state so back button only closes detail, not the whole page
   history.pushState({detail:true},'','');
   window.onpopstate=function(e){
     if(document.getElementById('detailPage').style.display!=='none'){
       closeDetail();
     }
   };
+}
 
 function closeDetail(){
   const page=document.getElementById('detailPage');
   page.style.transform='translateX(100%)';
   setTimeout(()=>{page.style.display='none';},300);
-  // Only go back one step — never exit the app
-  if(window.history.state&&window.history.state.detail){
-    history.back();
-  }
 }
 
 function openDetailPopup(){
