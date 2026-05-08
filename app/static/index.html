@@ -293,8 +293,8 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
     <div class="s-icon">🎉</div>
     <h2 id="successTitle">Request Submitted!</h2>
     <p id="successMsg">Vendor will contact you within <strong>24 hours</strong>. Get ready to ride!</p>
-    <button class="ok-btn" onclick="closeSuccess()">OK</button>
-    <button class="ok-btn" onclick="bookAnother()" style="background:#fff;color:#002d62;border:1.5px solid #002d62;margin-top:10px;">Book Another EV</button>
+    <button class="ok-btn" onclick="closeSuccess()" id="okBtn">OK</button>
+    <button class="ok-btn" onclick="bookAnother()" id="bookAnotherBtn" style="background:#fff;color:#002d62;border:1.5px solid #002d62;margin-top:10px;">Book Another EV</button>
   </div>
 </div>
 
@@ -460,10 +460,10 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
 </div>
 <script>
 const T = {
-  en:{heroTitle:'Find the Best <span>EV Rentals</span> for Delivery Riders',heroSub:'Affordable weekly plans | Instant booking | Vendor support',heroBadge:'For Delivery Riders',cityLabel:'1. Select City',cityHint:'Choose your delivery city.',budgetLabel:'2. Weekly Budget',b1:'Below Rs.1000',b2:'Per week',b3:'Per week',b4:'Above Rs.2000',findBtn:'Find EVs',sheetTitle:'Confirm Your Details',namePh:'Your Name',phonePh:'Mobile Number',confirmBtn:'Confirm & Request',successTitle:'Request Submitted!',successMsg:'Vendor will contact you within <strong>24 hours</strong>.',noRes:'No EVs found in {city}.',foundText:'{count} EVs found in {city}',cityDef:'-- Select city --'},
-  hi:{'heroTitle':'डिलीवरी राइडर्स के लिए <span>EV किराया</span> खोजें','heroSub':'सस्ते साप्ताहिक प्लान | तुरंत बुकिंग | वेंडर सपोर्ट','heroBadge':'डिलीवरी राइडर्स के लिए','cityLabel':'1. शहर चुनें','cityHint':'अपने शहर के लिए EV किराये देखें।','budgetLabel':'2. साप्ताहिक बजट','b1':'₹1000 से कम','b2':'प्रति सप्ताह','b3':'प्रति सप्ताह','b4':'₹2000 से ऊपर','findBtn':'EV खोजें','sheetTitle':'अपनी जानकारी दर्ज करें','namePh':'आपका नाम','phonePh':'मोबाइल नंबर','confirmBtn':'पुष्टि करें','successTitle':'अनुरोध सबमिट हुआ!','successMsg':'Vendor 24 घंटे में संपर्क करेगा।','noRes':'{city} में कोई EV नहीं मिली।','foundText':'{city} में {count} EV मिलीं','cityDef':'-- शहर चुनें --'},
-  bn:{'heroTitle':'ডেলিভারি রাইডারদের জন্য <span>EV ভাড়া</span> খুঁজুন','heroSub':'সাশ্রয়ী সাপ্তাহিক প্ল্যান | তাৎক্ষণিক বুকিং | ভেন্ডর সাপোর্ট','heroBadge':'ডেলিভারি রাইডারদের জন্য','cityLabel':'1. শহর নির্বাচন করুন','cityHint':'আপনার শহরের EV ভাড়া দেখুন।','budgetLabel':'2. সাপ্তাহিক বাজেট','b1':'₹1000 এর নিচে','b2':'প্রতি সপ্তাহে','b3':'প্রতি সপ্তাহে','b4':'₹2000 এর উপরে','findBtn':'EV খুঁজুন','sheetTitle':'আপনার বিবরণ নিশ্চিত করুন','namePh':'আপনার নাম','phonePh':'মোবাইল নম্বর','confirmBtn':'নিশ্চিত করুন','successTitle':'অনুরোধ জমা হয়েছে!','successMsg':'Vendor ২৪ ঘণ্টার মধ্যে যোগাযোগ করবে।','noRes':'{city} এ কোনো EV নেই।','foundText':'{city} এ {count} EV পাওয়া গেছে','cityDef':'-- শহর নির্বাচন করুন --'},
-  kn:{'heroTitle':'ಡೆಲಿವರಿ ರೈಡರ್ಗಳಿಗೆ <span>EV ಬಾಡಿಗೆ</span> ಹುಡುಕಿ','heroSub':'ಕಡಿಮೆ ವಾರದ ಯೋಜನೆ | ತಕ್ಷಣ ಬುಕಿಂಗ್ | ವೆಂಡರ್ ಸಹಾಯ','heroBadge':'ಡೆಲಿವರಿ ರೈಡರ್ಗಳಿಗಾಗಿ','cityLabel':'1. ನಗರ ಆಯ್ಕೆಮಾಡಿ','cityHint':'ನಿಮ್ಮ ನಗರದ EV ಬಾಡಿಗೆ ನೋಡಿ.','budgetLabel':'2. ವಾರದ ಬಜೆಟ್','b1':'₹1000 ಕೆಳಗೆ','b2':'ಪ್ರತಿ ವಾರ','b3':'ಪ್ರತಿ ವಾರ','b4':'₹2000 ಮೇಲೆ','findBtn':'EV ಹುಡುಕಿ','sheetTitle':'ನಿಮ್ಮ ವಿವರ ದೃಢೀಕರಿಸಿ','namePh':'ನಿಮ್ಮ ಹೆಸರು','phonePh':'ಮೊಬೈಲ್ ನಂಬರ್','confirmBtn':'ದೃಢೀಕರಿಸಿ','successTitle':'ವಿನಂತಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!','successMsg':'Vendor 24 ಗಂಟೆಗಳಲ್ಲಿ ಸಂಪರ್ಕಿಸುತ್ತಾರೆ.','noRes':'{city} ನಲ್ಲಿ EV ಇಲ್ಲ.','foundText':'{city} ನಲ್ಲಿ {count} EV ದೊರಕಿವೆ','cityDef':'-- ನಗರ ಆಯ್ಕೆಮಾಡಿ --'}
+  en:{heroTitle:'Find the Best <span>EV Rentals</span> for Delivery Riders',heroSub:'Affordable weekly plans | Instant booking | Vendor support',heroBadge:'For Delivery Riders',cityLabel:'1. Select City',cityHint:'Choose your delivery city.',budgetLabel:'2. Weekly Budget',b1:'Below Rs.1000',b2:'Per week',b3:'Per week',b4:'Above Rs.2000',findBtn:'🔍 Find EVs',sheetTitle:'Confirm Your Details',namePh:'Your Name',phonePh:'Mobile Number',confirmBtn:'Confirm & Request',successTitle:'Request Submitted!',successMsg:'Vendor will contact you within <strong>24 hours</strong>.',noRes:'No EVs found in {city}.',foundText:'{count} EVs found in {city}',cityDef:'-- Select city --',introTitle:"Welcome! Let's get started",introSub:'Select your language and city',introBtn:"Let's Go →",bestMatch:'⭐ Best Match',bookNow:'Book Now',weeklyRental:'Weekly rental',rangeLabel:'Range',chargeLabel:'Charge',depositLabel:'Deposit',dpopTitle:'Confirm Your Details',confirmRequest:'Confirm & Request',bookAnother:'Book Another EV',okBtn:'OK'},
+  hi:{heroTitle:'डिलीवरी राइडर्स के लिए <span>EV किराया</span> खोजें',heroSub:'सस्ते साप्ताहिक प्लान | तुरंत बुकिंग | वेंडर सपोर्ट',heroBadge:'डिलीवरी राइडर्स के लिए',cityLabel:'१. शहर चुनें',cityHint:'अपने शहर के लिए EV किराये देखें।',budgetLabel:'२. साप्ताहिक बजट',b1:'₹१००० से कम',b2:'प्रति सप्ताह',b3:'प्रति सप्ताह',b4:'₹२००० से ऊपर',findBtn:'🔍 EV खोजें',sheetTitle:'अपनी जानकारी दर्ज करें',namePh:'आपका नाम',phonePh:'मोबाइल नंबर',confirmBtn:'पुष्टि करें',successTitle:'अनुरोध सबमिट हुआ!',successMsg:'Vendor <strong>२४ घंटे</strong> में संपर्क करेगा।',noRes:'{city} में कोई EV नहीं मिली।',foundText:'{city} में {count} EV मिलीं',cityDef:'-- शहर चुनें --',introTitle:'स्वागत है! शुरू करें',introSub:'भाषा और शहर चुनें',introBtn:'चलो शुरू करें →',bestMatch:'⭐ सबसे अच्छा',bookNow:'अभी बुक करें',weeklyRental:'साप्ताहिक किराया',rangeLabel:'रेंज',chargeLabel:'चार्जिंग',depositLabel:'जमा',dpopTitle:'अपनी जानकारी दर्ज करें',confirmRequest:'पुष्टि करें',bookAnother:'दूसरी EV बुक करें',okBtn:'ठीक है'},
+  bn:{heroTitle:'ডেলিভারি রাইডারদের জন্য <span>EV ভাড়া</span> খুঁজুন',heroSub:'সাশ্রয়ী সাপ্তাহিক প্ল্যান | তাৎক্ষণিক বুকিং | ভেন্ডর সাপোর্ট',heroBadge:'ডেলিভারি রাইডারদের জন্য',cityLabel:'১. শহর নির্বাচন করুন',cityHint:'আপনার শহরের EV ভাড়া দেখুন।',budgetLabel:'২. সাপ্তাহিক বাজেট',b1:'₹১০০০ এর নিচে',b2:'প্রতি সপ্তাহে',b3:'প্রতি সপ্তাহে',b4:'₹২০০০ এর উপরে',findBtn:'🔍 EV খুঁজুন',sheetTitle:'আপনার বিবরণ নিশ্চিত করুন',namePh:'আপনার নাম',phonePh:'মোবাইল নম্বর',confirmBtn:'নিশ্চিত করুন',successTitle:'অনুরোধ জমা হয়েছে!',successMsg:'Vendor <strong>২৪ ঘণ্টা</strong>র মধ্যে যোগাযোগ করবে।',noRes:'{city} এ কোনো EV নেই।',foundText:'{city} এ {count} EV পাওয়া গেছে',cityDef:'-- শহর নির্বাচন করুন --',introTitle:'স্বাগতম! শুরু করুন',introSub:'ভাষা এবং শহর নির্বাচন করুন',introBtn:'চলুন শুরু করি →',bestMatch:'⭐ সেরা ম্যাচ',bookNow:'এখনই বুক করুন',weeklyRental:'সাপ্তাহিক ভাড়া',rangeLabel:'রেঞ্জ',chargeLabel:'চার্জিং',depositLabel:'জমা',dpopTitle:'আপনার বিবরণ নিশ্চিত করুন',confirmRequest:'নিশ্চিত করুন',bookAnother:'আরেকটি EV বুক করুন',okBtn:'ঠিক আছে'},
+  kn:{heroTitle:'ಡೆಲಿವರಿ ರೈಡರ್ಗಳಿಗೆ <span>EV ಬಾಡಿಗೆ</span> ಹುಡುಕಿ',heroSub:'ಕಡಿಮೆ ವಾರದ ಯೋಜನೆ | ತಕ್ಷಣ ಬುಕಿಂಗ್ | ವೆಂಡರ್ ಸಹಾಯ',heroBadge:'ಡೆಲಿವರಿ ರೈಡರ್ಗಳಿಗಾಗಿ',cityLabel:'೧. ನಗರ ಆಯ್ಕೆಮಾಡಿ',cityHint:'ನಿಮ್ಮ ನಗರದ EV ಬಾಡಿಗೆ ನೋಡಿ.',budgetLabel:'೨. ವಾರದ ಬಜೆಟ್',b1:'₹೧೦೦೦ ಕೆಳಗೆ',b2:'ಪ್ರತಿ ವಾರ',b3:'ಪ್ರತಿ ವಾರ',b4:'₹೨೦೦೦ ಮೇಲೆ',findBtn:'🔍 EV ಹುಡುಕಿ',sheetTitle:'ನಿಮ್ಮ ವಿವರ ದೃಢೀಕರಿಸಿ',namePh:'ನಿಮ್ಮ ಹೆಸರು',phonePh:'ಮೊಬೈಲ್ ನಂಬರ್',confirmBtn:'ದೃಢೀಕರಿಸಿ',successTitle:'ವಿನಂತಿ ಸಲ್ಲಿಸಲಾಗಿದೆ!',successMsg:'Vendor <strong>೨೪ ಗಂಟೆ</strong>ಗಳಲ್ಲಿ ಸಂಪರ್ಕಿಸುತ್ತಾರೆ.',noRes:'{city} ನಲ್ಲಿ EV ಇಲ್ಲ.',foundText:'{city} ನಲ್ಲಿ {count} EV ದೊರಕಿವೆ',cityDef:'-- ನಗರ ಆಯ್ಕೆಮಾಡಿ --',introTitle:'ಸ್ವಾಗತ! ಪ್ರಾರಂಭಿಸೋಣ',introSub:'ಭಾಷೆ ಮತ್ತು ನಗರ ಆಯ್ಕೆಮಾಡಿ',introBtn:'ಪ್ರಾರಂಭಿಸೋಣ →',bestMatch:'⭐ ಅತ್ಯುತ್ತಮ',bookNow:'ಈಗ ಬುಕ್ ಮಾಡಿ',weeklyRental:'ವಾರದ ಬಾಡಿಗೆ',rangeLabel:'ರೇಂಜ್',chargeLabel:'ಚಾರ್ಜಿಂಗ್',depositLabel:'ಠೇವಣಿ',dpopTitle:'ನಿಮ್ಮ ವಿವರ ದೃಢೀಕರಿಸಿ',confirmRequest:'ದೃಢೀಕರಿಸಿ',bookAnother:'ಮತ್ತೊಂದು EV ಬುಕ್ ಮಾಡಿ',okBtn:'ಸರಿ'}
 };
 
 let lang='en', budget=null, vendors=[], selVendor=null;
@@ -578,6 +578,7 @@ function setLang(l){
   document.getElementById('heroTitle').innerHTML=t.heroTitle;
   document.getElementById('heroSub').innerText=t.heroSub;
   document.getElementById('cityLabel').innerText=t.cityLabel;
+  document.getElementById('cityHint').innerText=t.cityHint;
   document.getElementById('budgetLabel').innerText=t.budgetLabel;
   document.getElementById('b1').innerText=t.b1;
   document.getElementById('b2').innerText=t.b2;
@@ -589,7 +590,19 @@ function setLang(l){
   document.getElementById('confirmBtn').innerText=t.confirmBtn;
   document.getElementById('sheetTitle').innerText=t.sheetTitle;
   document.getElementById('citySelect').options[0].text=t.cityDef;
-}
+  document.getElementById('introTitle').innerText=t.introTitle;
+  document.getElementById('introSub').innerText=t.introSub;
+  document.getElementById('introBtn').innerText=t.introBtn;
+  document.getElementById('successTitle').innerText=t.successTitle;
+  document.getElementById('successMsg').innerHTML=t.successMsg;
+  document.getElementById('dpopName2').placeholder=t.namePh;
+  document.getElementById('dpopPhone').placeholder=t.phonePh;
+  document.getElementById('dpopTitle').innerText=t.dpopTitle;
+  document.getElementById('dpopBtn').innerText=t.confirmRequest;
+  document.getElementById('okBtn').innerText=t.okBtn;
+  document.getElementById('bookAnotherBtn').innerText=t.bookAnother;
+  // re-render cards if results exist
+  if(document.getElementById('resultsArea')._list) renderCards();
 
 function setBudget(el,v){
   el.classList.toggle('active');
@@ -652,12 +665,12 @@ function renderResults(list,city){
     const bidx=list.indexOf(best);
     html+='<div class="best-match-card" onclick="openSheet('+bidx+')">';
     html+='<div class="best-match-top"><div class="best-match-img"><img src="'+bimg+'" onerror="this.src=\''+IMGS[btk]+'\'"/></div>';
-    html+='<div class="best-match-info"><div class="best-match-badge">⭐ Best Match</div>';
+    html+='<div class="best-match-info"><div class="best-match-badge">'+(t.bestMatch||'⭐ Best Match')+'</div>';
     html+='<div class="best-match-name">'+(best.Vendor||'EV')+'</div>';
     html+='<div style="color:rgba(255,255,255,0.7);font-size:11px;margin-bottom:4px;">'+(best.Make||'')+'</div>';
-    html+='<div class="best-match-meta">Range: '+(best['Range (Km)']||'N/A')+' km &nbsp;|&nbsp; Deposit: '+(best['Security Deposit']||'NIL')+'</div></div></div>';
-    html+='<div class="best-match-bot"><div class="best-match-price"><small>Weekly rental</small>'+(best['Approx Rental/Week']||'N/A')+'</div>';
-    html+='<button class="best-match-btn">Book Now</button></div></div>';
+    html+='<div class="best-match-meta">'+t.rangeLabel+': '+(best['Range (Km)']||'N/A')+' km &nbsp;|&nbsp; '+t.depositLabel+': '+(best['Security Deposit']||'NIL')+'</div></div></div>';
+    html+='<div class="best-match-bot"><div class="best-match-price"><small>'+t.weeklyRental+'</small>'+(best['Approx Rental/Week']||'N/A')+'</div>';
+    html+='<button class="best-match-btn">'+(t.bookNow||'Book Now')+'</button></div></div>';
   }
   html+='<div class="results-hdr">'+t.foundText.replace('{count}',list.length).replace('{city}',city)+'</div>';
   html+='<input class="search-bar" id="searchBar" placeholder="Search vendor or bike..." oninput="renderCards()" />';
@@ -710,12 +723,12 @@ function renderCards(){
       +'<div class="ev-name">'+(v.Vendor||'EV')+'</div>'
       +'<div class="ev-make">'+(v.Make||'')+'</div>'
       +'<div class="ev-meta">'
-      +'<div class="ev-meta-item">Range <span>'+(v['Range (Km)']||'N/A')+' km</span></div>'
-      +'<div class="ev-meta-item">Charge <span>'+(v['Charging/Swap']||'N/A')+'</span></div>'
-      +'<div class="ev-meta-item">Deposit <span>'+(v['Security Deposit']||'NIL')+'</span></div>'
+      +'<div class="ev-meta-item">'+t.rangeLabel+' <span>'+(v['Range (Km)']||'N/A')+' km</span></div>'
+      +'<div class="ev-meta-item">'+t.chargeLabel+' <span>'+(v['Charging/Swap']||'N/A')+'</span></div>'
+      +'<div class="ev-meta-item">'+t.depositLabel+' <span>'+(v['Security Deposit']||'NIL')+'</span></div>'
       +'</div></div>'
-      +'<div class="ev-card-bot"><div class="ev-price"><small>Weekly rental</small>'+(v['Approx Rental/Week']||'N/A')+'</div>'
-      +'<button class="book-btn" onclick="event.stopPropagation();openSheet('+idx+')">Book Now</button>'
+      +'<div class="ev-card-bot"><div class="ev-price"><small>'+t.weeklyRental+'</small>'+(v['Approx Rental/Week']||'N/A')+'</div>'
+      +'<button class="book-btn" onclick="event.stopPropagation();openSheet('+idx+')">'+(t.bookNow||'Book Now')+'</button>'
       +'</div></div>';
   });
   evList.innerHTML=html;
