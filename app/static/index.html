@@ -393,8 +393,7 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
   <div class="detail-header">
     <button class="back-btn" onclick="closeDetail()">&#8592;</button>
     <div class="detail-header-title" id="detailHeaderTitle">EV Details</div>
-    <button onclick="shareEV()" style="background:none;border:none;color:#ffd600;font-size:20px;cursor:pointer;padding:4px 8px;" title="Share">&#128279;</button>
-    <button class="share-btn" onclick="shareEV()" title="Share">&#11014;</button>
+    <button onclick="shareEV()" title="Share" style="background:#1a6ed8;border:none;border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-left:auto;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-12 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm12 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-11.1-6.8l6.2 3.6m-.1-9.6l-6.1 3.6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="detail-img-wrap">
     <img id="detailImg" src="" alt="EV"/>
@@ -705,7 +704,7 @@ function renderCards(){
     const bl=tk==='hi-speed'?'Hi-Speed':tk==='low-speed'?'Low Speed':'E-Cycle';
     const img=v.Image&&!v.Image.includes('ev_hi')&&!v.Image.includes('ev_lo')&&!v.Image.includes('ev_e')?v.Image:IMGS[tk];
     const idx=box._list.indexOf(v);
-    html+='<div class="ev-card">'
+    html+='<div class="ev-card" onclick="openSheet('+idx+')" style="cursor:pointer;">'
       +'<div class="ev-img-wrap"><img src="'+img+'" onerror="this.src=\''+IMGS[tk]+'\'"/></div>'
       +'<div class="ev-card-body"><span class="ev-badge '+bc+'">'+bl+'</span>'
       +'<div class="ev-name">'+(v.Vendor||'EV')+'</div>'
@@ -716,7 +715,7 @@ function renderCards(){
       +'<div class="ev-meta-item">Deposit <span>'+(v['Security Deposit']||'NIL')+'</span></div>'
       +'</div></div>'
       +'<div class="ev-card-bot"><div class="ev-price"><small>Weekly rental</small>'+(v['Approx Rental/Week']||'N/A')+'</div>'
-      +'<button class="book-btn" onclick="openSheet('+idx+')">Book Now</button>'
+      +'<button class="book-btn" onclick="event.stopPropagation();openSheet('+idx+')">Book Now</button>'
       +'</div></div>';
   });
   evList.innerHTML=html;
@@ -768,12 +767,22 @@ function openDetail(v){
   page.style.transition='transform 0.3s ease';
   setTimeout(()=>page.style.transform='translateX(0)',10);
   window.scrollTo(0,0);
-}
+  // Push state so back button only closes detail, not the whole page
+  history.pushState({detail:true},'','');
+  window.onpopstate=function(e){
+    if(document.getElementById('detailPage').style.display!=='none'){
+      closeDetail();
+    }
+  };
 
 function closeDetail(){
   const page=document.getElementById('detailPage');
   page.style.transform='translateX(100%)';
-  setTimeout(()=>page.style.display='none',300);
+  setTimeout(()=>{page.style.display='none';},300);
+  // Only go back one step — never exit the app
+  if(window.history.state&&window.history.state.detail){
+    history.back();
+  }
 }
 
 function openDetailPopup(){
