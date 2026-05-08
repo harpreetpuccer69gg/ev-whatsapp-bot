@@ -760,7 +760,7 @@ function openDetail(v){
   document.getElementById('detailCharge').innerText=v['Charging/Swap']||'N/A';
   document.getElementById('detailDeposit').innerText=v['Security Deposit']||'NIL';
   document.getElementById('detailRefund').innerText=v['Refundable Deposit']||'NIL';
-  document.getElementById('detailDisclaimer').classList.toggle('show',v.Vendor==='YuvwaaSpeed'||v.Vendor==='Bounce'||v.Vendor==='Yulu');
+  document.getElementById('detailDisclaimer').classList.remove('show');
   const page=document.getElementById('detailPage');
   page.style.display='block';
   page.style.transform='translateX(100%)';
