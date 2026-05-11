@@ -698,6 +698,7 @@ function renderResults(list,city){
 }
 
 function renderCards(){
+  const t=T[lang]||T.en;
   const box=document.getElementById('resultsArea');
   if(!box||!box._list)return;
   let list=[...box._list];
