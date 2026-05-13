@@ -276,13 +276,13 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
     </select>
     <select class="intro-sel" id="introCity">
       <option value="">-- Select your city --</option>
-      <option>Bangalore</option><option>Mumbai</option><option>Delhi NCR</option>
-      <option>Chennai</option><option>Kolkata</option><option>Hyderabad</option>
-      <option>Pune</option><option>Ahmedabad</option><option>Jaipur</option>
-      <option>Lucknow</option><option>Guwahati</option><option>Patna</option>
-      <option>Coimbatore</option><option>Bhopal</option><option>Indore</option>
-      <option>Kochi</option><option>Madurai</option><option>Vadodara</option>
-      <option>Zirakpur</option>
+      <option>Ahmedabad</option><option>Bangalore</option><option>Bhopal</option>
+      <option>Chennai</option><option>Coimbatore</option><option>Delhi NCR</option>
+      <option>Guwahati</option><option>Hyderabad</option><option>Indore</option>
+      <option>Jaipur</option><option>Kochi</option><option>Kolkata</option>
+      <option>Lucknow</option><option>Madurai</option><option>Mumbai</option>
+      <option>Pune</option><option>Vadodara</option><option>Zirakpur</option>
+      <option value="Other">Other</option>
     </select>
     <button class="intro-btn" id="introBtn" onclick="closeIntro()">Let&#39;s Go &rarr;</button>
   </div>
@@ -341,9 +341,6 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
         </div>
       </div>
     </div>
-    <div class="hero-slide poster-slide" onclick="bounceClick()" style="cursor:pointer;">
-      <img src="/static/images/bounce_poster.png" alt="Bounce Free Ride" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"/>
-    </div>
     <div class="hero-slide poster-slide" onclick="yuluClick()" style="cursor:pointer;align-items:flex-start;">
       <img src="/static/images/yulu_banner.jpeg" alt="Yulu DeX" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"/>
     </div>
@@ -352,7 +349,6 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
     <div class="hero-dot active" onclick="goSlide(0)"></div>
     <div class="hero-dot" onclick="goSlide(1)"></div>
     <div class="hero-dot" onclick="goSlide(2)"></div>
-    <div class="hero-dot" onclick="goSlide(3)"></div>
   </div>
 </div>
 
@@ -362,13 +358,13 @@ body{font-family:'Segoe UI',sans-serif;background:#f1f3f6;color:#212121;}
     <div class="card-title" id="cityLabel">1. Select City</div>
     <select class="city-sel" id="citySelect" onchange="checkReady()">
       <option value="">-- Select city --</option>
-      <option>Bangalore</option><option>Mumbai</option><option>Delhi NCR</option>
-      <option>Chennai</option><option>Kolkata</option><option>Hyderabad</option>
-      <option>Pune</option><option>Ahmedabad</option><option>Jaipur</option>
-      <option>Lucknow</option><option>Guwahati</option><option>Patna</option>
-      <option>Coimbatore</option><option>Bhopal</option><option>Indore</option>
-      <option>Kochi</option><option>Madurai</option><option>Vadodara</option>
-      <option>Zirakpur</option>
+      <option>Ahmedabad</option><option>Bangalore</option><option>Bhopal</option>
+      <option>Chennai</option><option>Coimbatore</option><option>Delhi NCR</option>
+      <option>Guwahati</option><option>Hyderabad</option><option>Indore</option>
+      <option>Jaipur</option><option>Kochi</option><option>Kolkata</option>
+      <option>Lucknow</option><option>Madurai</option><option>Mumbai</option>
+      <option>Pune</option><option>Vadodara</option><option>Zirakpur</option>
+      <option value="Other">Other</option>
     </select>
     <p class="hint" id="cityHint">Choose your delivery city to see available EV rentals.</p>
   </div>
@@ -472,7 +468,7 @@ const IMGS={'hi-speed':'/static/images/ev_hi_speed.svg','low-speed':'/static/ima
 
 fetch('/vendors').then(r=>r.json()).then(d=>{vendors=Array.isArray(d)?d:[];updateCarousel();}).catch(()=>{vendors=[];});
 
-const TOTAL_SLIDES=4;
+const TOTAL_SLIDES=3;
 let curSlide=0;
 let autoScrollInterval=null;
 let touchStartX=0;
@@ -482,25 +478,21 @@ let isTouching=false;
 function updateCarousel(){
   const city=(document.getElementById('citySelect').value||'').toLowerCase();
   const yuvwaaCities=['pune'];
-  const bounceCities=['bangalore','hyderabad','delhi ncr'];
   const yuluCities=vendors.filter(v=>v.Vendor==='Yulu').map(v=>(v.City||'').toLowerCase());
   const slides=document.querySelectorAll('.hero-slide');
   if(!city){
-    [1,2,3].forEach(i=>{slides[i].style.opacity='1';slides[i].style.pointerEvents='auto';});
+    [1,2].forEach(i=>{slides[i].style.opacity='1';slides[i].style.pointerEvents='auto';});
     return;
   }
   slides[1].style.opacity=yuvwaaCities.includes(city)?'1':'0';
   slides[1].style.pointerEvents=yuvwaaCities.includes(city)?'auto':'none';
-  slides[2].style.opacity=bounceCities.includes(city)?'1':'0';
-  slides[2].style.pointerEvents=bounceCities.includes(city)?'auto':'none';
-  slides[3].style.opacity=yuluCities.includes(city)?'1':'0';
-  slides[3].style.pointerEvents=yuluCities.includes(city)?'auto':'none';
+  slides[2].style.opacity=yuluCities.includes(city)?'1':'0';
+  slides[2].style.pointerEvents=yuluCities.includes(city)?'auto':'none';
   // Reset to slide 0 and rebuild visible list
   curSlide=0;
   window._activeSlides=[0];
   if(yuvwaaCities.includes(city))window._activeSlides.push(1);
-  if(bounceCities.includes(city))window._activeSlides.push(2);
-  if(yuluCities.includes(city))window._activeSlides.push(3);
+  if(yuluCities.includes(city))window._activeSlides.push(2);
   goSlideActive(0);
 }
 
@@ -634,6 +626,11 @@ function parseRent(s){
 
 function findEVs(){
   const city=document.getElementById('citySelect').value;
+  if(city==='Other'){
+    const box=document.getElementById('resultsArea');
+    box.innerHTML='<div class="card" style="margin-top:8px;"><div class="card-title">📍 We\'re coming to your city soon!</div><p style="font-size:13px;color:#616161;margin-bottom:16px;">Leave your details and we\'ll notify you when EV rentals are available near you.</p><label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Your Name</label><input class="inp" id="otherName" type="text" placeholder="e.g. Ravi Kumar" style="width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;margin-bottom:12px;font-weight:500;"/><label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Mobile Number</label><input class="inp" id="otherPhone" type="tel" placeholder="e.g. 98765 43210" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,\'\')" style="width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;margin-bottom:12px;font-weight:500;"/><button class="confirm-btn" onclick="submitOtherLead()" style="width:100%;background:#002d62;color:#fff;border:none;border-radius:10px;padding:15px;font-size:15px;font-weight:900;cursor:pointer;">Notify Me</button></div>';
+    return;
+  }
   const live=['live','live from next week','minutes wip'];
   const budgetSelected = budget && budget.length > 0;
   let res=vendors.filter(v=>{
@@ -659,6 +656,27 @@ function findEVs(){
     return;
   }
   renderResults(res,city);
+}
+
+function submitOtherLead(){
+  const name=document.getElementById('otherName').value.trim();
+  const phone=document.getElementById('otherPhone').value.trim();
+  if(!name||!phone){alert('Please enter name and phone.');return;}
+  if(phone.length!==10||!isValidPhone(phone)){alert('Please enter a valid 10-digit mobile number.');return;}
+  const btn=event.target;
+  btn.innerText='Submitting...';
+  btn.disabled=true;
+  fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    name,phone,city:'Other',lang,budget:null,
+    vendor:'',make:'',type:'',rental:'',security_deposit:'',refundable_deposit:'',spoc_name:'',spoc_phone:'',image:''
+  })}).catch(()=>{}).finally(()=>{
+    btn.innerText='Notify Me';
+    btn.disabled=false;
+    const t=T[lang]||T.en;
+    document.getElementById('successTitle').innerText=t.successTitle;
+    document.getElementById('successMsg').innerHTML='We\'ll notify you when EVs are available in your city!';
+    document.getElementById('successOverlay').classList.add('show');
+  });
 }
 
 function renderResults(list,city){
