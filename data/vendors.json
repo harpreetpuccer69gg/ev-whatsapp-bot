@@ -405,7 +405,7 @@
         "SPOC": "Himanshu Vaghela",
         "Phone": "96011 33973",
         "Email": null,
-        "Image": "/static/images/ev_hi_speed.svg"
+        "Image": "/static/images/evify.png"
     },
     {
         "City": "Surat",
@@ -422,7 +422,7 @@
         "SPOC": "Himanshu Vaghela",
         "Phone": "96011 33973",
         "Email": null,
-        "Image": "/static/images/ev_hi_speed.svg"
+        "Image": "/static/images/evify.png"
     },
     {
         "City": "Vadodara",
@@ -439,7 +439,7 @@
         "SPOC": "Ketan More",
         "Phone": "7048509951",
         "Email": null,
-        "Image": "/static/images/ev_hi_speed.svg"
+        "Image": "/static/images/evify.png"
     },
     {
         "City": "Guwahati",
@@ -529,7 +529,7 @@
     {
         "City": "Guwahati",
         "Vendor": "EcoEV",
-        "Status": "Live",
+        "Status": "Hidden",
         "Battery Type": "Swap",
         "Make": null,
         "Type": "Low speed",
