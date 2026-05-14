@@ -628,7 +628,7 @@ function findEVs(){
   const city=document.getElementById('citySelect').value;
   if(city==='Other'){
     const box=document.getElementById('resultsArea');
-    box.innerHTML='<div class="card" style="margin-top:8px;"><div class="card-title">📍 We\'re coming to your city soon!</div><p style="font-size:13px;color:#616161;margin-bottom:16px;">Leave your details and we\'ll notify you when EV rentals are available near you.</p><label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Your Name</label><input class="inp" id="otherName" type="text" placeholder="e.g. Ravi Kumar" style="width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;margin-bottom:12px;font-weight:500;"/><label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Mobile Number</label><input class="inp" id="otherPhone" type="tel" placeholder="e.g. 98765 43210" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,\'\')" style="width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;margin-bottom:12px;font-weight:500;"/><button class="confirm-btn" onclick="submitOtherLead()" style="width:100%;background:#002d62;color:#fff;border:none;border-radius:10px;padding:15px;font-size:15px;font-weight:900;cursor:pointer;">Notify Me</button></div>';
+    box.innerHTML='<div class="card" style="margin-top:8px;"><div class="card-title">📍 We\'re coming to your city soon!</div><p style="font-size:13px;color:#616161;margin-bottom:16px;">Leave your details and we\'ll notify you when EV rentals are available near you.</p><label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Your Name</label><input class="inp" id="otherName" type="text" placeholder="e.g. Ravi Kumar" style="width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;margin-bottom:12px;font-weight:500;"/><label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Mobile Number</label><input class="inp" id="otherPhone" type="tel" placeholder="e.g. 98765 43210" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,\'\')" style="width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;margin-bottom:12px;font-weight:500;"/><hr style="border:none;border-top:1px solid #e0e0e0;margin:4px 0 12px;"/><label style="font-size:12px;font-weight:700;color:#002d62;margin-bottom:4px;display:block;">Your City</label><input class="inp" id="otherCity" type="text" placeholder="e.g. Nagpur" style="width:100%;border:1.5px solid #e0e0e0;border-radius:10px;padding:13px 14px;font-size:14px;margin-bottom:12px;font-weight:500;"/><button class="confirm-btn" onclick="submitOtherLead()" style="width:100%;background:#002d62;color:#fff;border:none;border-radius:10px;padding:15px;font-size:15px;font-weight:900;cursor:pointer;">Notify Me</button></div>';
     return;
   }
   const live=['live','live from next week','minutes wip'];
@@ -661,13 +661,14 @@ function findEVs(){
 function submitOtherLead(){
   const name=document.getElementById('otherName').value.trim();
   const phone=document.getElementById('otherPhone').value.trim();
+  const city=(document.getElementById('otherCity')||{}).value||'';
   if(!name||!phone){alert('Please enter name and phone.');return;}
   if(phone.length!==10||!isValidPhone(phone)){alert('Please enter a valid 10-digit mobile number.');return;}
   const btn=event.target;
   btn.innerText='Submitting...';
   btn.disabled=true;
   fetch('/submit-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-    name,phone,city:'Other',lang,budget:null,
+    name,phone,city:city||'Other',lang,budget:null,
     vendor:'',make:'',type:'',rental:'',security_deposit:'',refundable_deposit:'',spoc_name:'',spoc_phone:'',image:''
   })}).catch(()=>{}).finally(()=>{
     btn.innerText='Notify Me';
